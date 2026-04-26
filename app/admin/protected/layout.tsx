@@ -71,6 +71,11 @@ const menuItems = [
     path: "/admin/protected/projects",
   },
   {
+    name: "Shorts",
+    icon: Video,
+    path: "/admin/protected/shorts",
+  },
+  {
     name: "Blogs",
     icon: BarChart3,
     path: "/admin/protected/blogs",
