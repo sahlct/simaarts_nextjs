@@ -66,19 +66,19 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="hover:text-white cursor-pointer">
-                <Link href="/public/about">About Us </Link>
+                <Link href="/about">About Us </Link>
               </li>
               <li className="hover:text-white cursor-pointer">
-                <Link href="/public/contact">Contact Us </Link>
+                <Link href="/contact">Contact Us </Link>
               </li>
               <li className="hover:text-white cursor-pointer">
-                <Link href="/public/careers">Career </Link>
+                <Link href="/careers">Career </Link>
               </li>
               <li className="hover:text-white cursor-pointer">
-                <Link href="/public/services">Services </Link>
+                <Link href="/services">Services </Link>
               </li>
               <li className="hover:text-white cursor-pointer">
-                <Link href="/public/products">Products </Link>
+                <Link href="/products">Products </Link>
               </li>
             </ul>
           </div>

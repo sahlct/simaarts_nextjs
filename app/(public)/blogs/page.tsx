@@ -165,7 +165,7 @@ export default function BlogsPage() {
                   {/* CTA */}
                   <button
                     onClick={() =>
-                      router.push(`/public/blogs/${slugify(blog.blog_title)}`)
+                      router.push(`/blogs/${slugify(blog.blog_title)}`)
                     }
                     className="bg-orange-500 cursor-pointer text-white text-xs px-4 py-1.5 rounded-full hover:bg-orange-600 transition"
                   >

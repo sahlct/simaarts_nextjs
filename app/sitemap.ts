@@ -9,25 +9,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: 'https://ssemlp.com/public/home',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: 'https://ssemlp.com/public/products',
+      url: 'https://ssemlp.com/products',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.5,
     },
     {
-      url: 'https://ssemlp.com/public/blogs',
+      url: 'https://ssemlp.com/blogs',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.5,
     },
     {
-      url: 'https://ssemlp.com/public/careers',
+      url: 'https://ssemlp.com/careers',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.3,

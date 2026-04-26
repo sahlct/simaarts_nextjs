@@ -187,10 +187,10 @@ export default function ProductsPage() {
 
     if (!c) {
       setSelectedCategory(null);
-      router.push("/public/products", { scroll: false });
+      router.push("/products", { scroll: false });
     } else {
       setSelectedCategory(c.category_id);
-      router.push(`/public/products?category=${slugify(c.category_name)}`, {
+      router.push(`/products?category=${slugify(c.category_name)}`, {
         scroll: false,
       });
     }
@@ -291,7 +291,7 @@ Price: ₹${p.price ?? "-"}
                   key={p.product_id}
                   className="bg-white rounded-xl p-3 cursor-pointer group"
                   onClick={() =>
-                    router.push(`/public/products/${slugify(p.product_name)}`)
+                    router.push(`/products/${slugify(p.product_name)}`)
                   }
                 >
                   <div className="h-56 bg-gray-100 flex items-center justify-center mb-3">

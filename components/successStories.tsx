@@ -155,7 +155,7 @@ export default function SuccessStories() {
         {/* ---------------- CTA ---------------- */}
         <div className="flex justify-center mt-10">
           <Button
-            onClick={() => router.push("/public/success-stories")}
+            onClick={() => router.push("/success-stories")}
             className="rounded-full px-6 py-2 text-sm bg-white text-black hover:bg-gray-200 cursor-pointer"
           >
             View All Success Stories

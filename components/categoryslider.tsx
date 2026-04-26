@@ -102,7 +102,7 @@ export default function CategorySlider() {
             return (
               <div
                 key={cat.category_id}
-                onClick={() => router.push(`/public/products?category=${slugify(cat.category_name)}`)}
+                onClick={() => router.push(`/products?category=${slugify(cat.category_name)}`)}
                 className="min-w-[260px] hover:shadow-lg hover:shadow-orange-200 transition-all duration-300 cursor-pointer max-w-[260px] bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
               >
                 {/* IMAGE */}

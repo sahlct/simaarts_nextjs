@@ -203,7 +203,7 @@ export default function HomeTestimonials() {
           {/* ---------------- CTA ---------------- */}
           <div data-ht-cta className="flex justify-center">
             <Button
-              onClick={() => router.push("/public/testimonials")}
+              onClick={() => router.push("/testimonials")}
               variant="outline"
               className="rounded-full px-6 py-2 text-sm cursor-pointer"
             >

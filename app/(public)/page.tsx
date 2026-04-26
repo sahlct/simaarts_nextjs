@@ -9,7 +9,7 @@ import CategorySlider from "@/components/categoryslider"
 
 export default function Home() {
   return (
-    <main className="min-h-screen py-16">
+    <main className="min-h-screen">
       <HeroSection />
       <HomeAbout />
       <NewArrivals />

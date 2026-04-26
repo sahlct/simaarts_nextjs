@@ -109,7 +109,7 @@ export default function NewArrivals() {
 
             return (
               <div
-                onClick={() => router.push(`/public/products/${slugify(p.product_name)}`)}
+                onClick={() => router.push(`/products/${slugify(p.product_name)}`)}
                 key={p.product_name}
                 className="min-w-[260px] max-w-[260px] hover:shadow-lg transition-all duration-300 hover:shadow-orange-200 cursor-pointer bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
               >
