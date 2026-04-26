@@ -295,10 +295,21 @@ export default function DynamicFormModal({
                               ? /\.(jpg|jpeg|png|webp|gif)$/i.test(file)
                               : false;
 
+                          const isVideo =
+                            file instanceof File
+                              ? file.type.startsWith("video/")
+                              : typeof file === "string"
+                              ? /\.(mp4|webm|ogg)$/i.test(file)
+                              : false;
+
                           const name =
                             file instanceof File
                               ? file.name
                               : String(file).split("/").pop();
+
+                          const src = file instanceof File
+                            ? URL.createObjectURL(file)
+                            : base_url + file;
 
                           return (
                             <div
@@ -307,13 +318,16 @@ export default function DynamicFormModal({
                             >
                               {isImage ? (
                                 <img
-                                  src={
-                                    file instanceof File
-                                      ? URL.createObjectURL(file)
-                                      : base_url + file
-                                  }
+                                  src={src}
                                   alt="preview"
-                                  className="w-full h-20 object-cover rounded"
+                                  className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                                  onClick={() => window.open(src, "_blank")}
+                                />
+                              ) : isVideo ? (
+                                <video
+                                  src={src}
+                                  className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                                  onClick={() => window.open(src, "_blank")}
                                 />
                               ) : (
                                 <p className="truncate">{name}</p>

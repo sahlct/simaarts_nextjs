@@ -131,7 +131,7 @@ export default function AdminLoginPage() {
       className="min-h-screen w-full flex items-center justify-center bg-cover bg-center relative"
       style={{
         backgroundImage:
-          "url('https://ssemlp.com/assets/web/imagespublic/banner03.jpg')",
+          "url('https://png.pngtree.com/background/20250104/original/pngtree-free-hd-wallpaper-4k-new-background-picture-image_15546678.jpg')",
       }}
     >
       {/* Overlay */}
@@ -141,7 +141,7 @@ export default function AdminLoginPage() {
       <div className="relative z-10 w-full max-w-md p-8 mx-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 text-white">
         <h2 className="text-3xl font-bold text-center mb-10 tracking-wide">
           {stage === "login"
-            ? "Ss Entreprises Admin"
+            ? "Elbano Admin"
             : stage === "forgot"
               ? "Forgot Password"
               : stage === "otp"

@@ -46,6 +46,7 @@ const menuItems = [
     icon: Home,
     children: [
       { name: "Users", icon: Users, path: "/admin/protected/users" },
+      { name: "Carousel", icon: Fan, path: "/admin/protected/carousel" },
       // { name: "Gallery", icon: Fan, path: "/admin/protected/gallery" },
     ],
   },
@@ -63,6 +64,11 @@ const menuItems = [
     name: "Services",
     icon: BookOpen,
     path: "/admin/protected/service",
+  },
+  {
+    name: "Projects",
+    icon: FolderOpen,
+    path: "/admin/protected/projects",
   },
   {
     name: "Blogs",
@@ -136,12 +142,12 @@ const Sidebar = memo(
           {/* Logo */}
           <div className="flex items-center justify-between p-4 border-b  border-gray-300 flex-shrink-0">
             <img
-              src="/ss_logo.png"
+              src="/elbano_full_text.png"
               alt=""
               className={`h-8 ps-5 ${isCollapsed ? "hidden" : "block"}`}
             />
             <img
-              src="/ss_logo_only.png"
+              src="/elbano_logo.png"
               alt=""
               className={`h-7 w-8 ${isCollapsed ? "block" : "hidden"}`}
             />
@@ -184,8 +190,8 @@ const Sidebar = memo(
 
                   <div
                     className={`ml-8 mt-1 space-y-1 overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${openDropdown === item.name && !isCollapsed
-                        ? "max-h-60 opacity-100"
-                        : "max-h-0 opacity-0"
+                      ? "max-h-60 opacity-100"
+                      : "max-h-0 opacity-0"
                       }`}
                   >
                     {item.children.map((child) => (
@@ -193,8 +199,8 @@ const Sidebar = memo(
                         href={child.path}
                         key={child.name}
                         className={`block px-3 py-2 text-gray-700 rounded-s-lg text-sm transition ${pathname === child.path
-                            ? "bg-[#0361ad] text-white"
-                            : "hover:bg-[#036ec6a4] hover:text-white"
+                          ? "bg-[#0361ad] text-white"
+                          : "hover:bg-[#036ec6a4] hover:text-white"
                           }`}
                       >
                         {child.name}

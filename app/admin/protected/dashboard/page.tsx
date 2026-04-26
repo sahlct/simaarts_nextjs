@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import { getProducts } from "@/lib/api/product";
 import { getCategories } from "@/lib/api/category";
 import { getEnquiries } from "@/lib/api/enquiry";
-import { getJobs } from "@/lib/api/careers";
+import { getProjects } from "@/lib/api/projects";
 import {
   Package,
   Layers,
   HelpCircle,
   Briefcase,
+  FolderOpen,
   TrendingUp,
   ArrowUpRight,
   ArrowDownRight,
@@ -42,11 +43,11 @@ export default function DashboardPage() {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        const [productsRes, categoriesRes, enquiriesRes, jobsRes] = await Promise.all([
+        const [productsRes, categoriesRes, enquiriesRes, projectsRes] = await Promise.all([
           getProducts(1, 1),
           getCategories(1, 1),
           getEnquiries(1, 4), // Get 5 for recent list
-          getJobs(1, 1),
+          getProjects(1, 1),
         ]);
 
         const dashboardStats: StatItem[] = [
@@ -78,13 +79,13 @@ export default function DashboardPage() {
             path: "/admin/protected/enquiry"
           },
           {
-            title: "Career Openings",
-            value: jobsRes?.total || 0,
-            icon: Briefcase,
+            title: "Projects",
+            value: projectsRes?.total || 0,
+            icon: FolderOpen,
             color: "bg-teal-500",
-            trend: "Active listings",
+            trend: "Active",
             isUp: true,
-            path: "/admin/protected/careers"
+            path: "/admin/protected/projects"
           },
         ];
 
@@ -233,7 +234,7 @@ export default function DashboardPage() {
               {[
                 { name: 'Products', path: '/admin/protected/product', icon: Package },
                 { name: 'Categories', path: '/admin/protected/category', icon: Layers },
-                { name: 'Careers', path: '/admin/protected/careers', icon: Briefcase },
+                { name: 'Projects', path: '/admin/protected/projects', icon: FolderOpen },
                 { name: 'Enquiries', path: '/admin/protected/enquiry', icon: HelpCircle },
                 { name: 'Services', path: '/admin/protected/service', icon: BookOpen },
                 { name: 'Blogs', path: '/admin/protected/blogs', icon: BarChart3 },
