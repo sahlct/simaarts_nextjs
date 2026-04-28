@@ -1,143 +1,154 @@
 "use client";
 
-import Image from "next/image";
-import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
+import React from "react";
+import { 
+  MapPin, 
+  Phone, 
+  Mail, 
+  Facebook, 
+  Instagram, 
+  Linkedin, 
+  Youtube,
+  ArrowRight
+} from "lucide-react";
 import Link from "next/link";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-[#12160f] to-[#1b2018] text-white">
-      {/* MAIN FOOTER */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* ---------------- LEFT : BRAND ---------------- */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Image
-                src="/ss_logo_only.png"
-                alt="SS Enterprises"
-                width={40}
-                height={40}
-                className="object-contain"
-              />
-              <h3 className="text-3xl font-bold">SS Enterprises</h3>
+    <footer className="bg-[#1E2B4D] text-white pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+          
+          {/* Brand & About */}
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center border border-white/20">
+                <span className="text-xl font-black text-white italic">E</span>
+              </div>
+              <h3 className="text-2xl font-black tracking-tight">elbano</h3>
             </div>
-
-            <p className="text-sm text-gray-300 leading-relaxed mb-6 max-w-sm">
-              Building trust through quality craftsmanship and innovative
-              solutions. We are dedicated to delivering excellence in every
-              project we undertake.
+            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+              Crafting timeless roofing excellence with premium natural clay tiles since 1995.
             </p>
-
-            {/* social media icons */}
-            <h4 className="text-sm font-semibold text-yellow-400 mb-4">
-              We are Available on
-            </h4>
-            <div className="flex gap-3 mt-6 items-center">
-              <a href="https://www.instagram.com/SSEnterprises" target="_blank" rel="noopener noreferrer">
-                <Instagram className="w-6 h-6 text-white" />
-              </a>
-              <a href="https://wa.me/914832080456" target="_blank" rel="noopener noreferrer">
-                <IconBrandWhatsapp className="w-6 h-6 text-white" />
-              </a>
-              <a href="https://www.facebook.com/SSEnterprises" target="_blank" rel="noopener noreferrer">
-                <Facebook className="w-6 h-6 text-white" />
-              </a>
-              <a href="tel:+914832080456" target="_blank" rel="noopener noreferrer">
-                <Phone className="w-6 h-6 text-white" />
-              </a>
+            
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              {[
+                { icon: <Instagram size={18} />, href: "#" },
+                { icon: <Facebook size={18} />, href: "#" },
+                { icon: <Linkedin size={18} />, href: "#" },
+                { icon: <Youtube size={18} />, href: "#" },
+              ].map((social, idx) => (
+                <a
+                  key={idx}
+                  href={social.href}
+                  className="w-10 h-10 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all"
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
-
-            {/* <a
-              href="/brochure.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center bg-white cursor-pointer text-black px-5 py-2 rounded-full text-sm font-medium hover:bg-gray-200 transition"
-            >
-              Download Catalogue
-            </a> */}
           </div>
 
-          {/* ---------------- CENTER : QUICK LINKS ---------------- */}
+          {/* Products Column */}
           <div>
-            <h4 className="text-sm font-semibold text-yellow-400 mb-4">
-              Quick Links
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-8">
+              Products
             </h4>
-            <ul className="space-y-3 text-sm text-gray-300">
-              <li className="hover:text-white cursor-pointer">
-                <Link href="/about">About Us </Link>
+            <ul className="flex flex-col gap-4">
+              {[
+                "Spanish Tiles",
+                "Flat Tiles",
+                "Curved Tiles",
+                "Accessories",
+                "New Arrivals"
+              ].map((item) => (
+                <li key={item}>
+                  <Link href={`/products/${item.toLowerCase().replace(" ", "-")}`} className="text-white/60 text-sm hover:text-white transition-colors">
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Column */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-8">
+              Company
+            </h4>
+            <ul className="flex flex-col gap-4">
+              {[
+                { name: "Our Projects", href: "/projects" },
+                { name: "About Us", href: "/about" },
+                { name: "Services", href: "/services" },
+                { name: "Contact", href: "/contact" }
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-white/60 text-sm hover:text-white transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Column */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white mb-8">
+              Contact
+            </h4>
+            <ul className="flex flex-col gap-6">
+              <li className="flex gap-4">
+                <MapPin size={18} className="text-white/40 shrink-0" />
+                <span className="text-white/60 text-sm leading-relaxed">
+                  14 Via della Ceramica, Florence, Italy 50121
+                </span>
               </li>
-              <li className="hover:text-white cursor-pointer">
-                <Link href="/contact">Contact Us </Link>
+              <li>
+                <a href="tel:+390551234567" className="flex items-center gap-4 text-white/60 text-sm hover:text-white transition-colors">
+                  <Phone size={18} className="text-white/40" />
+                  +39 055 123 4567
+                </a>
               </li>
-              <li className="hover:text-white cursor-pointer">
-                <Link href="/careers">Career </Link>
+              <li>
+                <a href="mailto:info@elbano.com" className="flex items-center gap-4 text-white/60 text-sm hover:text-white transition-colors">
+                  <Mail size={18} className="text-white/40" />
+                  info@elbano.com
+                </a>
               </li>
-              <li className="hover:text-white cursor-pointer">
-                <Link href="/services">Services </Link>
-              </li>
-              <li className="hover:text-white cursor-pointer">
-                <Link href="/products">Products </Link>
+              <li>
+                <a href="#" className="flex items-center gap-4 text-white/60 text-sm hover:text-white transition-colors">
+                  <IconBrandWhatsapp size={18} className="text-white/40" />
+                  WhatsApp Us
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* ---------------- RIGHT : CONTACT ---------------- */}
-          <div>
-            <h4 className="text-sm font-semibold text-yellow-400 mb-4">
-              Get in Touch
-            </h4>
+        </div>
 
-            <ul className="space-y-4 text-sm text-gray-300">
-              {/* LOCATION */}
-              <li>
-                <a
-                  href="https://maps.app.goo.gl/akzNBpKVM6p5WjPW9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex gap-3 hover:text-white transition"
-                >
-                  <MapPin className="md:w-4 md:h-4 text-yellow-400 mt-1 shrink-0" />
-                  <span>
-                    34B, Inkel Greens, Karathode Gorakam Melmuri PO, Malappuram
-                    Kerala - 676 519
-                  </span>
-                </a>
-              </li>
-
-              {/* PHONE */}
-              <li>
-                <a
-                  href="tel:+914832080456"
-                  className="flex items-center gap-3 hover:text-white transition"
-                >
-                  <Phone className="w-4 h-4 text-yellow-400" />
-                  <span>+91 483 208 0456</span>
-                </a>
-              </li>
-
-              {/* EMAIL */}
-              <li>
-                <a
-                  href="mailto:info@ssemlp.com"
-                  className="flex items-center gap-3 hover:text-white transition"
-                >
-                  <Mail className="w-4 h-4 text-yellow-400" />
-                  <span>info@ssemlp.com</span>
-                </a>
-              </li>
-            </ul>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-white/40 text-[10px] md:text-xs font-medium">
+            © 2024 Elbano. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            <Link href="/privacy" className="text-white/40 text-[10px] md:text-xs font-medium hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="text-white/40 text-[10px] md:text-xs font-medium hover:text-white transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* ---------------- BOTTOM BAR ---------------- */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 text-center text-xs text-gray-400">
-          © 2026 SS Enterprises. All rights reserved.
-        </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

@@ -17,6 +17,10 @@ export const getCategories = async (
   return apiRequest(`/api/product-category?${params.toString()}`, "GET");
 };
 
+export const getCategoriesWithSubCategoriesAndProductCount = async () => {
+  return apiRequest("/api/product-category/with-subcategories", "GET");
+};
+
 export const getCategoryById = (id: number) =>
   apiRequest(`/api/product-category/${id}`, "GET");
 

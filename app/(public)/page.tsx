@@ -3,41 +3,25 @@ import WhyChooseUs from "@/components/whyChooseUs"
 import HomeAbout from "@/components/homeAbout"
 import NewArrivals from "@/components/newArrivals"
 import SuccesStories from "@/components/successStories"
-// import BrandsSlider from "@/components/brandsSlider"
 import HomeTestimonials from "@/components/homeTestimonials"
+import HomeShorts from "@/components/HomeShorts"
 import CategorySlider from "@/components/categoryslider"
+import CollectionSection from "@/components/CollectionSection"
+import OurServices from "@/components/ourServices"
+import HomeProjects from "@/components/homeProjects"
+import CTASection from "@/components/CTASection"
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroSection />
-      <HomeAbout />
-      <NewArrivals />
-      <WhyChooseUs />
-      <SuccesStories />
-      {/* <BrandsSlider/> */}
+      <CollectionSection />
       <CategorySlider />
+      <OurServices />
+      <HomeProjects />
+      <CTASection />
       <HomeTestimonials />
-      
-      
-      {/* <HomeServices /> */}
-      {/* <MockupSection /> */}
-      {/* <HomeTechnologies /> */}
-      {/* <TechnologyPartner /> */}
-
-      {/* <Hero /> */}
-      {/* <AboutUs /> */}
-      {/* <Courses /> */}
-      {/* <RankHolders /> */}
-      {/* <RankHoldersForum /> */}
-      {/* <SuccessStories/> */}
-      {/* <Publications /> */}
-      {/* <HybridLearning /> */}
-      {/* <AceShorts /> */}
-      {/* <LatestNews /> */}
-      {/* <SocialService /> */}
-      {/* <Branches /> */}
-      {/* <OurFeatures /> */}
+      <HomeShorts />
     </main>
   )
 }

@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { getServices } from "@/lib/api/service";
 import gsap from "gsap";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 interface Service {
   service_id: number;
@@ -14,24 +16,22 @@ interface Service {
 
 export default function OurServices() {
   const [services, setServices] = useState<Service[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-  const modalOverlayRef = useRef<HTMLDivElement>(null);
-  const modalContentRef = useRef<HTMLDivElement>(null);
 
   /* ---------------- LOAD DATA ---------------- */
   useEffect(() => {
     const loadServices = async () => {
       try {
-        const res = await getServices(1, 4, "", 1);
+        // Fetch up to 6 services
+        const res = await getServices(1, 6, "", 1);
         setServices(res?.data || []);
+        if (res?.total) setTotal(res.total);
       } catch (error) {
         console.error("Service fetch error:", error);
       } finally {
@@ -47,110 +47,87 @@ export default function OurServices() {
     if (loading || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.from("[data-os-title]", {
-        opacity: 0,
-        y: 24,
-        duration: 0.8,
-        ease: "power3.out",
-      });
+      gsap.fromTo("[data-os-title]", 
+        { opacity: 0, y: 24 },
+        {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          clearProps: "all"
+        }
+      );
 
-      gsap.from(cardsRef.current, {
-        opacity: 0,
-        y: 28,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power3.out",
-      });
+      const validCards = cardsRef.current.filter(Boolean);
+      if (validCards.length > 0) {
+        gsap.fromTo(validCards, 
+          { opacity: 0, y: 100 },
+          {
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 75%",
+            },
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "expo.out",
+            clearProps: "all"
+          }
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [loading]);
-
-  /* ---------------- MODAL ANIMATIONS ---------------- */
-  useEffect(() => {
-    if (openModal) {
-      // Ensure display is set before animating
-      gsap.set(modalOverlayRef.current, { display: "flex" });
-
-      gsap.to(modalOverlayRef.current, {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-
-      gsap.fromTo(
-        modalContentRef.current,
-        { scale: 0.9, opacity: 0, y: 30 },
-        { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.4)" }
-      );
-
-      // Prevent scrolling
-      document.body.style.overflow = "hidden";
-    }
-  }, [openModal]);
-
-  const handleCloseModal = () => {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setOpenModal(false);
-        setSelectedService(null);
-        document.body.style.overflow = "unset";
-        // Reset display to none so it doesn't block clicks
-        gsap.set(modalOverlayRef.current, { display: "none" });
-      }
-    });
-
-    tl.to(modalContentRef.current, {
-      scale: 0.9,
-      opacity: 0,
-      y: 20,
-      duration: 0.3,
-      ease: "power2.in"
-    })
-      .to(modalOverlayRef.current, {
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      }, "-=0.2");
-  };
-
-  const handleOpenModal = (service: Service) => {
-    setSelectedService(service);
-    setOpenModal(true);
-  };
+  }, [loading, services]);
 
   return (
     <section
       ref={sectionRef}
-      className="bg-[#fffaf2] py-10 md:py-20 overflow-hidden"
+      className="relative bg-gradient-to-b from-[#FAFAFA] to-[#F1F5F9] py-20 md:py-32 overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      {/* Decorative top-right element */}
+      <div className="absolute top-10 right-10 w-48 h-32 bg-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl -rotate-6 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        
         {/* ---------------- HEADER ---------------- */}
-        <div data-os-title className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
-            Our Services
-          </h2>
-          <p className="text-gray-500 text-sm md:text-base md:px-60 text-start md:text-center">
-            At SS Enterprises, we value quality and competence. Every design we provide has precisely
-            engineered PVC and uPVC door solutions that offer long-term performance.
-          </p>
+        <div data-os-title className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+          <div className="max-w-lg">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-10 h-[2px] bg-[#1E2B4D]" />
+              <span className="text-xs font-bold tracking-[0.2em] text-[#1E2B4D] uppercase">
+                WHAT WE DO
+              </span>
+              <div className="w-10 h-[2px] bg-[#1E2B4D]" />
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight">
+              Our Services
+            </h2>
+          </div>
+          <div className="max-w-md md:text-right">
+            <p className="text-gray-500 text-sm md:text-base leading-relaxed">
+              From sourcing the world's finest ceramic tiles to expert installation and aftercare — we handle every stage of your project.
+            </p>
+          </div>
         </div>
 
         {/* ---------------- GRID ---------------- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          
           {/* ----------- SKELETON ----------- */}
           {loading &&
-            Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-gray-200 rounded-md" />
-                  <div className="h-4 w-28 bg-gray-200 rounded" />
-                </div>
-
-                <div className="space-y-2">
-                  <div className="h-3 bg-gray-200 rounded" />
-                  <div className="h-3 bg-gray-200 rounded w-5/6" />
-                  <div className="h-3 bg-gray-200 rounded w-4/6" />
+            Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="animate-pulse bg-white rounded-2xl overflow-hidden shadow-sm h-96">
+                <div className="h-48 bg-gray-200" />
+                <div className="p-6">
+                  <div className="h-6 w-3/4 bg-gray-200 rounded mb-4" />
+                  <div className="h-4 bg-gray-200 rounded mb-2" />
+                  <div className="h-4 bg-gray-200 rounded w-5/6" />
                 </div>
               </div>
             ))}
@@ -158,7 +135,7 @@ export default function OurServices() {
           {/* ----------- REAL DATA ----------- */}
           {!loading &&
             services.map((service, index) => {
-              const icon = service.service_image
+              const image = service.service_image
                 ? base_url + service.service_image
                 : "/placeholder.png";
 
@@ -168,82 +145,68 @@ export default function OurServices() {
                   ref={(el) => {
                     if (el) cardsRef.current[index] = el;
                   }}
-                  className="flex flex-col items-start text-start cursor-pointer group"
-                  onClick={() => handleOpenModal(service)}
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-[#1E2B4D]/5 border border-gray-100 group transition-all duration-300"
                 >
-                  {/* ICON + TITLE */}
-                  <div className="flex items-end gap-3 mb-4" >
-                    <div className="relative w-10 h-10 group-hover:scale-110 transition-transform duration-300">
-                      <Image
-                        src={icon}
-                        alt={service.service_title}
-                        fill
-                        className="object-contain"
-                      />
+                  {/* Image Container */}
+                  <div className="relative h-56 w-full overflow-hidden bg-gray-100">
+                    <img
+                      src={image}
+                      alt={service.service_title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    
+                    {/* Icon Badge */}
+                    <div className="absolute top-4 left-4 bg-[#1E2B4D] w-12 h-12 rounded-xl flex items-center justify-center shadow-lg">
+                      <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
                     </div>
-
-                    <h4 className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
-                      {service.service_title}
-                    </h4>
                   </div>
 
-                  {/* DESCRIPTION */}
-                  <p className="text-sm text-gray-600 leading-relaxed max-w-xs cursor-pointer group-hover:text-gray-950 transition line-clamp-4">
-                    {service.service_description}
-                  </p>
+                  {/* Content */}
+                  <div className="p-8">
+                    <h3 className="text-xl font-bold text-[#0F172A] mb-3 group-hover:text-[#1E2B4D] transition-colors">
+                      {service.service_title}
+                    </h3>
+                    <p className="text-gray-500 text-sm mb-6 line-clamp-3 leading-relaxed">
+                      {service.service_description}
+                    </p>
+
+                    {/* Badges (Mock styling for design parity) */}
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      <span className="px-3 py-1.5 bg-[#F1F5F9] text-[#475569] text-[10px] font-bold rounded-full uppercase tracking-wider">
+                        Premium Quality
+                      </span>
+                      <span className="px-3 py-1.5 bg-[#F1F5F9] text-[#475569] text-[10px] font-bold rounded-full uppercase tracking-wider">
+                        Expert Support
+                      </span>
+                    </div>
+
+                    {/* Link */}
+                    <Link
+                      href="/services" 
+                      className="inline-flex items-center text-[#1E2B4D] font-bold text-sm cursor-pointer hover:text-orange-600 transition-colors"
+                    >
+                      Learn More <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                  </div>
                 </div>
               );
             })}
         </div>
-      </div>
 
-
-      {/* ---------------- MODAL ---------------- */}
-      <div
-        ref={modalOverlayRef}
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm items-center justify-center z-[100] hidden opacity-0"
-        onClick={handleCloseModal}
-      >
-        <div
-          ref={modalContentRef}
-          className="bg-white rounded-lg p-6 max-w-2xl w-[92%] sm:w-[85%] md:w-full shadow-lg relative"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <button
-            className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-xl cursor-pointer"
-            onClick={handleCloseModal}
-          >
-            ✕
-          </button>
-
-          {selectedService && (
-            <>
-              <Image
-                src={
-                  selectedService.service_image
-                    ? base_url + selectedService.service_image
-                    : "/placeholder.png"
-                }
-                alt={selectedService.service_title}
-                width={80}
-                height={80}
-                className="object-contain mb-4"
-              />
-
-              <h3 className="text-lg font-semibold mb-3 text-gray-900">
-                {selectedService.service_title}
-              </h3>
-
-              <p className="text-gray-700 leading-relaxed max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
-                {selectedService.service_description}
-              </p>
-
-            </>
-          )}
-        </div>
+        {/* ---------------- VIEW ALL BUTTON ---------------- */}
+        {total > 6 && (
+          <div className="mt-16 flex justify-center">
+            <Link
+              href="/services"
+              className="bg-[#1E2B4D] text-white px-8 py-4 rounded-xl font-bold text-sm hover:bg-[#0F172A] hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-[#1E2B4D]/20"
+            >
+              View All Services
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
 }
-
-
