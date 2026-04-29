@@ -17,11 +17,11 @@ export default function Home() {
       <HeroSection />
       <CollectionSection />
       <CategorySlider />
-      <OurServices />
       <HomeProjects />
       <CTASection />
-      <HomeTestimonials />
+      <OurServices />
       <HomeShorts />
+      <HomeTestimonials />
     </main>
   )
 }

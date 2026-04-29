@@ -56,3 +56,7 @@ export const updateProduct = (id: number, data: FormData) =>
 // DELETE
 export const deleteProduct = (id: number) =>
   apiRequest(`/api/product/${id}`, "DELETE", undefined, true);
+
+// SIMILAR PRODUCTS
+export const getSimilarProducts = (id: number, limit = 4) =>
+  apiRequest(`/api/product/similar/${id}?limit=${limit}`, "GET");

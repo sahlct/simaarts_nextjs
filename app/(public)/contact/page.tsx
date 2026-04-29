@@ -1,18 +1,11 @@
-import ContactForm from '@/components/contactForm'
-import ContactHeader from '@/components/contactHeader'
-import React from 'react'
+import ContactClient from "@/components/ContactClient";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us | Elbano",
+  description: "Have a question about our collections or a custom project? Get in touch with our tile specialists for expert guidance and personalized consultation.",
+};
 
 export default function ContactPage() {
-  const data = {
-    title: 'Contact Us',
-    subtitle: 'Have a question or need assistance? Our team is ready to guide you with the right solution.',
-    colorleft: '#f7b500',
-    colorright: '#fff1c9'
-  }
-  return (
-    <div className='py-16 pb-0'>
-      <ContactHeader data={data} />
-      <ContactForm />
-    </div>
-  )
+  return <ContactClient />;
 }
