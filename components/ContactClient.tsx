@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { createEnquiry } from "@/lib/api/enquiry";
 import { toast } from "sonner";
+import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -133,15 +134,15 @@ export default function ContactClient() {
   ];
 
   return (
-    <div ref={sectionRef} className="bg-white min-h-screen pt-20">
+    <div ref={sectionRef} className="bg-white min-h-screen">
       {/* HERO HEADER */}
-      <section className="relative h-[250px] md:h-[400px] flex items-center overflow-hidden">
+      <section className="relative h-[400px] md:h-[400px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src="/product_bg.jpg" alt="Contact Background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0F172A]/70 backdrop-blur-[2px]" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white contact-hero-content">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white contact-hero-content pt-24 md:pt-32">
           <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] mb-4 opacity-80">
             <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
             <ChevronRight size={12} />
@@ -159,32 +160,33 @@ export default function ContactClient() {
       </section>
 
       {/* CONTACT INFO GRID */}
-      <section className="py-24 bg-[#F8FAFC] info-grid">
+      <section className="py-12 md:py-24 bg-[#F8FAFC] info-grid">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+            {/* Info Cards */}
             {[
-              { label: "Call Us", val: "+91 98765 43210", sub: "Mon-Sat, 9am to 6pm", icon: <Phone size={24} /> },
-              { label: "Email Us", val: "hello@elbano.com", sub: "Response within 24hrs", icon: <Mail size={24} /> },
-              { label: "Headquarters", val: "Florence, Italy", sub: "Via de' Tornabuoni, 1", icon: <MapPin size={24} /> },
-              { label: "Office Hours", val: "Open Daily", sub: "9:00 AM - 6:00 PM", icon: <Clock size={24} /> }
+              { label: "Call Us", val: CONTACT_INFO.phone, sub: "Mon-Sat, 9am-6pm", icon: <Phone size={20} className="md:w-6 md:h-6" />, href: CONTACT_LINKS.tel },
+              { label: "Email Us", val: CONTACT_INFO.email, sub: "Fast Response", icon: <Mail size={20} className="md:w-6 md:h-6" />, href: CONTACT_LINKS.mailto },
+              { label: "Headquarters", val: "Calicut", sub: "Kerala, India", icon: <MapPin size={20} className="md:w-6 md:h-6" />, href: CONTACT_INFO.googleMapsUrl },
+              { label: "Office Hours", val: "Open Daily", sub: "9 AM - 6 PM", icon: <Clock size={20} className="md:w-6 md:h-6" />, href: "#" }
             ].map((item, i) => (
-              <div key={i} className="info-card group cursor-pointer bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-blue-200/50 hover:-translate-y-2 transition-all duration-500">
-                <div className="w-14 h-14 bg-blue-50 text-[#1e2b58] rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-[#0F172A] group-hover:text-white transition-all duration-300">
+              <a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className="info-card group cursor-pointer bg-white p-5 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-blue-200/50 hover:-translate-y-2 transition-all duration-500">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-blue-50 text-[#1e2b58] rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-8 shadow-sm group-hover:bg-[#0F172A] group-hover:text-white transition-all duration-300">
                   <div className="group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
                 </div>
-                <h3 className="text-xs font-black uppercase tracking-widest text-gray-400 mb-2">{item.label}</h3>
-                <div className="text-xl font-black text-[#1e2b58] mb-2">{item.val}</div>
-                <p className="text-sm text-gray-500 font-medium">{item.sub}</p>
-              </div>
+                <h3 className="text-[8px] md:text-xs font-black uppercase tracking-widest text-gray-400 mb-1 md:mb-2">{item.label}</h3>
+                <div className="text-sm md:text-xl font-black text-[#1e2b58] mb-1 md:mb-2 truncate">{item.val}</div>
+                <p className="text-[10px] md:text-sm text-gray-500 font-medium truncate">{item.sub}</p>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
       {/* FORM & DETAILS */}
-      <section className="py-24 bg-[#F8FAFC]">
+      <section className="py-12 md:py-24 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
             {/* Left Column: Details */}
@@ -222,15 +224,15 @@ export default function ContactClient() {
               </div>
 
               <div className="mt-16 flex gap-4">
-                <Link href="#" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Facebook size={18} /></Link>
-                <Link href="#" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Instagram size={18} /></Link>
-                <Link href="#" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Linkedin size={18} /></Link>
+                <Link href={CONTACT_INFO.facebook} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Facebook size={18} /></Link>
+                <Link href={CONTACT_INFO.instagram} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Instagram size={18} /></Link>
+                <Link href={CONTACT_LINKS.mailto} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Mail size={18} /></Link>
               </div>
             </div>
 
             {/* Right Column: Form */}
             <div className="form-container">
-              <form onSubmit={handleSubmit} className="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-gray-200 border border-white">
+              <form onSubmit={handleSubmit} className="bg-white p-6 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl shadow-gray-200 border border-white">
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
@@ -239,7 +241,7 @@ export default function ContactClient() {
                         type="text"
                         placeholder="John Doe"
                         required
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-4 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       />
@@ -250,7 +252,7 @@ export default function ContactClient() {
                         type="email"
                         placeholder="john@example.com"
                         required
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-4 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
@@ -263,7 +265,7 @@ export default function ContactClient() {
                       <input
                         type="tel"
                         placeholder="+91 00000 00000"
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-4 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       />
@@ -273,7 +275,7 @@ export default function ContactClient() {
                       <input
                         type="text"
                         placeholder="Custom Order"
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-4 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
                         value={formData.subject}
                         onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       />
@@ -286,7 +288,7 @@ export default function ContactClient() {
                       placeholder="Tell us about your project requirements..."
                       rows={5}
                       required
-                      className="w-full bg-[#F8FAFC] border-none rounded-2xl p-4 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none resize-none"
+                      className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none resize-none"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     />
@@ -295,12 +297,12 @@ export default function ContactClient() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-[#1e2b58] cursor-pointer hover:bg-indigo-950 text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 shadow-xl hover:shadow-blue-200 active:scale-95"
+                    className="w-full bg-[#1e2b58] cursor-pointer hover:bg-indigo-950 text-white py-3.5 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 md:gap-3 shadow-xl hover:shadow-blue-200 active:scale-95"
                   >
                     {loading ? (
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                     ) : (
-                      <><Send size={18} /> Send Message</>
+                      <><Send size={16} className="md:w-[18px] md:h-[18px]" /> Send Message</>
                     )}
                   </button>
                 </div>
@@ -344,10 +346,10 @@ export default function ContactClient() {
       {/* MAP SECTION */}
       <section className="h-[400px] md:h-[600px] w-full bg-gray-100">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d115132.8610724621!2d11.168128329618116!3d43.77995289947849!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132a56a680d2d6ad%3A0x93d57917efc72c03!2sFlorence%2C%20Metropolitan%20City%20of%20Florence%2C%20Italy!5e0!3m2!1sen!2sin!4v1714400000000!5m2!1sen!2sin"
+          src={CONTACT_INFO.mapEmbedUrl}
           width="100%"
           height="100%"
-          style={{ border: 0, filter: 'grayscale(100%) contrast(1.2) invert(90%)' }}
+          style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"

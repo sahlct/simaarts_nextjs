@@ -182,13 +182,7 @@ export default function OurServices() {
                       </span>
                     </div>
 
-                    {/* Link */}
-                    <Link
-                      href="/services" 
-                      className="inline-flex items-center text-[#1E2B4D] font-bold text-sm cursor-pointer hover:text-orange-600 transition-colors"
-                    >
-                      Learn More <ArrowRight className="ml-2 w-4 h-4" />
-                    </Link>
+                    {/* Link removed as per user request */}
                   </div>
                 </div>
               );

@@ -157,16 +157,16 @@ export default function CategorySlider() {
                 Premium imported {cat.category_name.toLowerCase()} sourced from Italy, Spain, and Portugal. From large-format porcelain slabs to intricate mosaic floors — every step is a statement of quality and design.
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-row gap-3 md:gap-4">
                 <Link
                   href={`/products?category=${slugify(cat.category_name)}`}
-                  className="flex items-center justify-center gap-2 bg-[#b58500] hover:bg-[#9a7000] text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all shadow-lg shadow-yellow-900/20"
+                  className="flex items-center justify-center gap-2 bg-[#b58500] hover:bg-[#9a7000] text-white px-4 md:px-8 py-2.5 md:py-3.5 rounded-lg font-bold text-[10px] md:text-sm transition-all shadow-lg shadow-yellow-900/20 whitespace-nowrap"
                 >
-                  Browse Collection <ArrowRight size={16} />
+                  Browse Collection <ArrowRight size={14} className="md:w-4 md:h-4" />
                 </Link>
                 <Link
                   href="/contact"
-                  className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white px-8 py-3.5 rounded-lg font-bold text-sm transition-all"
+                  className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white px-5 md:px-8 py-2.5 md:py-3.5 rounded-lg font-bold text-[10px] md:text-sm transition-all whitespace-nowrap"
                 >
                   Get a Quote
                 </Link>
@@ -175,12 +175,12 @@ export default function CategorySlider() {
 
             {/* Right Side: SubCategories Grid */}
             <div className="w-full lg:w-6/12 flex justify-center lg:justify-end z-30">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
+              <div className="grid grid-cols-2 gap-3 md:gap-4 w-full max-w-2xl">
                 {cat.SubCategories && cat.SubCategories.slice(0, 4).map((sub: any) => (
                   <Link
                     href={`/products?category=${slugify(cat.category_name)}&subcategory=${slugify(sub.sub_category_name)}`}
                     key={sub.sub_category_id} 
-                    className="group relative h-[180px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl block"
+                    className="group relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl block"
                   >
                     <img 
                       src={sub.sub_category_image ? base_url + sub.sub_category_image : "/placeholder.png"} 
@@ -218,7 +218,7 @@ export default function CategorySlider() {
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-6">
         
         {/* Pagination Controls */}
-        <div className="flex items-center gap-4 bg-[#0F172A]/40 backdrop-blur-md px-6 py-2 rounded-full border border-white/10">
+        <div className="flex items-center gap-2 md:gap-4 bg-white/5 backdrop-blur-xl px-4 md:px-6 py-2 rounded-full border border-white/10 shadow-2xl">
           <button 
             onClick={handlePrev}
             disabled={activeIndex === 0}
@@ -226,8 +226,8 @@ export default function CategorySlider() {
           >
             <ChevronLeft size={16} />
           </button>
-          <span className="text-white text-xs font-bold tracking-[0.2em] px-2">
-            {String(activeIndex + 1).padStart(2, "0")} / {String(categories.length).padStart(2, "0")}
+          <span className="text-white text-[10px] md:text-xs font-black tracking-[0.3em] px-2 whitespace-nowrap flex items-center">
+            {String(activeIndex + 1).padStart(2, "0")} <span className="mx-2 opacity-30">/</span> {String(categories.length).padStart(2, "0")}
           </span>
           <button 
             onClick={handleNext}
@@ -237,6 +237,7 @@ export default function CategorySlider() {
             <ChevronRight size={16} />
           </button>
         </div>
+
 
         {/* Category Quick Links (Visual only) */}
         <div className="hidden md:flex items-center gap-3 pointer-events-none">

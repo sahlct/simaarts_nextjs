@@ -85,7 +85,7 @@ export default function AboutClient() {
   return (
     <div ref={sectionRef} className="bg-white overflow-hidden">
       {/* CINEMATIC HERO */}
-      <section className="relative h-[600px] md:h-[800px] flex items-center overflow-hidden">
+      <section className="relative min-h-screen md:h-[800px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
@@ -106,12 +106,12 @@ export default function AboutClient() {
             <span>About Us</span>
           </div>
 
-          <h1 className="text-6xl md:text-9xl font-black mb-8 tracking-tighter leading-none">
+          <h1 className="text-5xl md:text-9xl font-black mb-8 tracking-tighter leading-none">
             About <span className="text-blue-400 block md:inline">elbano</span>
           </h1>
 
-          <p className="text-lg md:text-2xl max-w-2xl text-white/90 leading-relaxed font-medium mb-12">
-            Importing the world's finest ceramic tiles since 1995. A legacy of Florence, delivered to your doorstep.
+          <p className="text-base md:text-2xl max-w-2xl text-white/90 leading-relaxed font-medium mb-12">
+            Importing the world's finest ceramic tiles since 1995. Delivering excellence to your doorstep.
           </p>
 
           <div className="flex gap-6">
@@ -123,7 +123,7 @@ export default function AboutClient() {
       </section>
 
       {/* OUR STORY */}
-      <section className="py-32 reveal-section">
+      <section className="py-16 md:py-32 reveal-section">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div className="order-2 lg:order-1">
@@ -131,15 +131,15 @@ export default function AboutClient() {
                 <div className="w-12 h-[2px] bg-indigo-800" />
                 <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Story</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] mb-8 tracking-tighter leading-tight">
+              <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-8 tracking-tighter leading-tight">
                 Born from a Passion <br /> for Ceramic & Design
               </h2>
               <div className="space-y-6 text-gray-500 text-base md:text-lg leading-relaxed font-medium">
                 <p>
-                  Founded in 1995 by master ceramicist Giorgio Elbano, our company began as a small Florence-based importer with a single mission: to bring the world's most beautiful ceramic tiles to architects and homeowners who demand the very best.
+                  Founded in 1995, our company began with a single mission: to bring the world's most beautiful ceramic and roofing tiles to architects and homeowners who demand the very best.
                 </p>
                 <p>
-                  Giorgio had spent 20 years working with European tile manufacturers and saw a gap — a curated, expert-led import service for premium ceramic tiles.
+                  We have spent over 30 years working with premium tile manufacturers across the globe to curate an expert-led import service for our clients.
                 </p>
               </div>
               <div className="mt-12">
@@ -160,23 +160,23 @@ export default function AboutClient() {
               </div>
 
               {/* Floating Badge */}
-              <div className="absolute -bottom-10 -left-10 md:-left-20 bg-[#1e2b58] p-10 rounded-[2.5rem] shadow-2xl text-white transform hover:scale-110 transition-transform">
-                <div className="text-4xl font-black mb-1">30+</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/60 whitespace-nowrap">Years of Excellence</div>
+              <div className="absolute -bottom-6 md:-bottom-10 -left-6 md:-left-20 bg-[#1e2b58] p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl text-white transform hover:scale-110 transition-transform">
+                <div className="text-2xl md:text-4xl font-black mb-1">30+</div>
+                <div className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-white/60 whitespace-nowrap">Years of Excellence</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-32 bg-[#F8FAFC] reveal-section">
+      <section className="py-16 md:py-32 bg-[#F8FAFC] reveal-section">
         <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-indigo-800" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Purpose</span>
             <div className="w-12 h-[1px] bg-indigo-800" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] mb-20 tracking-tighter">Vision & Mission</h2>
+          <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-12 md:mb-20 tracking-tighter">Vision & Mission</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Vision Card */}
@@ -205,7 +205,7 @@ export default function AboutClient() {
       </section>
 
       {/* STATS BAR */}
-      <section className="bg-[#0F172A] py-20 stats-bar">
+      <section className="bg-[#0F172A] py-12 md:py-20 stats-bar">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
             {[
@@ -229,7 +229,7 @@ export default function AboutClient() {
       </section>
 
       {/* OUR JOURNEY / TIMELINE */}
-      <section className="py-32 reveal-section">
+      <section className="py-16 md:py-32 reveal-section">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-24">
             <div className="flex items-center justify-center gap-4 mb-4">
@@ -248,8 +248,8 @@ export default function AboutClient() {
               {[
                 {
                   year: "1995",
-                  title: "Founded in Florence",
-                  desc: "Elbano was established by master ceramicist Giorgio Elbano in Florence, Italy, with a mission to bring the world's finest ceramic tiles to a global audience.",
+                  title: "Founded with Passion",
+                  desc: "Elbano was established with a mission to bring the world's finest ceramic and roofing tiles to a global audience, prioritizing quality and design excellence.",
                   align: "left"
                 },
                 {
@@ -284,7 +284,7 @@ export default function AboutClient() {
       </section>
 
       {/* THE TEAM */}
-      <section className="py-32 bg-[#F8FAFC] reveal-section">
+      <section className="py-16 md:py-32 bg-[#F8FAFC] reveal-section">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-blue-600" />
@@ -294,21 +294,21 @@ export default function AboutClient() {
           <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] mb-4 tracking-tighter">Meet Our Team</h2>
           <p className="text-gray-500 max-w-xl mx-auto mb-24 font-medium italic">The dedicated experts behind every Elbano tile.</p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 team-grid">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 team-grid">
             {[
               { name: "Marco Elbano", role: "Chief Executive Officer", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" },
               { name: "Sofia Marchetti", role: "Head of Design", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" },
-              { name: "Luca Ferrari", role: "Senior Tile Specialist", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" },
+              { name: "Arun Kumar", role: "Senior Tile Specialist", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" },
               { name: "Anna Rossi", role: "Global Sourcing Director", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop" }
             ].map((member, i) => (
-              <div key={i} className="team-card group bg-white rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700">
+              <div key={i} className="team-card group bg-white rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700">
                 <div className="aspect-[4/5] overflow-hidden relative">
                   <img src={member.img} alt={member.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
-                <div className="p-8">
-                  <h4 className="text-xl font-black text-[#0F172A] mb-1">{member.name}</h4>
-                  <p className="text-xs font-bold text-indigo-800 uppercase tracking-widest">{member.role}</p>
+                <div className="p-4 md:p-8">
+                  <h4 className="text-sm md:text-xl font-black text-[#0F172A] mb-1">{member.name}</h4>
+                  <p className="text-[8px] md:text-xs font-bold text-indigo-800 uppercase tracking-widest">{member.role}</p>
                 </div>
               </div>
             ))}

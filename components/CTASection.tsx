@@ -3,6 +3,8 @@
 import React from "react";
 import { ArrowRight, Phone, ShieldCheck, Truck, Headphones } from "lucide-react";
 import Link from "next/link";
+import { CONTACT_LINKS } from "@/lib/contact";
+import { IconBrandWhatsapp } from "@tabler/icons-react";
 
 const CTASection = () => {
   return (
@@ -41,37 +43,39 @@ const CTASection = () => {
           >
             Get Free Quote <ArrowRight size={18} />
           </Link>
-          <Link
-            href="https://wa.me/your-number"
+          <a
+            href={CONTACT_LINKS.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 bg-transparent border border-white/20 text-white px-10 py-4 rounded-xl font-bold text-sm hover:bg-white/10 transition-all w-full sm:w-auto backdrop-blur-sm"
           >
-            <Phone size={18} /> WhatsApp Us
-          </Link>
+            <IconBrandWhatsapp size={18} /> WhatsApp Us
+          </a>
         </div>
 
         {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-24">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
-              <ShieldCheck size={24} />
+        <div className="grid grid-cols-3 gap-2 md:gap-24">
+          <div className="flex flex-col items-center gap-2 md:gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
+              <ShieldCheck size={20} className="md:w-6 md:h-6" />
             </div>
-            <span className="text-white/60 text-[10px] md:text-xs font-bold tracking-wider uppercase">
+            <span className="text-white/60 text-[8px] md:text-xs font-bold tracking-wider uppercase">
               10 Year Warranty
             </span>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
-              <Truck size={24} />
+          <div className="flex flex-col items-center gap-2 md:gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
+              <Truck size={20} className="md:w-6 md:h-6" />
             </div>
-            <span className="text-white/60 text-[10px] md:text-xs font-bold tracking-wider uppercase">
+            <span className="text-white/60 text-[8px] md:text-xs font-bold tracking-wider uppercase">
               Global Delivery
             </span>
           </div>
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
-              <Headphones size={24} />
+          <div className="flex flex-col items-center gap-2 md:gap-3">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
+              <Headphones size={20} className="md:w-6 md:h-6" />
             </div>
-            <span className="text-white/60 text-[10px] md:text-xs font-bold tracking-wider uppercase">
+            <span className="text-white/60 text-[8px] md:text-xs font-bold tracking-wider uppercase">
               Expert Support
             </span>
           </div>

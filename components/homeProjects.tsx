@@ -1,15 +1,34 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { getProjects } from "@/lib/api/projects";
+import { getProjects, getProjectById } from "@/lib/api/projects";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
+import ProjectModal from "./ProjectModal";
+
+const safeParse = (data: any) => {
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+  if (typeof data === "string") {
+    try {
+      return JSON.parse(data);
+    } catch (e) {
+      return [];
+    }
+  }
+  return [];
+};
 
 export default function HomeProjects() {
   const [projects, setProjects] = useState<any[]>([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  // Modal State
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [modalLoading, setModalLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -28,6 +47,31 @@ export default function HomeProjects() {
     };
     fetchProjects();
   }, []);
+
+  const handleProjectClick = async (projectId: number) => {
+    try {
+      setModalLoading(true);
+      setIsModalOpen(true);
+      const res = await getProjectById(projectId);
+      const data = res?.data;
+
+      if (data) {
+        data.other_images = safeParse(data.other_images);
+      }
+
+      setSelectedProject(data);
+    } catch (error) {
+      console.error("Error fetching project details:", error);
+      setIsModalOpen(false);
+    } finally {
+      setModalLoading(false);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   useEffect(() => {
     if (loading || projects.length === 0 || !sectionRef.current) return;
@@ -131,6 +175,7 @@ export default function HomeProjects() {
             return (
               <div 
                 key={project.project_id || index}
+                onClick={() => handleProjectClick(project.project_id)}
                 className={`project-card relative group break-inside-avoid overflow-hidden rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-[#0F172A]/20 transition-all duration-500 cursor-pointer ${getHeightClass(index)}`}
               >
                 {/* Background Image */}
@@ -197,6 +242,13 @@ export default function HomeProjects() {
         )}
 
       </div>
+
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        project={selectedProject}
+        loading={modalLoading}
+      />
     </section>
   );
 }

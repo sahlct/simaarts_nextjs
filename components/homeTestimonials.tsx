@@ -105,11 +105,11 @@ export default function HomeTestimonials() {
   if (loading) return null;
 
   return (
-    <section ref={sectionRef} className="bg-[#FAFAFA] py-20 md:py-32 overflow-hidden">
+    <section ref={sectionRef} className="bg-[#FAFAFA] py-12 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* ---------------- HEADER ---------------- */}
-        <div data-ht-header className="text-center mb-16 flex flex-col items-center">
+        <div data-ht-header className="text-center mb-10 md:mb-16 flex flex-col items-center">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-10 h-[1.5px] bg-[#1E2B4D]" />
             <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#1E2B4D] uppercase">
@@ -117,7 +117,7 @@ export default function HomeTestimonials() {
             </span>
             <div className="w-10 h-[1.5px] bg-[#1E2B4D]" />
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-[#0F172A] tracking-tight">
+          <h2 className="text-3xl md:text-6xl font-black text-[#0F172A] tracking-tight">
             What Our Clients Say
           </h2>
         </div>
@@ -128,18 +128,18 @@ export default function HomeTestimonials() {
             <div className="embla__container flex">
               {testimonials.map((item) => (
                 <div key={item.testimonial_id} className="embla__slide flex-[0_0_100%] lg:flex-[0_0_50%] min-w-0 px-4">
-                  <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-[0_10px_50px_rgba(0,0,0,0.03)] border border-gray-100 h-full flex flex-col justify-between hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] transition-all duration-500 group/card">
+                  <div className="bg-white rounded-[2rem] p-6 md:p-12 shadow-[0_10px_50px_rgba(0,0,0,0.03)] border border-gray-100 h-full flex flex-col justify-between hover:shadow-[0_20px_60px_rgba(0,0,0,0.06)] transition-all duration-500 group/card">
 
                     <div>
                       {/* STARS */}
-                      <div className="flex gap-1 mb-8">
+                      <div className="flex gap-1 mb-5 md:mb-8">
                         {[...Array(5)].map((_, i) => (
                           <Star key={i} size={16} fill="#1E2B4D" className="text-[#1E2B4D]" />
                         ))}
                       </div>
 
                       {/* CONTENT */}
-                      <p className="text-gray-600 text-lg md:text-xl italic leading-relaxed mb-10 relative">
+                      <p className="text-gray-600 text-base md:text-xl italic leading-relaxed mb-6 md:mb-10 relative">
                         <span className="absolute -top-4 -left-4 text-6xl text-[#1E2B4D]/5 font-serif select-none">“</span>
                         {item.content}
                       </p>
@@ -167,7 +167,7 @@ export default function HomeTestimonials() {
           </div>
 
           {/* ---------------- NAVIGATION ---------------- */}
-          <div className="flex items-center justify-center gap-8 mt-16">
+          <div className="flex items-center justify-center gap-8 mt-10 md:mt-16">
             <button
               onClick={scrollPrev}
               className="w-12 h-12 cursor-pointer rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-[#1E2B4D] hover:border-[#1E2B4D] transition-all duration-300"

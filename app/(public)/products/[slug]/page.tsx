@@ -12,6 +12,7 @@ import {
   MessageCircle,
   ChevronRight
 } from "lucide-react";
+import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
 import ProductCard, { Product } from "@/components/ProductCard";
 
 interface ExtendedProduct extends Product {
@@ -108,11 +109,11 @@ Name: ${product.product_name}
 Code: ${product.product_code}
 Category: ${product.ProductCategory?.category_name || "-"}
 Price: ₹${product.price}`;
-    window.open(`https://wa.me/9876543210?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`${CONTACT_LINKS.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   const handleCall = () => {
-    window.open("tel:+919876543210", "_self");
+    window.open(CONTACT_LINKS.tel, "_self");
   };
 
   if (loading) {
@@ -134,15 +135,15 @@ Price: ₹${product.price}`;
   if (!product) return <div className="py-24 text-center">Product not found</div>;
 
   return (
-    <div className="bg-white min-h-screen pt-20">
+    <div className="bg-[#0B1120] min-h-screen pt-32">
       {/* BREADCRUMBS */}
       <nav className="max-w-7xl mx-auto px-6 md:px-12 py-4">
-        <ol className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
-          <li><Link href="/" className="hover:text-[#0F172A] transition-colors">Home</Link></li>
+        <ol className="flex items-center space-x-2 text-[10px] font-black uppercase tracking-[0.2em] text-white/40">
+          <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
           <li><ChevronRight size={12} /></li>
-          <li><Link href="/products" className="hover:text-[#0F172A] transition-colors">Products</Link></li>
+          <li><Link href="/products" className="hover:text-white transition-colors">Products</Link></li>
           <li><ChevronRight size={12} /></li>
-          <li className="text-[#0F172A] truncate max-w-[150px]">{product.product_name}</li>
+          <li className="text-white truncate max-w-[150px]">{product.product_name}</li>
         </ol>
       </nav>
 
@@ -151,7 +152,7 @@ Price: ₹${product.price}`;
 
           {/* LEFT: IMAGE GALLERY */}
           <div className="space-y-6">
-            <div className="relative aspect-[4/3] bg-[#F8FAFC] rounded-[2.5rem] overflow-hidden border border-gray-100 group shadow-sm">
+            <div className="relative aspect-[4/3] bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 group shadow-2xl">
               {product.is_best_selling === 1 && (
                 <div className="absolute top-8 left-8 z-10 bg-[#0F172A] text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-lg">
                   Best Seller
@@ -165,14 +166,14 @@ Price: ₹${product.price}`;
             </div>
 
             {Array.isArray(product.other_images) && product.other_images.length > 0 && (
-              <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+              <div className="grid grid-cols-4 md:flex gap-2 md:gap-4 pb-2">
                 {product.other_images.map((img: any, i: number) => {
                   const fullImg = base_url + img;
                   return (
                     <button
                       key={i}
                       onClick={() => setActiveImage(fullImg)}
-                      className={`relative w-24 h-24 rounded-2xl overflow-hidden border-2 transition-all flex-shrink-0 ${activeImage === fullImg ? "border-[#0F172A] shadow-md" : "border-transparent bg-gray-50 hover:border-gray-200"
+                      className={`relative aspect-square md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all ${activeImage === fullImg ? "border-blue-500 shadow-lg shadow-blue-500/20" : "border-white/5 bg-white/5 hover:border-white/20"
                         }`}
                     >
                       <img src={fullImg} alt="" className="w-full h-full object-cover" />
@@ -183,52 +184,52 @@ Price: ₹${product.price}`;
             )}
 
             {/* TRUST BADGES */}
-            <div className="grid grid-cols-3 gap-4 pt-10 border-t border-gray-50 mt-10">
+            <div className="grid grid-cols-3 gap-4 pt-10 border-t border-white/5 mt-10">
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-blue-50 text-indigo-800 rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-white/5 text-blue-400 rounded-full flex items-center justify-center mb-2">
                   <ShieldCheck size={20} />
                 </div>
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter">30yr Warranty</span>
+                <span className="text-[9px] font-black text-white/40 uppercase tracking-tighter">30yr Warranty</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-blue-50 text-indigo-800 rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-white/5 text-blue-400 rounded-full flex items-center justify-center mb-2">
                   <Truck size={20} />
                 </div>
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter">Global Shipping</span>
+                <span className="text-[9px] font-black text-white/40 uppercase tracking-tighter">Global Shipping</span>
               </div>
               <div className="flex flex-col items-center text-center">
-                <div className="w-10 h-10 bg-blue-50 text-indigo-800 rounded-full flex items-center justify-center mb-2">
+                <div className="w-10 h-10 bg-white/5 text-blue-400 rounded-full flex items-center justify-center mb-2">
                   <Leaf size={20} />
                 </div>
-                <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter">Eco Fired Clay</span>
+                <span className="text-[9px] font-black text-white/40 uppercase tracking-tighter">Eco Fired Clay</span>
               </div>
             </div>
           </div>
 
           {/* RIGHT: PRODUCT INFO */}
           <div className="flex flex-col">
-            <span className="text-indigo-800 text-xs font-black uppercase tracking-[0.2em] mb-3">
+            <span className="text-blue-400 text-xs font-black uppercase tracking-[0.2em] mb-3">
               {product.ProductCategory?.category_name || "Porcelain"}
             </span>
-            <h1 className="text-4xl md:text-5xl font-black text-[#0F172A] leading-tight mb-4 tracking-tight">
+            <h1 className="text-2xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
               {product.product_name}
             </h1>
             <div className="flex items-baseline gap-3 mb-8">
-              <span className="text-3xl font-black text-[#0F172A]">₹{product.price}</span>
+              <span className="text-3xl font-black text-white">₹{product.price}</span>
               {Number(product.mrp) > Number(product.price) && (
-                <span className="text-gray-400 text-lg line-through font-medium">₹{product.mrp}</span>
+                <span className="text-white/20 text-lg line-through font-medium">₹{product.mrp}</span>
               )}
-              <span className="text-gray-400 text-xs font-bold uppercase tracking-tighter">per m²</span>
+              <span className="text-white/40 text-xs font-bold uppercase tracking-tighter">per m²</span>
             </div>
 
             <div className="mb-10 max-w-xl">
-              <p className={`text-gray-500 text-sm md:text-base leading-relaxed font-medium transition-all duration-500 ${!isExpanded ? "line-clamp-3" : ""}`}>
+              <p className={`text-white/60 text-sm md:text-base leading-relaxed font-medium transition-all duration-500 ${!isExpanded ? "line-clamp-3" : ""}`}>
                 {product.description || "Captured from the breathtaking beauty of Italian marble with striking gold and grey veining. This large-format tile transforms any space into a luxury statement."}
               </p>
               {(product.description?.length > 160) && (
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="text-indigo-800 text-[10px] font-black uppercase tracking-[0.2em] mt-3 hover:text-blue-800 transition-colors cursor-pointer flex items-center gap-1"
+                  className="text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mt-3 hover:text-white transition-colors cursor-pointer flex items-center gap-1"
                 >
                   {isExpanded ? "View Less" : "Learn More"}
                   <ChevronRight size={12} className={`transition-transform duration-300 ${isExpanded ? "-rotate-90" : "rotate-0"}`} />
@@ -239,12 +240,12 @@ Price: ₹${product.price}`;
             {/* PRODUCT FEATURES */}
             {Array.isArray(product.features) && product.features.length > 0 && (
               <div className="mb-10">
-                <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Key Features</h3>
+                <h3 className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em] mb-4">Key Features</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {product.features.map((feature: string, index: number) => (
-                    <div key={index} className="flex items-center gap-3 bg-[#F8FAFC] p-4 rounded-2xl border border-gray-50 group transition-all hover:bg-white hover:shadow-md">
-                      <div className="w-2 h-2 rounded-full bg-indigo-800 transition-transform group-hover:scale-125" />
-                      <span className="text-sm font-bold text-[#0F172A]">{feature}</span>
+                    <div key={index} className="flex items-center gap-3 bg-white/5 p-4 rounded-2xl border border-white/5 group transition-all hover:bg-white/10">
+                      <div className="w-2 h-2 rounded-full bg-blue-500 transition-transform group-hover:scale-125" />
+                      <span className="text-sm font-bold text-white/80">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -265,18 +266,18 @@ Price: ₹${product.price}`;
             </div> */}
 
             {/* CTA BUTTONS */}
-            <div className="space-y-4 mb-12">
+            <div className="space-y-3 md:space-y-4 mb-12">
               <button
                 onClick={handleWhatsapp}
-                className="w-full bg-[#25D366] cursor-pointer hover:bg-[#1EBE57] text-white py-5 rounded-[1.25rem] font-black text-sm uppercase tracking-widest transition-all shadow-lg shadow-green-100 flex items-center justify-center gap-3 active:scale-[0.98]"
+                className="w-full bg-[#25D366] cursor-pointer hover:bg-[#1EBE57] text-white py-3.5 md:py-5 rounded-xl md:rounded-[1.25rem] font-black text-[10px] md:text-sm uppercase tracking-widest transition-all shadow-lg shadow-green-500/20 flex items-center justify-center gap-2 md:gap-3 active:scale-[0.98]"
               >
-                <MessageCircle size={20} fill="white" /> WhatsApp for Quote
+                <MessageCircle size={16} className="md:w-5 md:h-5" fill="white" /> WhatsApp for Quote
               </button>
               <button
                 onClick={handleCall}
-                className="w-full bg-[#0F172A] cursor-pointer hover:bg-[#1E2B4D] text-white py-5 rounded-[1.25rem] font-black text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
+                className="w-full bg-white text-[#0F172A] cursor-pointer hover:bg-gray-100 py-3.5 md:py-5 rounded-xl md:rounded-[1.25rem] font-black text-[10px] md:text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 md:gap-3 active:scale-[0.98]"
               >
-                <Phone size={20} fill="white" /> Call Us Now
+                <Phone size={16} className="md:w-5 md:h-5" fill="#0F172A" /> Call Us Now
               </button>
             </div>
 
@@ -285,10 +286,12 @@ Price: ₹${product.price}`;
         </div>
 
         {/* SIMILAR PRODUCTS */}
-        <section className="mt-32">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-black text-[#0F172A] tracking-tight">You May Also Like</h2>
-            <Link href="/products" className="text-xs font-black uppercase tracking-widest text-indigo-800 cursor-pointer hover:underline">
+        <section className="mt-20 md:mt-32">
+          <div className="flex items-center justify-between mb-8 md:mb-12 gap-4">
+            <h2 className="text-xl md:text-3xl font-black text-white tracking-tight shrink-0">
+              You May Also Like
+            </h2>
+            <Link href="/products" className="text-[10px] md:text-xs font-black uppercase tracking-widest text-blue-400 cursor-pointer hover:underline text-right">
               View All Products
             </Link>
           </div>
@@ -296,7 +299,7 @@ Price: ₹${product.price}`;
           {simLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="bg-white rounded-[2rem] h-[450px] animate-pulse border border-gray-100" />
+                <div key={i} className="bg-white/5 rounded-[2rem] h-[450px] animate-pulse border border-white/5" />
               ))}
             </div>
           ) : similarProducts.length > 0 ? (
@@ -306,7 +309,7 @@ Price: ₹${product.price}`;
               ))}
             </div>
           ) : (
-            <p className="text-gray-400 font-medium">No similar products found.</p>
+            <p className="text-white/20 font-medium">No similar products found.</p>
           )}
         </section>
       </main>

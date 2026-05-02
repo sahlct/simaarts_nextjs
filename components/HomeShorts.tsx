@@ -133,33 +133,46 @@ export default function HomeShorts() {
             </h2>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row items-center gap-3 w-full md:w-auto">
             {/* TYPE FILTERS */}
-            <div className="relative flex bg-white/5 p-1.5 rounded-2xl backdrop-blur-md border border-white/10">
+            <div className="relative flex-1 md:flex-none flex bg-white/5 p-1 md:p-1.5 rounded-xl md:rounded-2xl backdrop-blur-md border border-white/10">
               {/* Sliding Background Pill */}
               <div
-                className="absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-6px)] bg-white rounded-xl transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-xl"
+                className="absolute top-1 md:top-1.5 bottom-1 md:bottom-1.5 left-1 md:left-1.5 w-[calc(50%-4px)] md:w-[calc(50%-6px)] bg-white rounded-lg md:rounded-xl transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-xl"
                 style={{ transform: activeType === "insta" ? "translateX(100%)" : "translateX(0)" }}
               />
 
               <button
                 onClick={() => setActiveType("youtube")}
-                className={`relative flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "youtube" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
+                className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "youtube" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
                   }`}
               >
-                <Youtube size={18} /> Shorts
+                <Youtube size={14} className="md:w-[18px] md:h-[18px]" /> Shorts
               </button>
               <button
                 onClick={() => setActiveType("insta")}
-                className={`relative flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "insta" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
+                className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "insta" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
                   }`}
               >
-                <Instagram size={18} /> Reels
+                <Instagram size={14} className="md:w-[18px] md:h-[18px]" /> Reels
               </button>
             </div>
 
-            {/* ACTION BUTTONS */}
-            <div className="flex items-center gap-4 justify-start md:justify-end">
+            {/* ACTION BUTTONS (Mobile: Show only active type icon) */}
+            <div className="flex md:hidden items-center shrink-0">
+              {activeType === "youtube" ? (
+                <button className="w-10 h-10 bg-[#FF0000] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-95 transition-all">
+                  <Youtube size={20} />
+                </button>
+              ) : (
+                <button className="w-10 h-10 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-95 transition-all">
+                  <Instagram size={20} />
+                </button>
+              )}
+            </div>
+
+            {/* ACTION BUTTONS (Desktop: Show both with text) */}
+            <div className="hidden md:flex items-center gap-4 justify-end">
               <button className="flex items-center gap-2 bg-[#FF0000] text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:scale-105 transition-all cursor-pointer">
                 <Youtube size={16} /> Subscribe
               </button>

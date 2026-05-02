@@ -153,7 +153,7 @@ export default function ProductsClient() {
   return (
     <div className="bg-white min-h-screen">
       {/* HERO SECTION */}
-      <section className="relative h-[200px] md:h-[300px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[400px] md:h-[350px] flex items-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
@@ -163,7 +163,7 @@ export default function ProductsClient() {
           <div className="absolute inset-0 bg-black/50" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white pt-20">
           <nav className="mb-4">
             <ol className="flex items-center justify-start space-x-2 text-white/80 text-[10px] md:text-xs font-bold uppercase tracking-widest">
               <li>

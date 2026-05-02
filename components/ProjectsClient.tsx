@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { getProjects, getProjectById } from "@/lib/api/projects";
 import { MapPin, X, ChevronLeft, ChevronRight, Calendar, Info, Clock, CheckCircle2, MessageSquare, Layout, Box } from "lucide-react";
 import Link from "next/link";
+import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import ProjectModal from "./ProjectModal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,8 +37,6 @@ export default function ProjectsClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const modalRef = useRef<HTMLDivElement>(null);
-  const modalContentRef = useRef<HTMLDivElement>(null);
 
   const fetchProjects = async (page: number) => {
     try {
@@ -76,15 +76,6 @@ export default function ProjectsClient() {
       }
 
       setSelectedProject(data);
-
-      // Animate Modal Open
-      if (modalRef.current && modalContentRef.current) {
-        gsap.to(modalRef.current, { display: "flex", opacity: 1, duration: 0.3 });
-        gsap.fromTo(modalContentRef.current,
-          { scale: 0.8, opacity: 0, rotateY: 20, perspective: 1000 },
-          { scale: 1, opacity: 1, rotateY: 0, duration: 0.6, ease: "back.out(1.2)" }
-        );
-      }
     } catch (error) {
       console.error("Error fetching project details:", error);
       setIsModalOpen(false);
@@ -94,20 +85,8 @@ export default function ProjectsClient() {
   };
 
   const closeModal = () => {
-    if (modalRef.current && modalContentRef.current) {
-      gsap.to(modalContentRef.current, { scale: 0.8, opacity: 0, rotateY: -20, duration: 0.4, ease: "power2.in" });
-      gsap.to(modalRef.current, {
-        opacity: 0,
-        duration: 0.4,
-        onComplete: () => {
-          setIsModalOpen(false);
-          setSelectedProject(null);
-          if (modalRef.current) {
-            modalRef.current.style.display = "none";
-          }
-        }
-      });
-    }
+    setIsModalOpen(false);
+    setSelectedProject(null);
   };
 
   const getImageUrl = (project: any) => {
@@ -130,7 +109,7 @@ export default function ProjectsClient() {
   return (
     <div className="bg-white min-h-screen">
       {/* HERO HEADER */}
-      <section className="relative h-[250px] md:h-[350px] flex items-center overflow-hidden">
+      <section className="relative h-[400px] md:h-[350px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src="/product_bg.jpg" alt="Header Background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#0F172A]/60 backdrop-blur-[2px]" />
@@ -148,7 +127,7 @@ export default function ProjectsClient() {
           </h1>
 
           <p className="text-xs md:text-sm max-w-xl text-white/80 leading-relaxed font-medium">
-            Transforming homes and landmarks across 48 countries with handcrafted clay tiles that blend tradition with modern architectural excellence.
+            Transforming homes and landmarks across 60+ countries with handcrafted clay tiles that blend tradition with modern architectural excellence.
           </p>
         </div>
       </section>
@@ -162,7 +141,7 @@ export default function ProjectsClient() {
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Projects Completed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">48</div>
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">60+</div>
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Countries</div>
             </div>
             <div className="text-center">
@@ -178,7 +157,7 @@ export default function ProjectsClient() {
       </section>
 
       {/* MAIN CONTENT */}
-      <main className="py-24 max-w-7xl mx-auto px-6 md:px-12">
+      <main className="py-16 md:py-24 max-w-7xl mx-auto px-6 md:px-12">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-blue-600" />
@@ -251,7 +230,7 @@ export default function ProjectsClient() {
       </main>
 
       {/* PROCESS SECTION */}
-      <section className="py-32 bg-[#F8FAFC]">
+      <section className="py-16 md:py-32 bg-[#F8FAFC]">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-indigo-800" />
@@ -265,7 +244,7 @@ export default function ProjectsClient() {
             {[
               { id: "01", title: "Consultation", desc: "We discuss your project requirements, budget, and architectural vision.", icon: <MessageSquare size={24} /> },
               { id: "02", title: "Design & Selection", desc: "Our experts help you choose the perfect tile style, colour and profile.", icon: <Layout size={24} /> },
-              { id: "03", title: "Production", desc: "Tiles are kiln-fired to your specification in our Florence facility.", icon: <Box size={24} /> },
+              { id: "03", title: "Production", desc: "Tiles are kiln-fired to your specification in our premium production facility.", icon: <Box size={24} /> },
               { id: "04", title: "Installation", desc: "Our certified installers ensure flawless fitting and weatherproofing.", icon: <CheckCircle2 size={24} /> }
             ].map((step, i) => (
               <div key={i} className="group bg-white p-10 rounded-[2.5rem] text-left border border-gray-50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
@@ -292,85 +271,13 @@ export default function ProjectsClient() {
         </div>
       </section> */}
 
-      {/* 3D PROJECT MODAL */}
-      <div
-        ref={modalRef}
-        className="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8 opacity-0"
-        style={{ perspective: "2000px" }}
-      >
-        <div className="absolute inset-0 bg-[#0F172A]/90 backdrop-blur-xl" onClick={closeModal} />
-
-        <div
-          ref={modalContentRef}
-          className="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row opacity-0"
-        >
-          <button
-            onClick={closeModal}
-            className="absolute cursor-pointer top-8 right-8 z-50 w-12 h-12 bg-white/10 backdrop-blur-md text-white md:text-[#0F172A] rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg border border-white/20"
-          >
-            <X size={24} />
-          </button>
-
-          {modalLoading ? (
-            <div className="w-full h-[500px] flex items-center justify-center">
-              <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
-            </div>
-          ) : selectedProject ? (
-            <>
-              {/* Modal Left: Images */}
-              <div className="w-full md:w-[60%] h-[300px] md:h-auto overflow-y-auto no-scrollbar bg-gray-100">
-                <div className="flex flex-col gap-4 p-4">
-                  <img src={getImageUrl(selectedProject)} className="w-full rounded-[2rem] shadow-md" alt="" />
-                  {Array.isArray(selectedProject.other_images) && selectedProject.other_images.map((img: string, i: number) => (
-                    <img key={i} src={base_url + img} className="w-full rounded-[2rem] shadow-sm" alt="" />
-                  ))}
-                </div>
-              </div>
-
-              {/* Modal Right: Details */}
-              <div className="w-full md:w-[40%] p-10 md:p-16 overflow-y-auto no-scrollbar flex flex-col">
-                <div className="flex items-center gap-3 text-indigo-800 text-xs font-black uppercase tracking-[0.2em] mb-6">
-                  <Calendar size={14} /> {selectedProject.year || "2024"}
-                </div>
-
-                <h2 className="text-4xl md:text-4xl font-black text-[#0F172A] mb-6 tracking-tighter leading-tight">
-                  {selectedProject.project_title}
-                </h2>
-
-                <div className="flex items-center gap-3 text-gray-500 font-bold mb-10">
-                  <MapPin size={18} className="text-indigo-800" /> {selectedProject.place}
-                </div>
-
-                <div className="space-y-8 mb-12">
-                  <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Project Description</h4>
-                    <p className="text-gray-600 leading-relaxed font-medium">{selectedProject.description}</p>
-                  </div>
-
-                  {selectedProject.client && (
-                    <div>
-                      <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Client</h4>
-                      <p className="text-[#0F172A] font-bold">{selectedProject.client}</p>
-                    </div>
-                  )}
-
-
-                </div>
-
-                <div className="mt-auto pt-10 border-t border-gray-100">
-                  <button onClick={handleWhatsapp} className="w-full bg-[#1e2b58] cursor-pointer text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-800 transition-all flex items-center justify-center gap-3">
-                    <MessageSquare size={18} /> Enquire About This Project
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : null}
-        </div>
-      </div>
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        project={selectedProject}
+        loading={modalLoading}
+      />
     </div>
   );
 }
 
-const handleWhatsapp = () => {
-  window.open(`https://wa.me/9876543210?text=${encodeURIComponent("I am interested in your projects.")}`, "_blank");
-};
