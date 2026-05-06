@@ -126,7 +126,7 @@ export default function BlogsPage() {
             render: (r) =>
               r.blog_image ? (
                 <img
-                  src={base_url + r.blog_image}
+                  src={r.blog_image?.startsWith('http') ? r.blog_image : base_url + r.blog_image}
                   alt={r.blog_title}
                   className="w-10 h-10 object-cover rounded-full"
                 />
@@ -245,7 +245,7 @@ export default function BlogsPage() {
             "Blog Image": b.blog_image ? (
               <div className="flex justify-end">
               <img
-                src={base_url + b.blog_image}
+                src={b.blog_image?.startsWith('http') ? b.blog_image : base_url + b.blog_image}
                 alt="Blog"
                 className="w-14 h-14 object-cover rounded"
               />

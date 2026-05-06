@@ -99,7 +99,7 @@ export default function CustomerStoriesPage() {
             render: (r) =>
               r.company_logo ? (
                 <img
-                  src={base_url + r.company_logo}
+                  src={r.company_logo?.startsWith('http') ? r.company_logo : base_url + r.company_logo}
                   alt={r.company_name}
                   className="w-10 h-10 rounded-full object-cover"
                 />
@@ -177,7 +177,7 @@ export default function CustomerStoriesPage() {
             "Country Name": s.country_name || "—",
             "Company Logo": s.company_logo ? (
               <img
-                src={base_url +s.company_logo}
+                src={s.company_logo?.startsWith('http') ? s.company_logo : base_url + s.company_logo}
                 alt={s.company_name}
                 className="w-20 h-20 object-cover rounded"
               />
@@ -186,7 +186,7 @@ export default function CustomerStoriesPage() {
             ),
             "Country Flag": s.country_flag ? (
               <img
-                src={base_url + s.country_flag}
+                src={s.country_flag?.startsWith('http') ? s.country_flag : base_url + s.country_flag}
                 alt={s.country_name}
                 className="w-12 h-8 object-cover rounded"
               />

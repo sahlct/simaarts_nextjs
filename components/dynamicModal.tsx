@@ -309,7 +309,7 @@ export default function DynamicFormModal({
 
                           const src = file instanceof File
                             ? URL.createObjectURL(file)
-                            : base_url + file;
+                            : (file?.startsWith('http') ? file : base_url + file);
 
                           return (
                             <div

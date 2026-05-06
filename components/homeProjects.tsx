@@ -123,9 +123,9 @@ export default function HomeProjects() {
   };
 
   const getImageUrl = (project: any) => {
-    if (project.thumbnail_image) return base_url + project.thumbnail_image;
-    if (project.project_image) return base_url + project.project_image;
-    if (project.images && project.images.length > 0) return base_url + project.images[0];
+    if (project.thumbnail_image) return (project.thumbnail_image?.startsWith('http') ? project.thumbnail_image : base_url + project.thumbnail_image);
+    if (project.project_image) return (project.project_image?.startsWith('http') ? project.project_image : base_url + project.project_image);
+    if (project.images && project.images.length > 0) return (project.images[0]?.startsWith('http') ? project.images[0] : base_url + project.images[0]);
     return "/placeholder.png";
   };
 

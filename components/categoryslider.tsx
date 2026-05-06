@@ -122,7 +122,7 @@ export default function CategorySlider() {
           {/* Background Image */}
           <div className="absolute inset-0 bg-[#0F172A]">
             <img
-              src={cat.category_image ? base_url + cat.category_image : "/placeholder.png"}
+              src={cat.category_image ? (cat.category_image?.startsWith('http') ? cat.category_image : base_url + cat.category_image) : "/placeholder.png"}
               alt={cat.category_name}
               className="w-full h-full object-cover opacity-40 mix-blend-overlay"
             />
@@ -183,7 +183,7 @@ export default function CategorySlider() {
                     className="group relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl block"
                   >
                     <img 
-                      src={sub.sub_category_image ? base_url + sub.sub_category_image : "/placeholder.png"} 
+                      src={sub.sub_category_image ? (sub.sub_category_image?.startsWith('http') ? sub.sub_category_image : base_url + sub.sub_category_image) : "/placeholder.png"} 
                       alt={sub.sub_category_name} 
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                     />

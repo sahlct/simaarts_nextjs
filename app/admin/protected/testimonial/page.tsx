@@ -72,7 +72,7 @@ export default function TestimonialsPage() {
           "Candidate Image": t.image_of_candidate ? (
             <div className="flex justify-end">
               <img
-                src={base_url + t.image_of_candidate}
+                src={t.image_of_candidate?.startsWith('http') ? t.image_of_candidate : base_url + t.image_of_candidate}
                 alt={t.name_of_candidate}
                 className="w-16 h-16 object-cover rounded"
               />
@@ -176,7 +176,7 @@ export default function TestimonialsPage() {
             render: (r) =>
               r.image_of_candidate ? (
                 <img
-                  src={base_url + r.image_of_candidate}
+                  src={r.image_of_candidate?.startsWith('http') ? r.image_of_candidate : base_url + r.image_of_candidate}
                   className="w-10 h-10 object-cover rounded-full"
                   alt="Candidate"
                 />

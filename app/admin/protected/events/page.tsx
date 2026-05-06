@@ -130,7 +130,7 @@ export default function EventsPage() {
             render: (r) =>
               r.event_image ? (
                 <img
-                  src={base_url + r.event_image}
+                  src={r.event_image?.startsWith('http') ? r.event_image : base_url + r.event_image}
                   className="w-10 h-10 object-cover rounded-full"
                 />
               ) : (
@@ -235,7 +235,7 @@ export default function EventsPage() {
               ),
             Image: e.event_image ? (
               <img
-                src={base_url + e.event_image}
+                src={e.event_image?.startsWith('http') ? e.event_image : base_url + e.event_image}
                 className="w-20 h-20 rounded object-cover"
               />
             ) : (

@@ -125,7 +125,7 @@ export default function BlogsPage() {
           {!loading &&
             blogs.map((blog, index) => {
               const image = blog.blog_image
-                ? base_url + blog.blog_image
+                ? (blog.blog_image?.startsWith('http') ? blog.blog_image : base_url + blog.blog_image)
                 : "/placeholder.png";
 
               return (

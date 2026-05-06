@@ -79,7 +79,7 @@ export default function SuccessStories() {
               className="md:row-span-2 row-span-1 relative rounded-xl overflow-hidden cursor-pointer group"
             >
               <Image
-                src={base_url + stories[0].company_logo}
+                src={(stories[0].company_logo?.startsWith('http') ? stories[0].company_logo : base_url + stories[0].company_logo)}
                 alt={stories[0].company_name}
                 fill
                 className="object-cover group-hover:scale-110 transition-all duration-300 ease-in-out"
@@ -95,7 +95,7 @@ export default function SuccessStories() {
               className="md:col-span-3 cursor-pointer group relative rounded-xl overflow-hidden h-[220px]"
             >
               <Image
-                src={base_url + stories[1].company_logo}
+                src={(stories[1].company_logo?.startsWith('http') ? stories[1].company_logo : base_url + stories[1].company_logo)}
                 alt={stories[1].company_name}
                 fill
                 className="object-cover group-hover:scale-110 transition-all duration-300 ease-in-out"
@@ -111,7 +111,7 @@ export default function SuccessStories() {
               className="relative cursor-pointer rounded-xl overflow-hidden h-[220px] group"
             >
               <Image
-                src={base_url + stories[2].company_logo}
+                src={(stories[2].company_logo?.startsWith('http') ? stories[2].company_logo : base_url + stories[2].company_logo)}
                 alt={stories[2].company_name}
                 fill
                 className="object-cover group-hover:scale-110 transition-all duration-300 ease-in-out"
@@ -142,7 +142,7 @@ export default function SuccessStories() {
               className="relative cursor-pointer rounded-xl overflow-hidden h-[220px] group"
             >
               <Image
-                src={base_url + stories[3].company_logo}
+                src={(stories[3].company_logo?.startsWith('http') ? stories[3].company_logo : base_url + stories[3].company_logo)}
                 alt={stories[3].company_name}
                 fill
                 className="object-cover group-hover:scale-110 transition-all duration-300 ease-in-out"
@@ -187,7 +187,7 @@ export default function SuccessStories() {
               <Image
                 src={
                   selected.company_logo
-                    ? base_url + selected.company_logo
+                    ? (selected.company_logo?.startsWith('http') ? selected.company_logo : base_url + selected.company_logo)
                     : "/placeholder.png"
                 }
                 alt={selected.company_name}

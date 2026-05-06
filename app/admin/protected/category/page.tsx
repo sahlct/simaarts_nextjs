@@ -103,7 +103,7 @@ export default function CategoryPage() {
             render: (r) =>
               r.category_image ? (
                 <img
-                  src={base_url + r.category_image}
+                  src={r.category_image?.startsWith('http') ? r.category_image : base_url + r.category_image}
                   className="w-10 h-10 rounded object-cover"
                 />
               ) : (
@@ -163,7 +163,7 @@ export default function CategoryPage() {
             "Category Image": c.category_image ? (
               <div className="flex justify-end">
                 <img
-                  src={base_url + c.category_image}
+                  src={c.category_image?.startsWith('http') ? c.category_image : base_url + c.category_image}
                   className="w-14 h-14 rounded object-cover"
                 />
               </div>

@@ -90,7 +90,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           style={{ transform: "translateZ(20px)" }}
         >
           <img
-            src={product.thumbnail_image ? `${base_url}${product.thumbnail_image}` : "/placeholder.png"}
+            src={product.thumbnail_image ? (product.thumbnail_image?.startsWith('http') ? product.thumbnail_image : `${base_url}${product.thumbnail_image}`) : "/placeholder.png"}
             alt={product.product_name}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />

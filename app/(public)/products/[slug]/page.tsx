@@ -72,9 +72,9 @@ export default function ProductDetailsPage() {
 
           // Set default active image
           if (Array.isArray(data.other_images) && data.other_images.length > 0) {
-            setActiveImage(base_url + data.other_images[0]);
+            setActiveImage((data.other_images[0]?.startsWith('http') ? data.other_images[0] : base_url + data.other_images[0]));
           } else if (data.thumbnail_image) {
-            setActiveImage(base_url + data.thumbnail_image);
+            setActiveImage((data.thumbnail_image?.startsWith('http') ? data.thumbnail_image : base_url + data.thumbnail_image));
           }
 
           // Load Similar Products
@@ -168,7 +168,7 @@ Price: ₹${product.price}`;
             {Array.isArray(product.other_images) && product.other_images.length > 0 && (
               <div className="grid grid-cols-4 md:flex gap-2 md:gap-4 pb-2">
                 {product.other_images.map((img: any, i: number) => {
-                  const fullImg = base_url + img;
+                  const fullImg = (img?.startsWith('http') ? img : base_url + img);
                   return (
                     <button
                       key={i}

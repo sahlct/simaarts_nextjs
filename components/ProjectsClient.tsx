@@ -90,9 +90,9 @@ export default function ProjectsClient() {
   };
 
   const getImageUrl = (project: any) => {
-    if (project.thumbnail_image) return base_url + project.thumbnail_image;
-    if (project.project_image) return base_url + project.project_image;
-    if (project.other_images && Array.isArray(project.other_images) && project.other_images.length > 0) return base_url + project.other_images[0];
+    if (project.thumbnail_image) return (project.thumbnail_image?.startsWith('http') ? project.thumbnail_image : base_url + project.thumbnail_image);
+    if (project.project_image) return (project.project_image?.startsWith('http') ? project.project_image : base_url + project.project_image);
+    if (project.other_images && Array.isArray(project.other_images) && project.other_images.length > 0) return (project.other_images[0]?.startsWith('http') ? project.other_images[0] : base_url + project.other_images[0]);
     return "/placeholder.png";
   };
 

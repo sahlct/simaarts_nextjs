@@ -102,7 +102,7 @@ export default function ServicePage() {
             render: (r) =>
               r.service_image ? (
                 <img
-                  src={base_url + r.service_image}
+                  src={r.service_image?.startsWith('http') ? r.service_image : base_url + r.service_image}
                   alt={r.service_title}
                   className="w-10 h-10 object-cover rounded-md"
                 />
@@ -183,7 +183,7 @@ export default function ServicePage() {
             "Service Image": s.service_image ? (
               <div className="flex justify-end">
                 <img
-                  src={base_url + s.service_image}
+                  src={s.service_image?.startsWith('http') ? s.service_image : base_url + s.service_image}
                   alt="Service"
                   className="w-14 h-14 object-cover rounded"
                 />

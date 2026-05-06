@@ -83,7 +83,7 @@ export default function HeroSection() {
 
   const renderBackground = (bg: string) => {
     const isVideo = bg?.toLowerCase().endsWith(".mp4") || bg?.toLowerCase().endsWith(".webm");
-    const src = bg ? `${base_url}${bg}` : "/hero_01.png";
+    const src = bg ? (bg?.startsWith('http') ? bg : `${base_url}${bg}`) : "/hero_01.png";
 
     if (isVideo) {
       return (

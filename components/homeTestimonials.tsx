@@ -149,7 +149,7 @@ export default function HomeTestimonials() {
                     <div className="flex items-center gap-5">
                       <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-[#1E2B4D]/10">
                         <img
-                          src={item.image_of_candidate ? base_url + item.image_of_candidate : "/placeholder.png"}
+                          src={item.image_of_candidate ? (item.image_of_candidate?.startsWith('http') ? item.image_of_candidate : base_url + item.image_of_candidate) : "/placeholder.png"}
                           alt={item.name_of_candidate}
                           className="w-full h-full object-cover"
                         />

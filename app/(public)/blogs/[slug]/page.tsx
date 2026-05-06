@@ -100,7 +100,7 @@ export default function BlogDetailsPage() {
   }
 
   const image = blog.blog_image
-    ? base_url + blog.blog_image
+    ? (blog.blog_image?.startsWith('http') ? blog.blog_image : base_url + blog.blog_image)
     : "/placeholder.png";
 
   const tags: string[] = Array.isArray(blog.tags) ? blog.tags : [];

@@ -228,7 +228,7 @@ export default function JobApplicationsPage() {
               : "—",
             "Resume File": a.resume_file ? (
               <a
-                href={base_url + a.resume_file}
+                href={(a.resume_file?.startsWith('http') ? a.resume_file : base_url + a.resume_file)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 underline"

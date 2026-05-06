@@ -187,7 +187,7 @@ export default function CareersPage() {
               : "—",
             Image: j.job_image ? (
               <img
-                src={base_url +j.job_image}
+                src={j.job_image?.startsWith('http') ? j.job_image : base_url + j.job_image}
                 alt={j.job_title}
                 className="w-24 h-24 object-cover rounded-md"
               />

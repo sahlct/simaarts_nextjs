@@ -102,7 +102,7 @@ export default function ProjectsPage() {
             render: (r) =>
               r.thumbnail_image ? (
                 <img
-                  src={base_url + r.thumbnail_image}
+                  src={r.thumbnail_image?.startsWith('http') ? r.thumbnail_image : base_url + r.thumbnail_image}
                   alt={r.project_title}
                   className="w-10 h-10 object-cover rounded-md"
                 />
@@ -179,7 +179,7 @@ export default function ProjectsPage() {
             Thumbnail: s.thumbnail_image ? (
               <div className="flex justify-end">
                 <img
-                  src={base_url + s.thumbnail_image}
+                  src={s.thumbnail_image?.startsWith('http') ? s.thumbnail_image : base_url + s.thumbnail_image}
                   alt="Thumbnail"
                   className="w-14 h-14 object-cover rounded"
                 />
@@ -193,7 +193,7 @@ export default function ProjectsPage() {
                   {otherImages.map((img: string, i: number) => (
                     <img
                       key={i}
-                      src={base_url + img}
+                      src={img?.startsWith('http') ? img : base_url + img}
                       alt={`Project Image ${i + 1}`}
                       className="w-12 h-12 object-cover rounded"
                     />

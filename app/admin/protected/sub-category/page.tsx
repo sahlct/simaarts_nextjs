@@ -133,7 +133,7 @@ export default function SubCategoryPage() {
             render: (r) =>
               r.sub_category_image ? (
                 <img
-                  src={base_url + r.sub_category_image}
+                  src={r.sub_category_image?.startsWith('http') ? r.sub_category_image : base_url + r.sub_category_image}
                   className="w-10 h-10 object-cover rounded-full"
                 />
               ) : (
@@ -187,7 +187,7 @@ export default function SubCategoryPage() {
             Category: sc.ProductCategory?.category_name || "—",
             "Sub Category Image": sc.sub_category_image ? (
               <img
-                src={base_url + sc.sub_category_image}
+                src={sc.sub_category_image?.startsWith('http') ? sc.sub_category_image : base_url + sc.sub_category_image}
                 className="w-20 h-20 object-cover rounded"
               />
             ) : (

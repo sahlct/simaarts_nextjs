@@ -123,7 +123,7 @@ export default function CarouselPage() {
                 </div>
               ) : (
                 <img
-                  src={base_url + file}
+                  src={file?.startsWith('http') ? file : base_url + file}
                   alt={r.carousel_title}
                   className="w-10 h-10 object-cover rounded-md"
                 />
@@ -150,7 +150,7 @@ export default function CarouselPage() {
                 </div>
               ) : (
                 <img
-                  src={base_url + file}
+                  src={file?.startsWith('http') ? file : base_url + file}
                   alt={r.carousel_title}
                   className="w-10 h-10 object-cover rounded-md"
                 />
@@ -211,7 +211,7 @@ export default function CarouselPage() {
                   </div>
                 ) : (
                   <img
-                    src={base_url + file}
+                    src={file?.startsWith('http') ? file : base_url + file}
                     alt="Preview"
                     className="w-20 h-14 object-cover rounded hover:opacity-80 transition-opacity"
                   />

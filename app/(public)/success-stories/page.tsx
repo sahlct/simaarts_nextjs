@@ -84,7 +84,7 @@ export default function SuccessStories() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {stories.map((story) => {
               const img = story.company_logo
-                ? base_url + story.company_logo
+                ? (story.company_logo?.startsWith('http') ? story.company_logo : base_url + story.company_logo)
                 : "/placeholder.png";
 
               return (
@@ -179,7 +179,7 @@ export default function SuccessStories() {
               <Image
                 src={
                   selected.company_logo
-                    ? base_url + selected.company_logo
+                    ? (selected.company_logo?.startsWith('http') ? selected.company_logo : base_url + selected.company_logo)
                     : "/placeholder.png"
                 }
                 alt={selected.company_name}

@@ -43,9 +43,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project, l
   }, [isOpen]);
 
   const getImageUrl = (p: any) => {
-    if (p.thumbnail_image) return base_url + p.thumbnail_image;
-    if (p.project_image) return base_url + p.project_image;
-    if (p.other_images && Array.isArray(p.other_images) && p.other_images.length > 0) return base_url + p.other_images[0];
+    if (p.thumbnail_image) return (p.thumbnail_image?.startsWith('http') ? p.thumbnail_image : base_url + p.thumbnail_image);
+    if (p.project_image) return (p.project_image?.startsWith('http') ? p.project_image : base_url + p.project_image);
+    if (p.other_images && Array.isArray(p.other_images) && p.other_images.length > 0) return (p.other_images[0]?.startsWith('http') ? p.other_images[0] : base_url + p.other_images[0]);
     return "/placeholder.png";
   };
 
@@ -115,7 +115,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project, l
               <div className="flex flex-col gap-4 p-4">
                 <img src={getImageUrl(project)} className="w-full rounded-[1.5rem] md:rounded-[2rem] shadow-md" alt="" />
                 {Array.isArray(project.other_images) && project.other_images.map((img: string, i: number) => (
-                  <img key={i} src={base_url + img} className="w-full rounded-[1.5rem] md:rounded-[2rem] shadow-sm" alt="" />
+                  <img key={i} src={img?.startsWith('http') ? img : base_url + img} className="w-full rounded-[1.5rem] md:rounded-[2rem] shadow-sm" alt="" />
                 ))}
               </div>
             </div>

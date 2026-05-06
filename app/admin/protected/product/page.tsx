@@ -335,7 +335,7 @@ export default function ProductPage() {
             render: (r) =>
               r.thumbnail_image ? (
                 <img
-                  src={base_url + r.thumbnail_image}
+                  src={r.thumbnail_image?.startsWith('http') ? r.thumbnail_image : base_url + r.thumbnail_image}
                   className="w-10 h-10 rounded object-cover"
                 />
               ) : (
@@ -450,7 +450,7 @@ export default function ProductPage() {
             Status: p.status == 1 ? "Active" : "Inactive",
             Thumbnail: p.thumbnail_image ? (
               <img
-                src={base_url + p.thumbnail_image}
+                src={p.thumbnail_image?.startsWith('http') ? p.thumbnail_image : base_url + p.thumbnail_image}
                 className="w-20 h-20 object-cover rounded"
               />
             ) : (
@@ -477,7 +477,7 @@ export default function ProductPage() {
                 {otherImgs.map((img: string, idx: number) => (
                   <img
                     key={idx}
-                    src={base_url + img}
+                    src={img?.startsWith('http') ? img : base_url + img}
                     className="w-16 h-16 object-cover rounded"
                   />
                 ))}

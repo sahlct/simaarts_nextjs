@@ -201,7 +201,7 @@ export default function HomeShorts() {
                   >
                     {/* THUMBNAIL */}
                     <img
-                      src={short.thumbnail_image ? base_url + short.thumbnail_image : "/placeholder.png"}
+                      src={short.thumbnail_image ? (short.thumbnail_image?.startsWith('http') ? short.thumbnail_image : base_url + short.thumbnail_image) : "/placeholder.png"}
                       alt={short.shorts_title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />

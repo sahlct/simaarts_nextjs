@@ -104,7 +104,7 @@ export default function NewArrivals() {
         {!loading &&
           products.map((p) => {
             const thumb = p.thumbnail_image
-              ? base_url + p.thumbnail_image
+              ? (p.thumbnail_image?.startsWith('http') ? p.thumbnail_image : base_url + p.thumbnail_image)
               : "/placeholder.png";
 
             return (

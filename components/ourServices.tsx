@@ -136,7 +136,7 @@ export default function OurServices() {
           {!loading &&
             services.map((service, index) => {
               const image = service.service_image
-                ? base_url + service.service_image
+                ? (service.service_image?.startsWith('http') ? service.service_image : base_url + service.service_image)
                 : "/placeholder.png";
 
               return (
