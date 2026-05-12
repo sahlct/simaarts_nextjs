@@ -10,11 +10,22 @@ import CollectionSection from "@/components/CollectionSection"
 import OurServices from "@/components/ourServices"
 import HomeProjects from "@/components/homeProjects"
 import CTASection from "@/components/CTASection"
+import { getCarousels } from "@/lib/api/carousel"
 
-export default function Home() {
+export default async function Home() {
+  let initialCarousel = null;
+  try {
+    const res = await getCarousels(1, 1, "", 1);
+    if (res?.data && res.data.length > 0) {
+      initialCarousel = res.data[0];
+    }
+  } catch (error) {
+    console.error("Failed to fetch initial carousel:", error);
+  }
+
   return (
     <main className="min-h-screen">
-      <HeroSection />
+      <HeroSection initialData={initialCarousel} />
       <CollectionSection />
       <CategorySlider />
       <HomeProjects />

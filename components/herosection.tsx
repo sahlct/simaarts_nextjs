@@ -18,9 +18,9 @@ interface CarouselItem {
   status: number;
 }
 
-export default function HeroSection() {
-  const [carousel, setCarousel] = useState<CarouselItem | null>(null);
-  const [loading, setLoading] = useState(true);
+export default function HeroSection({ initialData }: { initialData?: CarouselItem | null }) {
+  const [carousel, setCarousel] = useState<CarouselItem | null>(initialData || null);
+  const [loading, setLoading] = useState(!initialData);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -55,7 +55,7 @@ export default function HeroSection() {
           duration: 0.8,
           stagger: 0.2,
           ease: "power3.out",
-          delay: 0.5,
+          delay: 0.1,
         }
       );
 
@@ -69,7 +69,7 @@ export default function HeroSection() {
           duration: 0.6,
           stagger: 0.15,
           ease: "power3.out",
-          delay: 1.2,
+          delay: 0.5,
         }
       );
     }, sectionRef);

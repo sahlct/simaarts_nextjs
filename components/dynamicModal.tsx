@@ -1,9 +1,10 @@
-// Updated DynamicFormModal with color picker support
+// Updated DynamicFormModal with color picker and image editor support
 "use client";
 import React, { useEffect, useState } from "react";
-import { X, Upload } from "lucide-react";
+import { X, Upload, Pencil } from "lucide-react";
 import { apiRequest } from "@/lib/api/apiClients";
 import { useToast } from "@/contexts/ToastContext";
+import ImageEditor from "./ImageEditor";
 
 type FieldType =
   | "text"
@@ -56,6 +57,8 @@ export default function DynamicFormModal({
   const [formState, setFormState] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
+  const [editingImage, setEditingImage] = useState<{ fieldName: string; index: number; src: string } | null>(null);
+  
   const { showSuccess, showError } = useToast();
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -92,7 +95,7 @@ export default function DynamicFormModal({
 
     setFormState(normalized);
     setError("");
-  }, [defaultValues, isOpen]);
+  }, [defaultValues, isOpen, fields]);
 
   if (!isOpen) return null;
 
@@ -145,6 +148,21 @@ export default function DynamicFormModal({
       arr.splice(index, 1);
       return { ...prev, [fieldName]: arr };
     });
+  };
+
+  const handleSaveEditedImage = (croppedBlob: Blob) => {
+    if (!editingImage) return;
+
+    const { fieldName, index } = editingImage;
+    const file = new File([croppedBlob], `edited_${Date.now()}.jpg`, { type: "image/jpeg" });
+
+    setFormState((prev) => {
+      const arr = Array.isArray(prev[fieldName]) ? [...prev[fieldName]] : [];
+      arr[index] = file;
+      return { ...prev, [fieldName]: arr };
+    });
+
+    setEditingImage(null);
   };
 
   const buildFormData = () => {
@@ -317,12 +335,22 @@ export default function DynamicFormModal({
                               className="relative border rounded-md p-2 w-28 text-xs bg-gray-50"
                             >
                               {isImage ? (
-                                <img
-                                  src={src}
-                                  alt="preview"
-                                  className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
-                                  onClick={() => window.open(src, "_blank")}
-                                />
+                                <div className="relative group">
+                                  <img
+                                    src={src}
+                                    alt="preview"
+                                    className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                                    onClick={() => window.open(src, "_blank")}
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() => setEditingImage({ fieldName: field.name, index: i, src })}
+                                    className="absolute cursor-pointer top-1 left-1 bg-white/90 border rounded-full p-1 text-[#036ec6] hover:bg-white transition-colors shadow-sm"
+                                    title="Edit Image"
+                                  >
+                                    <Pencil size={12} />
+                                  </button>
+                                </div>
                               ) : isVideo ? (
                                 <video
                                   src={src}
@@ -389,6 +417,14 @@ export default function DynamicFormModal({
           </form>
         </div>
       </div>
+
+      {editingImage && (
+        <ImageEditor
+          image={editingImage.src}
+          onSave={handleSaveEditedImage}
+          onCancel={() => setEditingImage(null)}
+        />
+      )}
     </div>
   );
 }
