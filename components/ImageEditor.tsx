@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import Cropper from "react-easy-crop";
-import { X, RotateCw, ZoomIn, ZoomOut, Check, Maximize } from "lucide-react";
-import getCroppedImg from "@/lib/imageUtils";
+import React, { useState, useRef, useEffect } from "react";
+import { Cropper, CropperRef } from "react-advanced-cropper";
+import "react-advanced-cropper/dist/style.css";
+import { X, RotateCw, ZoomIn, Check, Maximize } from "lucide-react";
 
 interface ImageEditorProps {
   image: string;
@@ -20,25 +20,44 @@ const ASPECT_RATIOS = [
 ];
 
 export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProps) {
-  const [crop, setCrop] = useState({ x: 0, y: 0 });
-  const [rotation, setRotation] = useState(0);
+  const [aspect, setAspect] = useState<number | undefined>(ASPECT_RATIOS[0].value); // Default Free
+  const cropperRef = useRef<CropperRef>(null);
+  
+  // Local state for sliders just for UI visual if needed, 
+  // but advanced-cropper is best controlled via its own drag/zoom. 
+  // However, we can hook up the sliders by calling methods on the cropperRef.
   const [zoom, setZoom] = useState(1);
-  const [aspect, setAspect] = useState<number | undefined>(ASPECT_RATIOS[1].value); // Default 1:1
-  const [croppedAreaPixels, setCroppedAreaPixels] = useState<any>(null);
+  const [rotation, setRotation] = useState(0);
 
-  const onCropComplete = useCallback((_croppedArea: any, croppedAreaPixels: any) => {
-    setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
-
-  const handleSave = async () => {
-    try {
-      const croppedImage = await getCroppedImg(image, croppedAreaPixels, rotation);
-      if (croppedImage) {
-        onSave(croppedImage);
+  const handleSave = () => {
+    if (cropperRef.current) {
+      const canvas = cropperRef.current.getCanvas();
+      if (canvas) {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            onSave(blob);
+          }
+        }, "image/jpeg");
       }
-    } catch (e) {
-      console.error(e);
     }
+  };
+
+  const onZoomChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newZoom = Number(e.target.value);
+    if (cropperRef.current) {
+      // relative zoom change
+      cropperRef.current.zoomImage(newZoom / zoom);
+    }
+    setZoom(newZoom);
+  };
+
+  const onRotateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newRotation = Number(e.target.value);
+    if (cropperRef.current) {
+      // relative rotation change
+      cropperRef.current.rotateImage(newRotation - rotation);
+    }
+    setRotation(newRotation);
   };
 
   return (
@@ -52,17 +71,15 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
       </div>
 
       {/* Cropper Container */}
-      <div className="relative flex-1 bg-black rounded-lg overflow-hidden border border-white/10">
+      <div className="relative flex-1 bg-black rounded-lg overflow-hidden border border-white/10 flex items-center justify-center">
         <Cropper
-          image={image}
-          crop={crop}
-          rotation={rotation}
-          zoom={zoom}
-          aspect={aspect}
-          onCropChange={setCrop}
-          onRotationChange={setRotation}
-          onCropComplete={onCropComplete}
-          onZoomChange={setZoom}
+          ref={cropperRef}
+          src={image}
+          stencilProps={{
+            aspectRatio: aspect,
+          }}
+          className={"w-full h-full"}
+          style={{ maxHeight: '70vh' }}
         />
       </div>
 
@@ -79,10 +96,10 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
               <input
                 type="range"
                 value={zoom}
-                min={1}
+                min={0.5}
                 max={3}
                 step={0.1}
-                onChange={(e) => setZoom(Number(e.target.value))}
+                onChange={onZoomChange}
                 className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#036ec6]"
               />
             </div>
@@ -98,7 +115,7 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
                 min={0}
                 max={360}
                 step={1}
-                onChange={(e) => setRotation(Number(e.target.value))}
+                onChange={onRotateChange}
                 className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#036ec6]"
               />
             </div>
@@ -113,7 +130,7 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
                   key={ratio.label}
                   onClick={() => setAspect(ratio.value)}
                   className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
-                    aspect === ratio.value
+                    aspect === ratio.value || (ratio.label === "Free" && aspect === undefined)
                       ? "bg-[#036ec6] text-white shadow-lg shadow-[#036ec6]/20"
                       : "bg-white/10 text-white/60 hover:bg-white/20"
                   }`}
@@ -144,3 +161,4 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
     </div>
   );
 }
+

@@ -46,7 +46,7 @@ export default function CollectionSection() {
               <div className="h-[2px] w-12 bg-gray-300" />
             </div>
             <h2 className="text-4xl md:text-6xl font-black text-[#0F172A] leading-[1.1] tracking-tight">
-              Premium Clay Tiles <br /> For Every Architecture
+              Premium Tiles <br /> For Every Architecture
             </h2>
           </div>
           <div className="lg:max-w-xs">
@@ -60,11 +60,11 @@ export default function CollectionSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {loading
             ? Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="bg-white rounded-2xl h-[450px] animate-pulse shadow-sm" />
-              ))
+              <div key={i} className="bg-white rounded-2xl h-[450px] animate-pulse shadow-sm" />
+            ))
             : products.map((product) => (
-                <ProductCard key={product.product_id} product={product} />
-              ))}
+              <ProductCard key={product.product_id} product={product} />
+            ))}
         </div>
 
         {/* View All Button */}

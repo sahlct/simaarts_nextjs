@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "About Us | elbano",
-  description: "Learn about Elbano's legacy of importing the world's finest ceramic tiles since 1995. Discover our vision, mission, and the people behind our success.",
+  description: "Welcome to Elbano Roofings, where we turn houses into lasting landmarks.True to our branding tagline, Built to strong, made to last, we provide premium, weather-resistant roofing and building solutions",
 };
 
 export default function AboutPage() {

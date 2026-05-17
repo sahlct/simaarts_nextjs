@@ -111,7 +111,7 @@ export default function AboutClient() {
           </h1>
 
           <p className="text-base md:text-2xl max-w-2xl text-white/90 leading-relaxed font-medium mb-12">
-            Importing the world's finest ceramic tiles since 1995. Delivering excellence to your doorstep.
+            Welcome to Elbano Roofings, where we turn houses into lasting landmarks. True to our branding tagline, Built to strong, made to last, we provide premium, weather-resistant roofing and building solutions
           </p>
 
           <div className="flex gap-6">
@@ -136,10 +136,10 @@ export default function AboutClient() {
               </h2>
               <div className="space-y-6 text-gray-500 text-base md:text-lg leading-relaxed font-medium">
                 <p>
-                  Founded in 1995, our company began with a single mission: to bring the world's most beautiful ceramic and roofing tiles to architects and homeowners who demand the very best.
+                  Our Premium Product CollectionWe offer a comprehensive range of building products to protect and beautify your property:Ceramic White Clay Roofing Tiles: Our WAVE , FLAT, ROMAN AND EUROPEAN Series Ceramic Tiles are crafted from high-quality white clay and kiln-fired with a ceramic glaze. They are 100% waterproof, heat-reflective, and resistant to moss and fading.Modern Roofing Sheets: Choose from Stone Coated Roofing Sheets for a premium look with extreme weather resistance, or UPVC Roofing Sheets for excellent thermal insulation and cost-effective durability.
                 </p>
                 <p>
-                  We have spent over 30 years working with premium tile manufacturers across the globe to curate an expert-led import service for our clients.
+                  Specialized Roofing Solutions: We provide high-quality Roofing Shingles for versatile architectural designs and robust Rain Gutter systems to ensure efficient water management for your home.
                 </p>
               </div>
               <div className="mt-12">
