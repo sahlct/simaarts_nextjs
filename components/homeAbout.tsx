@@ -70,14 +70,13 @@ export default function HomeAbout() {
           </h4>
 
           <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mt-1">
-            SS Enterprises
+            elbano
           </h2>
 
           <p className="text-gray-600 mt-4 leading-relaxed max-w-md">
-            SS enterprises was born on 18th February 2017 with the aim of delivering budget-friendly and
-            low maintenance PVC and uPVC door solutions. With sustainability in mind, we intend to
-            eliminate the need to harvest timber, offering a smarter and greener alternative to today's
-            homeowners.
+            elbano was born on 18th February 2017 with the aim of delivering budget-friendly and
+            premium imported ceramic tiles and roofing solutions. With sustainability in mind, we intend to
+            offer a smarter, greener, and more durable alternative to today's homeowners.
           </p>
         </div>
 

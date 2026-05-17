@@ -149,7 +149,7 @@ const Sidebar = memo(
           {/* Logo */}
           <div className="flex items-center justify-between p-4 border-b  border-gray-300 flex-shrink-0">
             <img
-              src="/elbano_full_text.png"
+              src="/logo-transparent.png"
               alt=""
               className={`h-8 ps-5 ${isCollapsed ? "hidden" : "block"}`}
             />

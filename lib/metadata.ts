@@ -1,25 +1,25 @@
 import { Metadata } from "next";
 
 export const sharedMetadata: Metadata = {
-  title: "ELBANO | Premium Ceramic Tiles",
-  description: "ELBANO offers a wide range of premium quality doors, shutters, and interior solutions. Experience the perfect blend of elegance and durability.",
-  keywords: ["Doors", "Interior Solutions", "ELBANO", "Modern Doors", "Home Decor", "Premium Shutters"],
+  title: "ELBANO | Premium Ceramic Tiles & Roofing Solutions",
+  description: "ELBANO offers a wide range of premium quality imported ceramic tiles and roofing solutions. Experience the perfect blend of elegance and durability.",
+  keywords: ["Ceramic Tiles", "Roofing Solutions", "ELBANO", "Roofing Sheets", "Home Decor", "Premium Tiles"],
   authors: [{ name: "ELBANO" }],
-  metadataBase: new URL("https://ssemlp.com"),
+  metadataBase: new URL("https://elbano.com"),
   alternates: {
-    canonical: "https://ssemlp.com",
+    canonical: "https://elbano.com",
   },
   openGraph: {
-    title: "ELBANO | Premium Doors & Interiors",
-    description: "Discover our premium collection of doors and interior solutions crafted for modern living. Elegance meets durability at SS Enterprises.",
-    url: "https://ssemlp.com",
-    siteName: "SS Enterprises",
+    title: "ELBANO | Premium Ceramic Tiles & Roofing Solutions",
+    description: "Discover our premium collection of imported ceramic tiles and roofing solutions crafted for modern living. Elegance meets durability at ELBANO.",
+    url: "https://elbano.com",
+    siteName: "ELBANO",
     images: [
       {
-        url: "https://ssemlp.com/elbano_logo.jpeg",
+        url: "https://elbano.com/elbano_logo.png",
         width: 1200,
         height: 630,
-        alt: "SS Enterprises Logo",
+        alt: "ELBANO Logo",
       },
     ],
     locale: "en_US",
@@ -27,9 +27,9 @@ export const sharedMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SS ENTERPRISES | Premium Doors & Interiors",
-    description: "Discover our premium collection of doors and interior solutions crafted for modern living.",
-    images: ["https://ssemlp.com/elbano_logo.png"],
+    title: "ELBANO | Premium Ceramic Tiles & Roofing Solutions",
+    description: "Discover our premium collection of imported ceramic tiles and roofing solutions crafted for modern living.",
+    images: ["https://elbano.com/elbano_logo.png"],
   },
   icons: {
     icon: "/favicon.ico",

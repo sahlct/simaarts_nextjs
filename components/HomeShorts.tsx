@@ -115,6 +115,10 @@ export default function HomeShorts() {
     return () => ctx.revert();
   }, [loading, activeType]);
 
+  if (!loading && shorts.length === 0) {
+    return null;
+  }
+
   return (
     <section ref={sectionRef} className="bg-[#0F172A] py-20 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8">

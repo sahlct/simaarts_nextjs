@@ -44,7 +44,7 @@ const Footer = () => {
           {/* Brand & About */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3">
-              <img src="/elbano_full_text.png" alt="logo" className="max-h-10 brightness-0 invert" />
+              <img src="/logo-transparent.png" alt="logo" className="max-h-10 brightness-0 invert" />
             </div>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               Crafting timeless roofing excellence with premium natural clay tiles since 1995.

@@ -37,14 +37,14 @@ export default function Header() {
     <>
       <header
         className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out flex items-center justify-between rounded-full border backdrop-blur-xl shadow-2xl ${scrolled
-            ? "bg-white/90 w-[95%] max-w-6xl border-black/5 py-1 px-6 shadow-black/5"
-            : "bg-white/10 w-[92%] max-w-5xl border-white/20 py-1.5 md:py-3 px-6 md:px-8"
+          ? "bg-white/90 w-[95%] max-w-6xl border-black/5 py-1 px-6 shadow-black/5"
+          : "bg-white/10 w-[92%] max-w-5xl border-white/20 py-1.5 md:py-3 px-6 md:px-8"
           }`}
       >
         {/* LOGO */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
           <img
-            src="/elbano_full_text.png"
+            src="/logo-transparent.png"
             alt="logo"
             className={`transition-all duration-300 ${scrolled ? "h-5 md:h-8" : "h-6 md:h-9"} ${!scrolled && "brightness-0 invert"}`}
           />
@@ -73,8 +73,8 @@ export default function Header() {
           <Link
             href="/contact"
             className={`hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full text-[13px] font-bold transition-all shadow-lg active:scale-95 ${scrolled
-                ? "bg-[#1e2b58] text-white hover:bg-[#2a3c7a]"
-                : "bg-white text-[#1e2b58] hover:bg-white/90"
+              ? "bg-[#1e2b58] text-white hover:bg-[#2a3c7a]"
+              : "bg-white text-[#1e2b58] hover:bg-white/90"
               }`}
           >
             Get Quote
@@ -108,7 +108,7 @@ export default function Header() {
       >
         <div className="flex justify-between items-center mb-12">
           <div className="flex items-center gap-2">
-            <img src="/elbano_full_text.png" alt="logo" className="h-7" />
+            <img src="/logo-transparent.png" alt="logo" className="h-7" />
           </div>
           <button
             onClick={() => setMobileOpen(false)}

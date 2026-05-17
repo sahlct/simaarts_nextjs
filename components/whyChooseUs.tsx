@@ -93,8 +93,8 @@ export default function WhyChooseUs() {
           </h2>
 
           <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
-            At SS Enterprises, we value quality and competence. Every design we provide has precisely
-            engineered PVC and uPVC door solutions that offer long-term performance.
+            At elbano, we value quality and competence. Every design we provide has precisely
+            engineered imported ceramic tiles and roofing solutions that offer long-term performance.
           </p>
         </div>
 

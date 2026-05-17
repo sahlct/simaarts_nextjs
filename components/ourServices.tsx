@@ -85,6 +85,10 @@ export default function OurServices() {
     return () => ctx.revert();
   }, [loading, services]);
 
+  if (!loading && services.length === 0) {
+    return null;
+  }
+
   return (
     <section
       ref={sectionRef}

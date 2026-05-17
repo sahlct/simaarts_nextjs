@@ -41,15 +41,15 @@ export default function AboutHero() {
           <div className="flex flex-col justify-center lg:mt-32 h-full">
             <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 leading-tight mb-4">
               About <br />
-              SS Enterprises
+              elbano
             </h1>
 
             <div className="w-16 h-[2px] bg-gray-300 mb-4" />
 
             <p className="text-gray-600 text-sm md:text-base max-w-md leading-relaxed mb-6">
-              We specialize in manufacturing premium quality fiber doors with a
+              We specialize in providing premium imported ceramic tiles and roofing solutions with a
               perfect blend of elegance, strength, and durability. Every product
-              we craft reflects our commitment to excellence and innovation.
+              we offer reflects our commitment to excellence and innovation.
             </p>
 
             <button
@@ -65,7 +65,7 @@ export default function AboutHero() {
             <div className="w-full flex justify-center">
               <Image
                 src="/door_three.png"
-                alt="SS Enterprises Doors"
+                alt="elbano Roofings"
                 width={500}
                 height={500}
                 className="object-contain"
