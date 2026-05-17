@@ -167,7 +167,7 @@ export default function ContactClient() {
             {[
               { label: "Call Us", val: CONTACT_INFO.phone, sub: "Mon-Sat, 9am-6pm", icon: <Phone size={20} className="md:w-6 md:h-6" />, href: CONTACT_LINKS.tel },
               { label: "Email Us", val: CONTACT_INFO.email, sub: "Fast Response", icon: <Mail size={20} className="md:w-6 md:h-6" />, href: CONTACT_LINKS.mailto },
-              { label: "Headquarters", val: "Calicut", sub: "Kerala, India", icon: <MapPin size={20} className="md:w-6 md:h-6" />, href: CONTACT_INFO.googleMapsUrl },
+              { label: "Headquarters", val: "Karuvankallu", sub: "Malappuram, Kerala", icon: <MapPin size={20} className="md:w-6 md:h-6" />, href: CONTACT_INFO.googleMapsUrl },
               { label: "Office Hours", val: "Open Daily", sub: "9 AM - 6 PM", icon: <Clock size={20} className="md:w-6 md:h-6" />, href: "#" }
             ].map((item, i) => (
               <a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className="info-card group cursor-pointer bg-white p-5 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-blue-200/50 hover:-translate-y-2 transition-all duration-500">

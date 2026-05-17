@@ -35,7 +35,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bg-[#1E2B4D] text-white pt-20 pb-10">
+    <footer className="bg-[#0F172A] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Main Grid */}

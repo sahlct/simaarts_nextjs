@@ -137,11 +137,11 @@ export default function ProjectsClient() {
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">1,200+</div>
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">1,000+</div>
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Projects Completed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">60+</div>
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">16+</div>
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Countries</div>
             </div>
             <div className="text-center">
@@ -149,7 +149,7 @@ export default function ProjectsClient() {
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Years Experience</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">98%</div>
+              <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">100%</div>
               <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Client Satisfaction</div>
             </div>
           </div>

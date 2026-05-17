@@ -123,48 +123,61 @@ export default function AboutClient() {
       </section>
 
       {/* OUR STORY */}
-      <section className="py-16 md:py-32 reveal-section">
+      <section className="py-16 md:py-32 reveal-section bg-white">
+        <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="w-12 h-[2px] bg-indigo-800" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Story</span>
+            <div className="w-12 h-[2px] bg-indigo-800" />
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-10 tracking-tighter leading-tight">
+            elbano - Specialised for <br className="hidden md:block" /> Roofing Solutions
+          </h2>
+
+          <div className="space-y-8 text-gray-600 text-base md:text-lg leading-relaxed font-medium text-left bg-gray-50/50 p-8 md:p-12 rounded-[2rem] border border-gray-100">
+            <p>
+              Our Premium Product Collection: We offer a comprehensive range of building products to protect and beautify your property.
+            </p>
+            <p>
+              <strong className="text-[#0F172A]">Ceramic White Clay Roofing Tiles:</strong> Our WAVE, FLAT, ROMAN AND EUROPEAN Series Ceramic Tiles are crafted from high-quality white clay and kiln-fired with a ceramic glaze. They are 100% waterproof, heat-reflective, and resistant to moss and fading.
+            </p>
+            <p>
+              <strong className="text-[#0F172A]">Modern Roofing Sheets:</strong> Choose from Stone Coated Roofing Sheets for a premium look with extreme weather resistance, or UPVC Roofing Sheets for excellent thermal insulation and cost-effective durability.
+            </p>
+            <p>
+              <strong className="text-[#0F172A]">Specialized Roofing Solutions:</strong> We provide high-quality Roofing Shingles for versatile architectural designs and robust Rain Gutter systems to ensure efficient water management for your home.
+            </p>
+          </div>
+
+          <div className="mt-12 flex justify-center">
+            <Link href="/contact" className="inline-flex items-center gap-3 bg-[#1e2b58] text-white px-10 py-5 rounded-[1.25rem] font-black text-xs uppercase tracking-widest hover:bg-[#1e2b58]/80 hover:scale-105 transition-all shadow-xl shadow-gray-200">
+              Work With Us <ChevronRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS BAR */}
+      <section className="bg-[#1E2B4D] py-12 md:py-20 stats-bar">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-[2px] bg-indigo-800" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Story</span>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+            {[
+              { label: "Projects Completed", value: "1000", suffix: "+", icon: <Briefcase size={20} /> },
+              { label: "Countries Served", value: "16", suffix: "+", icon: <Globe size={20} /> },
+              { label: "Tile Designs", value: "100", suffix: "+", icon: <Box size={20} /> },
+              { label: "Client Satisfaction", value: "100", suffix: "%", icon: <Users size={20} /> }
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col items-center">
+                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-blue-400 mb-6 border border-white/10">
+                  {stat.icon}
+                </div>
+                <div className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">
+                  <span className="stat-number">{stat.value}</span>{stat.suffix}
+                </div>
+                <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{stat.label}</div>
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-8 tracking-tighter leading-tight">
-                Born from a Passion <br /> for Ceramic & Design
-              </h2>
-              <div className="space-y-6 text-gray-500 text-base md:text-lg leading-relaxed font-medium">
-                <p>
-                  Our Premium Product CollectionWe offer a comprehensive range of building products to protect and beautify your property:Ceramic White Clay Roofing Tiles: Our WAVE , FLAT, ROMAN AND EUROPEAN Series Ceramic Tiles are crafted from high-quality white clay and kiln-fired with a ceramic glaze. They are 100% waterproof, heat-reflective, and resistant to moss and fading.Modern Roofing Sheets: Choose from Stone Coated Roofing Sheets for a premium look with extreme weather resistance, or UPVC Roofing Sheets for excellent thermal insulation and cost-effective durability.
-                </p>
-                <p>
-                  Specialized Roofing Solutions: We provide high-quality Roofing Shingles for versatile architectural designs and robust Rain Gutter systems to ensure efficient water management for your home.
-                </p>
-              </div>
-              <div className="mt-12">
-                <Link href="/contact" className="inline-flex items-center gap-3 bg-[#1e2b58] text-white px-10 py-5 rounded-[1.25rem] font-black text-xs uppercase tracking-widest hover:bg-[#1e2b58]/80 hover:scale-105 transition-all shadow-xl shadow-gray-200">
-                  Work With Us <ChevronRight size={18} />
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative order-1 lg:order-2">
-              <div className="aspect-[5/5] rounded-[3rem] overflow-hidden shadow-2xl relative">
-                <img
-                  src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?q=80&w=1918&auto=format&fit=crop"
-                  alt="Crafting tiles"
-                  className="w-full h-full object-cover transition-transform duration-1000 hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/40 to-transparent" />
-              </div>
-
-              {/* Floating Badge */}
-              <div className="absolute -bottom-6 md:-bottom-10 -left-6 md:-left-20 bg-[#1e2b58] p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl text-white transform hover:scale-110 transition-transform">
-                <div className="text-2xl md:text-4xl font-black mb-1">30+</div>
-                <div className="text-[8px] md:text-[10px] font-bold uppercase tracking-widest text-white/60 whitespace-nowrap">Years of Excellence</div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -204,32 +217,10 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* STATS BAR */}
-      <section className="bg-[#0F172A] py-12 md:py-20 stats-bar">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-            {[
-              { label: "Projects Completed", value: "1200", suffix: "+", icon: <Briefcase size={20} /> },
-              { label: "Countries Served", value: "60", suffix: "+", icon: <Globe size={20} /> },
-              { label: "Tile Designs", value: "5000", suffix: "+", icon: <Box size={20} /> },
-              { label: "Client Satisfaction", value: "98", suffix: "%", icon: <Users size={20} /> }
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-blue-400 mb-6 border border-white/10">
-                  {stat.icon}
-                </div>
-                <div className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">
-                  <span className="stat-number">{stat.value}</span>{stat.suffix}
-                </div>
-                <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* OUR JOURNEY / TIMELINE */}
-      <section className="py-16 md:py-32 reveal-section">
+      {/* <section className="py-16 md:py-32 reveal-section">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="text-center mb-24">
             <div className="flex items-center justify-center gap-4 mb-4">
@@ -241,7 +232,7 @@ export default function AboutClient() {
           </div>
 
           <div className="relative history-container">
-            {/* Timeline Line */}
+           
             <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-100 -translate-x-1/2 hidden md:block" />
 
             <div className="space-y-24">
@@ -268,7 +259,6 @@ export default function AboutClient() {
                 <div key={i} className={`history-item relative flex items-center justify-between md:flex-row ${item.align === "left" ? "md:flex-row-reverse" : ""}`}>
                   <div className="hidden md:block w-5/12" />
 
-                  {/* Timeline Dot */}
                   <div className="absolute left-0 md:left-1/2 w-6 h-6 bg-indigo-800 border-4 border-white rounded-full -translate-x-1/2 z-10 shadow-lg hidden md:block" />
 
                   <div className="w-full md:w-5/12 bg-white p-10 rounded-[2.5rem] border border-gray-50 shadow-sm hover:shadow-xl transition-all duration-500">
@@ -281,10 +271,10 @@ export default function AboutClient() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* THE TEAM */}
-      <section className="py-16 md:py-32 bg-[#F8FAFC] reveal-section">
+      {/* <section className="py-16 md:py-32 bg-[#F8FAFC] reveal-section">
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
           <div className="flex items-center justify-center gap-4 mb-4">
             <div className="w-12 h-[1px] bg-blue-600" />
@@ -314,7 +304,7 @@ export default function AboutClient() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FINAL CTA */}
       {/* <section className="bg-[#0F172A] py-32 relative overflow-hidden">

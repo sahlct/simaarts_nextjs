@@ -139,8 +139,8 @@ export default function HomeTestimonials() {
                       </div>
 
                       {/* CONTENT */}
-                      <p className="text-gray-600 text-base md:text-xl italic leading-relaxed mb-6 md:mb-10 relative">
-                        <span className="absolute -top-4 -left-4 text-6xl text-[#1E2B4D]/5 font-serif select-none line-clamp-5">“</span>
+                      <p className="text-gray-600 text-base md:text-xl italic leading-relaxed mb-6 md:mb-10 relative line-clamp-6">
+                        <span className="absolute -top-4 -left-4 text-6xl text-[#1E2B4D]/5 font-serif select-none">“</span>
                         {item.content}
                       </p>
                     </div>

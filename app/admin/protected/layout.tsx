@@ -75,31 +75,33 @@ const menuItems = [
     icon: Video,
     path: "/admin/protected/shorts",
   },
-  {
-    name: "Blogs",
-    icon: BarChart3,
-    path: "/admin/protected/blogs",
-  },
+  // {
+  //   name: "Blogs",
+  //   icon: BarChart3,
+  //   path: "/admin/protected/blogs",
+  // },
   // {
   //   name: "Events",
   //   icon: Star,
   //   path: "/admin/protected/events",
   // },
   {
-    name: "Others",
+    name: "Testimonials",
     icon: Award,
-    children: [
-      { name: "Testimonials", icon: Trophy, path: "/admin/protected/testimonial" },
-      { name: "Customer Stories", icon: GraduationCap, path: "/admin/protected/stories" },
-      { name: "Careers", icon: GraduationCap, path: "/admin/protected/careers" },
-    ],
+    path: "/admin/protected/testimonial",
+    // children: [
+    //   { name: "Testimonials", icon: Trophy, path: "/admin/protected/testimonial" },
+    //   { name: "Customer Stories", icon: GraduationCap, path: "/admin/protected/stories" },
+    //   { name: "Careers", icon: GraduationCap, path: "/admin/protected/careers" },
+    // ],
   },
   {
     name: "Enquiry's", icon: HelpCircle,
-    children: [
-      { name: "Contact", icon: MessageSquare, path: "/admin/protected/enquiry" },
-      { name: "Job Applications", icon: MessageSquare, path: "/admin/protected/job-apps" },
-    ],
+    path: "/admin/protected/enquiry",
+    // children: [
+    //   { name: "Contact", icon: MessageSquare, path: "/admin/protected/enquiry" },
+    //   { name: "Job Applications", icon: MessageSquare, path: "/admin/protected/job-apps" },
+    // ],
   },
 ];
 
