@@ -29,6 +29,9 @@ interface ExtendedProduct extends Product {
   ProductCategory?: {
     category_name: string;
   };
+  SubCategory?: {
+    sub_category_name: string;
+  };
 }
 
 const safeParse = (data: any) => {
@@ -108,7 +111,7 @@ export default function ProductDetailsPage() {
 Name: ${product.product_name}
 Code: ${product.product_code}
 Category: ${product.ProductCategory?.category_name || "-"}
-Price: ₹${product.price}`;
+Subcategory: ${product.price}`;
     window.open(`${CONTACT_LINKS.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
@@ -148,11 +151,11 @@ Price: ₹${product.price}`;
       </nav>
 
       <main className="max-w-7xl mx-auto px-6 md:px-12 pb-24 pt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
           {/* LEFT: IMAGE GALLERY */}
-          <div className="space-y-6">
-            <div className="relative aspect-[4/3] bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 group shadow-2xl">
+          <div className="lg:col-span-5 space-y-4 md:space-y-6 w-full max-w-md mx-auto lg:max-w-none">
+            <div className="relative aspect-square bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 group shadow-2xl">
               {product.is_best_selling === 1 && (
                 <div className="absolute top-8 left-8 z-10 bg-[#0F172A] text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-lg">
                   Best Seller
@@ -166,25 +169,34 @@ Price: ₹${product.price}`;
             </div>
 
             {Array.isArray(product.other_images) && product.other_images.length > 0 && (
-              <div className="grid grid-cols-4 md:flex gap-2 md:gap-4 pb-2">
-                {product.other_images.map((img: any, i: number) => {
-                  const fullImg = (img?.startsWith('http') ? img : base_url + img);
+              <div className="grid grid-cols-4 gap-2 md:gap-4 pb-2 w-full">
+                {Array.from({ length: 4 }).map((_, i) => {
+                  const img = product.other_images[i];
+                  if (img) {
+                    const fullImg = (img?.startsWith('http') ? img : base_url + img);
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => setActiveImage(fullImg)}
+                        className={`relative aspect-square w-full rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all ${activeImage === fullImg ? "border-blue-500 shadow-lg shadow-blue-500/20" : "border-white/5 bg-white/5 hover:border-white/20"
+                          }`}
+                      >
+                        <img src={fullImg} alt="" className="w-full h-full object-cover" />
+                      </button>
+                    );
+                  }
                   return (
-                    <button
-                      key={i}
-                      onClick={() => setActiveImage(fullImg)}
-                      className={`relative aspect-square md:w-24 md:h-24 rounded-xl md:rounded-2xl overflow-hidden border-2 transition-all ${activeImage === fullImg ? "border-blue-500 shadow-lg shadow-blue-500/20" : "border-white/5 bg-white/5 hover:border-white/20"
-                        }`}
-                    >
-                      <img src={fullImg} alt="" className="w-full h-full object-cover" />
-                    </button>
+                    <div
+                      key={`placeholder-${i}`}
+                      className="relative aspect-square w-full rounded-xl md:rounded-2xl border-2 border-dashed border-white/10 bg-white/5"
+                    />
                   );
                 })}
               </div>
             )}
 
             {/* TRUST BADGES */}
-            <div className="grid grid-cols-3 gap-4 pt-10 border-t border-white/5 mt-10">
+            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/5 mt-8 hidden md:grid">
               <div className="flex flex-col items-center text-center">
                 <div className="w-10 h-10 bg-white/5 text-blue-400 rounded-full flex items-center justify-center mb-2">
                   <ShieldCheck size={20} />
@@ -207,20 +219,13 @@ Price: ₹${product.price}`;
           </div>
 
           {/* RIGHT: PRODUCT INFO */}
-          <div className="flex flex-col">
+          <div className="lg:col-span-7 flex flex-col">
             <span className="text-blue-400 text-xs font-black uppercase tracking-[0.2em] mb-3">
-              {product.ProductCategory?.category_name || "Porcelain"}
+              {[product.ProductCategory?.category_name, product.SubCategory?.sub_category_name].filter(Boolean).join(" • ") || "Porcelain"}
             </span>
-            <h1 className="text-2xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
+            <h1 className="text-2xl md:text-5xl font-black text-white leading-tight mb-8 tracking-tight">
               {product.product_name}
             </h1>
-            <div className="flex items-baseline gap-3 mb-8">
-              <span className="text-3xl font-black text-white">₹{product.price}</span>
-              {Number(product.mrp) > Number(product.price) && (
-                <span className="text-white/20 text-lg line-through font-medium">₹{product.mrp}</span>
-              )}
-              <span className="text-white/40 text-xs font-bold uppercase tracking-tighter">per m²</span>
-            </div>
 
             <div className="mb-10 max-w-xl">
               <p className={`text-white/60 text-sm md:text-base leading-relaxed font-medium transition-all duration-500 ${!isExpanded ? "line-clamp-3" : ""}`}>

@@ -18,6 +18,9 @@ export interface Product {
   SubCategory?: {
     sub_category_name: string;
   };
+  ProductCategory?: {
+    category_name: string;
+  };
 }
 
 const ProductCard = ({ product }: { product: Product }) => {
@@ -101,8 +104,8 @@ const ProductCard = ({ product }: { product: Product }) => {
           className="p-6 pt-4 flex flex-col flex-grow"
           style={{ transform: "translateZ(30px)" }}
         >
-          <span className="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2">
-            {product.SubCategory?.sub_category_name || "Porcelain"}
+          <span className="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2 line-clamp-1">
+            {[product.ProductCategory?.category_name, product.SubCategory?.sub_category_name].filter(Boolean).join(" • ") || "Porcelain"}
           </span>
           <h3 className="text-lg font-bold text-[#0F172A] mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
             {product.product_name}
@@ -111,14 +114,10 @@ const ProductCard = ({ product }: { product: Product }) => {
             {product.description || "Italian-inspired marble-look porcelain with gold veining"}
           </p>
 
-          <div className="mt-auto flex items-center justify-between gap-4">
-            <div className="flex flex-col">
-              <span className="text-xl font-black text-[#0F172A]">${product.price || "68.00"}</span>
-              <span className="text-gray-400 text-[10px] font-bold uppercase tracking-tighter">per m²</span>
-            </div>
+          <div className="mt-auto flex items-center pt-4">
             <Link
               href={`/products/${slugify(product.product_name)}`}
-              className="flex items-center gap-2 text-[#0F172A] text-[10px] font-black border-2 border-gray-100 px-5 py-2.5 rounded-xl hover:border-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all duration-300"
+              className="flex w-full justify-center items-center gap-2 bg-gray-50 text-[#0F172A] text-[10px] font-black border-2 border-gray-200 px-5 py-2.5 rounded-xl hover:border-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all duration-300"
             >
               View Details <MoveRight size={14} />
             </Link>
