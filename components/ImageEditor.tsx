@@ -11,6 +11,7 @@ interface ImageEditorProps {
   onCancel: () => void;
 }
 
+// aspect ratios for cropping
 const ASPECT_RATIOS = [
   { label: "Free", value: undefined },
   { label: "1:1", value: 1 },
@@ -22,7 +23,7 @@ const ASPECT_RATIOS = [
 export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProps) {
   const [aspect, setAspect] = useState<number | undefined>(ASPECT_RATIOS[0].value); // Default Free
   const cropperRef = useRef<CropperRef>(null);
-  
+
   // Local state for sliders just for UI visual if needed, 
   // but advanced-cropper is best controlled via its own drag/zoom. 
   // However, we can hook up the sliders by calling methods on the cropperRef.
@@ -129,11 +130,10 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
                 <button
                   key={ratio.label}
                   onClick={() => setAspect(ratio.value)}
-                  className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${
-                    aspect === ratio.value || (ratio.label === "Free" && aspect === undefined)
+                  className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${aspect === ratio.value || (ratio.label === "Free" && aspect === undefined)
                       ? "bg-[#036ec6] text-white shadow-lg shadow-[#036ec6]/20"
                       : "bg-white/10 text-white/60 hover:bg-white/20"
-                  }`}
+                    }`}
                 >
                   {ratio.label}
                 </button>
