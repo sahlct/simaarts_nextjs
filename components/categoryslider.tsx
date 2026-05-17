@@ -175,12 +175,12 @@ export default function CategorySlider() {
 
             {/* Right Side: SubCategories Grid */}
             <div className="w-full lg:w-6/12 flex justify-center lg:justify-end z-30">
-              <div className="grid grid-cols-2 gap-3 md:gap-4 w-full max-w-2xl">
+              <div className="grid grid-cols-2 gap-3 md:gap-4 w-full max-w-[400px] lg:max-w-[460px]">
                 {cat.SubCategories && cat.SubCategories.slice(0, 4).map((sub: any) => (
                   <Link
                     href={`/products?category=${slugify(cat.category_name)}&subcategory=${slugify(sub.sub_category_name)}`}
                     key={sub.sub_category_id} 
-                    className="group relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-2xl block"
+                    className="group relative aspect-square rounded-2xl overflow-hidden shadow-2xl block"
                   >
                     <img 
                       src={sub.sub_category_image ? (sub.sub_category_image?.startsWith('http') ? sub.sub_category_image : base_url + sub.sub_category_image) : "/placeholder.png"} 

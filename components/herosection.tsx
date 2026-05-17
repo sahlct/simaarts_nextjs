@@ -18,12 +18,54 @@ interface CarouselItem {
   status: number;
 }
 
+function useAnimatedCounter(endValue: number, durationMs: number = 2000, delayMs: number = 500) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (endValue === 0) {
+      setCount(0);
+      return;
+    }
+
+    let startTime: number | null = null;
+    let animationFrame: number;
+    let timeout: NodeJS.Timeout;
+
+    const updateCounter = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / durationMs, 1);
+      
+      const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      setCount(Math.floor(easeProgress * endValue));
+
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(updateCounter);
+      }
+    };
+
+    timeout = setTimeout(() => {
+      animationFrame = requestAnimationFrame(updateCounter);
+    }, delayMs);
+
+    return () => {
+      clearTimeout(timeout);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [endValue, durationMs, delayMs]);
+
+  return count;
+}
+
 export default function HeroSection({ initialData }: { initialData?: CarouselItem | null }) {
   const [carousel, setCarousel] = useState<CarouselItem | null>(initialData || null);
   const [loading, setLoading] = useState(!initialData);
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+  const expCount = useAnimatedCounter(loading ? 0 : 30);
+  const designsCount = useAnimatedCounter(loading ? 0 : 100);
+  const countriesCount = useAnimatedCounter(loading ? 0 : 16);
 
   useEffect(() => {
     const fetchHero = async () => {
@@ -158,25 +200,25 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
       <div className="absolute bottom-10 md:bottom-12 left-0 w-full z-10 px-4 md:px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 md:flex md:flex-wrap md:justify-around gap-4 hero-stats text-center items-center">
           <div className="flex flex-col items-center">
-            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">30+</span>
+            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{expCount}+</span>
             <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Years Experience</span>
           </div>
           <div className="flex flex-col items-center border-x border-white/10 md:border-none">
-            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">5,000+</span>
+            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{designsCount}+</span>
             <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Tile Designs</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">60+</span>
+            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{countriesCount}+</span>
             <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Countries Sourced</span>
           </div>
         </div>
       </div>
 
       {/* SCROLL INDICATOR */}
-      <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40 md:opacity-60">
+      {/* <div className="absolute bottom-2 md:bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40 md:opacity-60">
         <span className="text-[8px] md:text-[10px] font-bold tracking-widest uppercase text-gray-400">Scroll</span>
         <ChevronDown size={16} className="animate-bounce" />
-      </div>
+      </div> */}
     </section>
   );
 }

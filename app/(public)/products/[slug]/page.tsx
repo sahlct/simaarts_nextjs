@@ -207,7 +207,7 @@ Subcategory: ${product.price}`;
                 <div className="w-10 h-10 bg-white/5 text-blue-400 rounded-full flex items-center justify-center mb-2">
                   <Truck size={20} />
                 </div>
-                <span className="text-[9px] font-black text-white/40 uppercase tracking-tighter">Global Shipping</span>
+                <span className="text-[9px] font-black text-white/40 uppercase tracking-tighter">Delivery Avaialble</span>
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="w-10 h-10 bg-white/5 text-blue-400 rounded-full flex items-center justify-center mb-2">

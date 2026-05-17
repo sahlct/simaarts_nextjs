@@ -68,7 +68,7 @@ const CTASection = () => {
               <Truck size={20} className="md:w-6 md:h-6" />
             </div>
             <span className="text-white/60 text-[8px] md:text-xs font-bold tracking-wider uppercase">
-              Global Delivery
+              Delivery Available
             </span>
           </div>
           <div className="flex flex-col items-center gap-2 md:gap-3">

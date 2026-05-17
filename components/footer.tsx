@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   MapPin,
   Phone,
@@ -14,8 +14,26 @@ import {
 import Link from "next/link";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
+import { getProducts } from "@/lib/api/product";
+import { slugify } from "@/lib/api/slugify";
 
 const Footer = () => {
+  const [products, setProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await getProducts(1, 5);
+        if (res?.data) {
+          setProducts(res.data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch products for footer", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
   return (
     <footer className="bg-[#1E2B4D] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -59,19 +77,17 @@ const Footer = () => {
               Products
             </h4>
             <ul className="flex flex-col gap-4">
-              {[
-                "Spanish Tiles",
-                "Flat Tiles",
-                "Curved Tiles",
-                "Accessories",
-                "New Arrivals"
-              ].map((item) => (
-                <li key={item}>
-                  <Link href={`/products/${item.toLowerCase().replace(" ", "-")}`} className="text-white/60 text-sm hover:text-white transition-colors">
-                    {item}
-                  </Link>
-                </li>
-              ))}
+              {products.length > 0 ? (
+                products.map((item) => (
+                  <li key={item.product_id}>
+                    <Link href={`/products/${slugify(item.product_name)}`} className="text-white/60 text-sm hover:text-white transition-colors line-clamp-1">
+                      {item.product_name}
+                    </Link>
+                  </li>
+                ))
+              ) : (
+                <li className="text-white/40 text-sm">Loading...</li>
+              )}
             </ul>
           </div>
 
@@ -105,7 +121,7 @@ const Footer = () => {
               <li className="flex gap-4">
                 <MapPin size={18} className="text-white/40 shrink-0" />
                 <a href={CONTACT_INFO.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="text-white/60 text-sm leading-relaxed hover:text-white transition-colors">
-                  Elbano Roofings, Calicut, Kerala, India
+                  Elbano Roofings, Airport Road, Karuvankallu, Malappuram. <br />Pin : 673638
                 </a>
               </li>
               <li>
