@@ -51,7 +51,7 @@ export default function CollectionSection() {
           </div>
           <div className="lg:max-w-xs">
             <p className="text-gray-400 text-sm md:text-base leading-relaxed lg:text-right font-medium">
-              Each tile is crafted from natural clay, kiln-fired to perfection, and designed to endure for generations.
+              Each tile is crafted from natural white clay, kiln-fired to perfection, and designed to endure for generations.
             </p>
           </div>
         </div>

@@ -10,7 +10,12 @@ import {
   Truck,
   Leaf,
   MessageCircle,
-  ChevronRight
+  ChevronRight,
+  Droplet,
+  Snowflake,
+  Flame,
+  Feather,
+  Dumbbell
 } from "lucide-react";
 import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
 import ProductCard, { Product } from "@/components/ProductCard";
@@ -240,6 +245,28 @@ Subcategory: ${product.price}`;
                   <ChevronRight size={12} className={`transition-transform duration-300 ${isExpanded ? "-rotate-90" : "rotate-0"}`} />
                 </button>
               )}
+            </div>
+
+            {/* PRODUCT CTA ICONS (SMALL) */}
+            <div className="flex justify-between md:justify-start gap-2 md:gap-10 mb-10 w-full ">
+              {[
+                { label: "Leak Proof", icon: <Droplet size={20} strokeWidth={1.5} /> },
+                { label: "Frost Resistant", icon: <Snowflake size={20} strokeWidth={1.5} /> },
+                { label: "Heat Resistant", icon: <Flame size={20} strokeWidth={1.5} /> },
+                { label: "Light Weight", icon: <Feather size={20} strokeWidth={1.5} /> },
+                { label: "Durable", icon: <Dumbbell size={20} strokeWidth={1.5} /> },
+              ].map((feature, i) => (
+                <div key={i} className="flex flex-col items-center gap-2 w-[55px] md:w-[65px]">
+                  <div className="w-10 h-10 md:w-12 md:h-12 border border-white/20 rounded-xl flex items-center justify-center text-white bg-transparent">
+                    {feature.icon}
+                  </div>
+                  <span className="text-white/80 text-[9px] md:text-[10px] font-medium text-center leading-snug">
+                    {feature.label.split(' ').map((word, idx) => (
+                      <span key={idx} className="block">{word}</span>
+                    ))}
+                  </span>
+                </div>
+              ))}
             </div>
 
             {/* PRODUCT FEATURES */}

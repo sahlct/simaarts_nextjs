@@ -228,6 +228,7 @@ export default function CarouselPage() {
               </span>
             ),
             Subheader: s.carousel_subheader || "—",
+            "Flip Text": s.flip_text || "—",
             Description: (
               <p className="text-gray-700 whitespace-pre-line">
                 {s.description || "—"}
@@ -282,6 +283,11 @@ export default function CarouselPage() {
           {
             name: "carousel_subheader",
             label: "Carousel Subheader",
+            type: "text",
+          },
+          {
+            name: "flip_text",
+            label: "Flip Text (Comma Separated)",
             type: "text",
           },
           {

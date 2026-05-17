@@ -36,7 +36,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-in-out flex items-center justify-between rounded-full border backdrop-blur-xl shadow-2xl ${scrolled
+        className={`fixed top-4 md:top-6 left-1/2 -translate-x-1/2 z-[90] transition-all duration-500 ease-in-out flex items-center justify-between rounded-full border backdrop-blur-xl shadow-2xl ${scrolled
           ? "bg-white/90 w-[95%] max-w-6xl border-black/5 py-1 px-6 shadow-black/5"
           : "bg-white/10 w-[92%] max-w-5xl border-white/20 py-1.5 md:py-3 px-6 md:px-8"
           }`}

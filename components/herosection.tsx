@@ -13,6 +13,7 @@ interface CarouselItem {
   carousel_title_02_color: string;
   carousel_subheader: string;
   description: string;
+  flip_text?: string;
   desktop_background: string;
   mobile_background: string;
   status: number;
@@ -34,7 +35,7 @@ function useAnimatedCounter(endValue: number, durationMs: number = 2000, delayMs
     const updateCounter = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / durationMs, 1);
-      
+
       const easeProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
       setCount(Math.floor(easeProgress * endValue));
 
@@ -67,7 +68,35 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
   const designsCount = useAnimatedCounter(loading ? 0 : 100);
   const countriesCount = useAnimatedCounter(loading ? 0 : 16);
 
+  const flipWords = carousel?.flip_text ? carousel.flip_text.split(',').map(w => w.trim()).filter(Boolean) : [];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [animState, setAnimState] = useState("enter");
+
   useEffect(() => {
+    if (flipWords.length === 0) return;
+
+    const initialTimer = setTimeout(() => setAnimState("visible"), 100);
+
+    if (flipWords.length <= 1) return () => clearTimeout(initialTimer);
+
+    const interval = setInterval(() => {
+      setAnimState("exit");
+      setTimeout(() => {
+        setCurrentWordIndex((prev) => (prev + 1) % flipWords.length);
+        setAnimState("enter");
+        setTimeout(() => setAnimState("visible"), 50);
+      }, 400);
+    }, 3000);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearInterval(interval);
+    };
+  }, [carousel?.flip_text]);
+
+  useEffect(() => {
+    if (initialData) return;
+
     const fetchHero = async () => {
       try {
         const res = await getCarousels(1, 1, "", 1);
@@ -81,7 +110,7 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
       }
     };
     fetchHero();
-  }, []);
+  }, [initialData]);
 
   useEffect(() => {
     if (loading || !carousel) return;
@@ -117,7 +146,7 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [loading, carousel]);
+  }, [loading]); // Only run animation when loading finishes
 
   if (loading) {
     return <div className="h-screen bg-gray-900 animate-pulse" />;
@@ -170,12 +199,25 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
           <span style={{ color: carousel?.carousel_title_02_color || "#f5b400" }}>
             {carousel?.carousel_title_02 || "CERAMIC"}
           </span>
+          {flipWords.length > 0 && (
+            <div className="mt-2 md:mt-4 h-[40px] md:h-[60px] flex items-center justify-center overflow-hidden">
+              <span
+                className={`block text-2xl md:text-5xl font-medium text-white transition-all duration-500
+                  ${animState === "exit" ? "opacity-0 -translate-y-8" : ""}
+                  ${animState === "enter" ? "opacity-0 translate-y-8" : ""}
+                  ${animState === "visible" ? "opacity-100 translate-y-0" : ""}
+                `}
+              >
+                {flipWords[currentWordIndex]}
+              </span>
+            </div>
+          )}
         </h1>
 
         {/* DESCRIPTION */}
-        <p className="text-gray-300 text-xs md:text-lg max-w-2xl mb-8 md:mb-10 leading-relaxed font-light px-4">
+        {/* <p className="text-gray-300 text-xs md:text-lg max-w-2xl mb-8 md:mb-10 leading-relaxed font-light px-4">
           {carousel?.description || "Curated imported ceramic tiles from the world's finest manufacturers. Elevate every floor, wall, and surface with timeless quality and design."}
-        </p>
+        </p> */}
 
         {/* BUTTONS */}
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto px-6 sm:px-0">

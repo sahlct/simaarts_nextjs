@@ -33,9 +33,9 @@ const CTASection = () => {
     <section ref={containerRef} className="relative bg-[#0F172A] pt-24 md:pt-32 pb-12 md:pb-16 overflow-hidden">
       {/* Floating Decorative Elements */}
       <div className="floating-shape absolute top-10 left-10 w-16 h-16 bg-white/5 backdrop-blur-md rounded-2xl rotate-12 border border-white/10 hidden md:block"></div>
-      <div className="floating-shape absolute bottom-20 left-1/4 w-12 h-12 bg-white/5 backdrop-blur-md rounded-xl -rotate-12 border border-white/10 hidden md:block"></div>
+      <div className="floating-shape absolute top-1/2 left-10 w-12 h-12 bg-white/5 backdrop-blur-md rounded-xl -rotate-12 border border-white/10 hidden md:block"></div>
       <div className="floating-shape absolute top-20 right-10 w-24 h-12 bg-white/5 backdrop-blur-md rounded-xl rotate-45 border border-white/10 hidden md:block"></div>
-      <div className="floating-shape absolute bottom-10 right-1/4 w-20 h-16 bg-white/10 backdrop-blur-md rounded-2xl rotate-12 border border-white/10 hidden md:block"></div>
+      <div className="floating-shape absolute top-1/2 right-10 w-20 h-16 bg-white/10 backdrop-blur-md rounded-2xl rotate-12 border border-white/10 hidden md:block"></div>
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 flex flex-col items-center text-center">
         {/* Header */}
@@ -76,23 +76,25 @@ const CTASection = () => {
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-12 w-full max-w-6xl mt-8">
+        <div className="flex flex-wrap justify-center gap-6 md:gap-10 w-full max-w-6xl mt-8">
           {[
-            // { label: "10 Year Warranty", icon: <ShieldCheck size={20} className="md:w-6 md:h-6" /> },
-            // { label: "Delivery Available", icon: <Truck size={20} className="md:w-6 md:h-6" /> },
-            // { label: "Expert Support", icon: <Headphones size={20} className="md:w-6 md:h-6" /> },
-            { label: "Leak Proof", icon: <Droplet size={20} className="md:w-6 md:h-6" /> },
-            { label: "Frost Resistant", icon: <Snowflake size={20} className="md:w-6 md:h-6" /> },
-            { label: "Heat Resistant", icon: <Flame size={20} className="md:w-6 md:h-6" /> },
-            { label: "Light Weight", icon: <Feather size={20} className="md:w-6 md:h-6" /> },
-            { label: "Durable", icon: <Dumbbell size={20} className="md:w-6 md:h-6" /> },
+            { label: "Leak Proof", icon: <Droplet size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
+            { label: "Frost Resistant", icon: <Snowflake size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
+            { label: "Heat Resistant", icon: <Flame size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
+            { label: "Light Weight", icon: <Feather size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
+            { label: "Durable", icon: <Dumbbell size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
           ].map((feature, i) => (
-            <div key={i} className="flex flex-col items-center gap-2 md:gap-3 w-[80px] md:w-[120px]">
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-white/10 rounded-full flex items-center justify-center text-[#EAB308] backdrop-blur-md">
+            <div key={i} className="flex flex-col items-center gap-3 md:gap-4 w-[70px] md:w-[100px]">
+              <div className="w-16 h-16 md:w-[84px] md:h-[84px] border-[2px] border-white rounded-xl md:rounded-2xl flex items-center justify-center text-white bg-transparent">
                 {feature.icon}
               </div>
-              <span className="text-white/60 text-[8px] md:text-xs font-bold tracking-wider uppercase text-center leading-tight">
-                {feature.label}
+              <span className="text-white text-[11px] md:text-sm font-medium text-center leading-snug">
+                {feature.label.split(' ').map((word, idx) => (
+                  <React.Fragment key={idx}>
+                    {word}
+                    {idx !== feature.label.split(' ').length - 1 && <br />}
+                  </React.Fragment>
+                ))}
               </span>
             </div>
           ))}

@@ -105,7 +105,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           style={{ transform: "translateZ(30px)" }}
         >
           <span className="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2 line-clamp-1">
-            {[product.ProductCategory?.category_name, product.SubCategory?.sub_category_name].filter(Boolean).join(" • ") || "Porcelain"}
+            {product.SubCategory?.sub_category_name || "Porcelain"}
           </span>
           <h3 className="text-lg font-bold text-[#0F172A] mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
             {product.product_name}
