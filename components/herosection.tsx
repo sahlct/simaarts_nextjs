@@ -57,9 +57,11 @@ function useAnimatedCounter(endValue: number, durationMs: number = 2000, delayMs
   return count;
 }
 
+let cachedCarousel: CarouselItem | null = null;
+
 export default function HeroSection({ initialData }: { initialData?: CarouselItem | null }) {
-  const [carousel, setCarousel] = useState<CarouselItem | null>(initialData || null);
-  const [loading, setLoading] = useState(!initialData);
+  const [carousel, setCarousel] = useState<CarouselItem | null>(initialData || cachedCarousel || null);
+  const [loading, setLoading] = useState(!(initialData || cachedCarousel));
 
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -95,13 +97,14 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
   }, [carousel?.flip_text]);
 
   useEffect(() => {
-    if (initialData) return;
+    if (initialData || cachedCarousel) return;
 
     const fetchHero = async () => {
       try {
         const res = await getCarousels(1, 1, "", 1);
         if (res?.data && res.data.length > 0) {
           setCarousel(res.data[0]);
+          cachedCarousel = res.data[0];
         }
       } catch (err) {
         console.error("Failed to fetch carousel data", err);
@@ -152,6 +155,14 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
     return <div className="h-screen bg-gray-900 animate-pulse" />;
   }
 
+  if (!carousel) {
+    return (
+      <section className="relative h-screen min-h-[600px] flex flex-col justify-center items-center text-white overflow-hidden bg-gray-900">
+        <p className="text-gray-400 text-lg">No data available</p>
+      </section>
+    );
+  }
+
   const renderBackground = (bg: string) => {
     const isVideo = bg?.toLowerCase().endsWith(".mp4") || bg?.toLowerCase().endsWith(".webm");
     const src = bg ? (bg?.startsWith('http') ? bg : `${base_url}${bg}`) : "/hero_01.png";
@@ -186,18 +197,18 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center hero-content flex flex-col items-center justify-center h-full pt-10 pb-32">
         {/* SUBTITLE */}
         <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-          <div className="h-[1px] w-6 md:w-12 bg-yellow-500" />
-          <span className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-yellow-500 uppercase px-2">
-            {carousel?.carousel_subheader || "Premium Imported Ceramic Tiles Since 1995"}
+          <div className="h-[1px] w-6 md:w-12 bg-blue-600" />
+          <span className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-blue-600 uppercase px-2">
+            {carousel.carousel_subheader}
           </span>
-          <div className="h-[1px] w-6 md:w-12 bg-yellow-500" />
+          <div className="h-[1px] w-6 md:w-12 bg-blue-600" />
         </div>
 
         {/* MAIN TITLE */}
         <h1 className="text-3xl md:text-7xl font-extrabold mb-6 md:mb-8 leading-[1.1] tracking-tight">
-          {carousel?.carousel_title || "Defining Spaces with"}<br />
-          <span style={{ color: carousel?.carousel_title_02_color || "#f5b400" }}>
-            {carousel?.carousel_title_02 || "CERAMIC"}
+          {carousel.carousel_title}<br />
+          <span style={{ color: carousel.carousel_title_02_color || "#f5b400" }}>
+            {carousel.carousel_title_02}
           </span>
           {flipWords.length > 0 && (
             <div className="mt-2 md:mt-4 h-[40px] md:h-[60px] flex items-center justify-center overflow-hidden">
@@ -223,7 +234,7 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto px-6 sm:px-0">
           <Link
             href="/products"
-            className="group flex items-center justify-center gap-2 bg-[#f5b400] text-black px-8 py-3.5 md:py-4 rounded-lg font-bold text-sm transition-all hover:bg-[#e0a500] active:scale-95 shadow-lg shadow-yellow-500/20"
+            className="group flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3.5 md:py-4 rounded-lg font-bold text-sm transition-all hover:bg-blue-700 active:scale-95 shadow-lg shadow-blue-600/20"
           >
             Explore Collection
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
