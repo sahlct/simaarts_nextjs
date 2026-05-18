@@ -241,6 +241,12 @@ export default function ProductPage() {
         ],
       },
       {
+        name: "order",
+        label: "Order No",
+        type: "number",
+        required: false,
+      },
+      {
         name: "thumbnail_image",
         label: "Thumbnail Image",
         type: "file",
@@ -344,6 +350,11 @@ export default function ProductPage() {
           },
           { key: "product_name", label: "Product" },
           {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
+          {
             key: "category",
             label: "Category",
             render: (r) => r.ProductCategory?.category_name || "—",
@@ -404,6 +415,7 @@ export default function ProductPage() {
             is_stock: String(row.is_stock),
             status: String(row.status),
             features: featuresText,
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
           });
 
           setSelectedCategoryForForm(String(row.category_id));

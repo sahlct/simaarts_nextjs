@@ -112,6 +112,11 @@ export default function CategoryPage() {
           },
           { key: "category_name", label: "Category Name" },
           {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
+          {
             key: "status",
             label: "Status",
             render: (r) =>
@@ -136,6 +141,7 @@ export default function CategoryPage() {
           setSelected({
             ...row,
             status: String(row.status),
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
           });
           setOpenForm(true);
         }}
@@ -200,6 +206,12 @@ export default function CategoryPage() {
               { label: "Inactive", value: "0" },
             ],
             required: true,
+          },
+          {
+            name: "order",
+            label: "Order No",
+            type: "number",
+            required: false,
           },
           {
             name: "category_image",

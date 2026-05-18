@@ -77,7 +77,7 @@ export default function HomeProjects() {
     if (loading || projects.length === 0 || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo("[data-hp-title]", 
+      gsap.fromTo("[data-hp-title]",
         { opacity: 0, y: 20 },
         {
           scrollTrigger: {
@@ -92,7 +92,7 @@ export default function HomeProjects() {
         }
       );
 
-      gsap.fromTo(".project-card", 
+      gsap.fromTo(".project-card",
         { opacity: 0, y: 50 },
         {
           scrollTrigger: {
@@ -145,7 +145,7 @@ export default function HomeProjects() {
   return (
     <section ref={sectionRef} className="bg-gradient-to-b from-[#F8FAFC] to-white py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        
+
         {/* Header */}
         <div data-hp-title className="text-center mb-16 flex flex-col items-center">
           <div className="flex items-center gap-4 mb-4">
@@ -155,11 +155,11 @@ export default function HomeProjects() {
             </span>
             <div className="w-10 h-[1px] bg-[#1E2B4D]" />
           </div>
-          
+
           <h2 className="text-4xl md:text-6xl font-black text-[#0F172A] tracking-tight mb-6">
             Roofs We've Transformed
           </h2>
-          
+
           <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-2xl">
             From Mediterranean villas to modern desert homes — our clay tiles have graced remarkable buildings across 48 countries.
           </p>
@@ -171,15 +171,15 @@ export default function HomeProjects() {
             const title = project.project_title || "Project Title";
             const location = project.place || "Global Location";
             const year = project.year || "2024";
-            
+
             return (
-              <div 
+              <div
                 key={project.project_id || index}
                 onClick={() => handleProjectClick(project.project_id)}
                 className={`project-card relative group break-inside-avoid overflow-hidden rounded-[2rem] shadow-sm hover:shadow-2xl hover:shadow-[#0F172A]/20 transition-all duration-500 cursor-pointer ${getHeightClass(index)}`}
               >
                 {/* Background Image */}
-                <img 
+                <img
                   src={getImageUrl(project)}
                   alt={title}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)]"
@@ -194,10 +194,10 @@ export default function HomeProjects() {
 
                 {/* Dark Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/30 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Content Container (Bottom Aligned) */}
                 <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end">
-                  
+
                   {/* Static Content */}
                   <div className="transform group-hover:-translate-y-2 transition-transform duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]">
                     <span className="text-white/70 text-xs font-bold tracking-widest mb-2 block">
@@ -234,7 +234,7 @@ export default function HomeProjects() {
           <div className="mt-16 flex justify-center">
             <Link
               href="/projects"
-              className="bg-[#1E2B4D] text-white px-10 py-4 rounded-xl font-bold text-sm hover:bg-[#0F172A] hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-[#1E2B4D]/20"
+              className="bg-[#1E2B4D] text-white px-10 py-4 rounded-xl font-bold text-sm hover:bg-[#282d63] hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-[#1E2B4D]/20"
             >
               View All Projects
             </Link>

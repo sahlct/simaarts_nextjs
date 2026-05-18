@@ -49,7 +49,7 @@ export default function HomeShorts() {
   const lastScrollTime = useRef(0);
   const onWheel = useCallback((e: WheelEvent) => {
     if (!emblaApi) return;
-    
+
     // Check if it's primarily a horizontal scroll
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
       const now = Date.now();
@@ -120,7 +120,7 @@ export default function HomeShorts() {
   }
 
   return (
-    <section ref={sectionRef} className="bg-[#0F172A] py-20 md:py-32 overflow-hidden">
+    <section ref={sectionRef} className="bg-[#282d63] py-20 md:py-32 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* ---------------- HEADER ---------------- */}

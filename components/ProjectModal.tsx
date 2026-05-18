@@ -55,7 +55,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project, l
       className="fixed inset-0 z-[100] hidden items-center justify-center p-4 md:p-8 opacity-0"
       style={{ perspective: "2000px" }}
     >
-      <div className="absolute inset-0 bg-[#0F172A]/90 backdrop-blur-xl" onClick={onClose} />
+      <div className="absolute inset-0 bg-[#282d63]/90 backdrop-blur-xl" onClick={onClose} />
 
       <div
         className="relative w-full max-w-6xl h-full max-h-[90vh] md:max-h-[85vh] bg-white rounded-[2rem] md:rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row opacity-0"

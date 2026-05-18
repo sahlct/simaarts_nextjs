@@ -112,7 +112,7 @@ export default function ProjectsClient() {
       <section className="relative h-[400px] md:h-[350px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src="/product_bg.jpg" alt="Header Background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0F172A]/60 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-[#282d63]/60 backdrop-blur-[2px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white pt-20">
@@ -127,13 +127,13 @@ export default function ProjectsClient() {
           </h1>
 
           <p className="text-xs md:text-sm max-w-xl text-white/80 leading-relaxed font-medium">
-            Transforming homes and landmarks across 60+ countries with handcrafted clay tiles that blend tradition with modern architectural excellence.
+            Transforming homes and landmarks across 16+ States with handcrafted clay tiles that blend tradition with modern architectural excellence.
           </p>
         </div>
       </section>
 
       {/* STATS BAR */}
-      <section className="bg-[#0F172A] py-12 border-b border-white/5">
+      <section className="bg-[#282d63] py-12 border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
             <div className="text-center">
@@ -142,7 +142,7 @@ export default function ProjectsClient() {
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">16+</div>
-              <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Countries</div>
+              <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">States</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-black text-white mb-2 tracking-tighter">30+</div>
@@ -201,7 +201,7 @@ export default function ProjectsClient() {
                 <button
                   onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                   disabled={currentPage === 1}
-                  className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center hover:bg-[#0F172A] hover:text-white disabled:opacity-30 transition-all"
+                  className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center hover:bg-[#282d63] hover:text-white disabled:opacity-30 transition-all"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -210,7 +210,7 @@ export default function ProjectsClient() {
                     <button
                       key={i}
                       onClick={() => setCurrentPage(i + 1)}
-                      className={`w-12 h-12 rounded-full font-bold text-sm transition-all ${currentPage === i + 1 ? "bg-[#0F172A] text-white shadow-xl scale-110" : "bg-gray-50 text-gray-400 hover:bg-gray-100"}`}
+                      className={`w-12 h-12 rounded-full font-bold text-sm transition-all ${currentPage === i + 1 ? "bg-[#282d63] text-white shadow-xl scale-110" : "bg-gray-50 text-gray-400 hover:bg-gray-100"}`}
                     >
                       {i + 1}
                     </button>
@@ -219,7 +219,7 @@ export default function ProjectsClient() {
                 <button
                   onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                   disabled={currentPage === totalPages}
-                  className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center hover:bg-[#0F172A] hover:text-white disabled:opacity-30 transition-all"
+                  className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center hover:bg-[#282d63] hover:text-white disabled:opacity-30 transition-all"
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -249,7 +249,7 @@ export default function ProjectsClient() {
             ].map((step, i) => (
               <div key={i} className="group bg-white p-10 rounded-[2.5rem] text-left border border-gray-50 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden">
                 <div className="absolute top-8 right-8 text-6xl font-black text-blue-100 group-hover:text-blue-200 transition-colors">{step.id}</div>
-                <div className="w-14 h-14 bg-[#0F172A] text-white rounded-2xl flex items-center justify-center mb-8 relative z-10 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 bg-[#282d63] text-white rounded-2xl flex items-center justify-center mb-8 relative z-10 group-hover:scale-110 transition-transform">
                   {step.icon}
                 </div>
                 <h3 className="text-xl font-black text-[#0F172A] mb-4 relative z-10">{step.title}</h3>
@@ -261,7 +261,7 @@ export default function ProjectsClient() {
       </section>
 
       {/* CTA SECTION */}
-      {/* <section className="bg-[#0F172A] py-24 relative overflow-hidden">
+      {/* <section className="bg-[#282d63] py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tighter italic">Start Your Project Today</h2>
           <p className="text-white/60 mb-10 text-sm md:text-base font-medium">Join over 1,200 satisfied clients who trusted Elbano with their roofing.</p>

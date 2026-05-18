@@ -46,7 +46,7 @@ export default function CollectionSection() {
               <div className="h-[2px] w-12 bg-gray-300" />
             </div>
             <h2 className="text-4xl md:text-6xl font-black text-[#0F172A] leading-[1.1] tracking-tight">
-              Premium Tiles <br /> For Every Architecture
+              Premium Products <br /> For Every Architecture
             </h2>
           </div>
           <div className="lg:max-w-xs">

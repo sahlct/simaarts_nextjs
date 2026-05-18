@@ -162,7 +162,7 @@ Subcategory: ${product.price}`;
           <div className="lg:col-span-5 space-y-4 md:space-y-6 w-full max-w-md mx-auto lg:max-w-none">
             <div className="relative aspect-square bg-white/5 rounded-[2.5rem] overflow-hidden border border-white/10 group shadow-2xl">
               {product.is_best_selling === 1 && (
-                <div className="absolute top-8 left-8 z-10 bg-[#0F172A] text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-lg">
+                <div className="absolute top-8 left-8 z-10 bg-[#282d63] text-white text-[10px] font-black px-5 py-2 rounded-full uppercase tracking-widest shadow-lg">
                   Best Seller
                 </div>
               )}

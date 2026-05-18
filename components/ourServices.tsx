@@ -47,7 +47,7 @@ export default function OurServices() {
     if (loading || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo("[data-os-title]", 
+      gsap.fromTo("[data-os-title]",
         { opacity: 0, y: 24 },
         {
           scrollTrigger: {
@@ -64,7 +64,7 @@ export default function OurServices() {
 
       const validCards = cardsRef.current.filter(Boolean);
       if (validCards.length > 0) {
-        gsap.fromTo(validCards, 
+        gsap.fromTo(validCards,
           { opacity: 0, y: 100 },
           {
             scrollTrigger: {
@@ -98,7 +98,7 @@ export default function OurServices() {
       <div className="absolute top-10 right-10 w-48 h-32 bg-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl -rotate-6 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-        
+
         {/* ---------------- HEADER ---------------- */}
         <div data-os-title className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
           <div className="max-w-lg">
@@ -122,7 +122,7 @@ export default function OurServices() {
 
         {/* ---------------- GRID ---------------- */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          
+
           {/* ----------- SKELETON ----------- */}
           {loading &&
             Array.from({ length: 3 }).map((_, i) => (
@@ -158,7 +158,7 @@ export default function OurServices() {
                       alt={service.service_title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    
+
                     {/* Icon Badge */}
                     <div className="absolute top-4 left-4 bg-[#1E2B4D] w-12 h-12 rounded-xl flex items-center justify-center shadow-lg">
                       <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -198,7 +198,7 @@ export default function OurServices() {
           <div className="mt-16 flex justify-center">
             <Link
               href="/services"
-              className="bg-[#1E2B4D] text-white px-8 py-4 rounded-xl font-bold text-sm hover:bg-[#0F172A] hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-[#1E2B4D]/20"
+              className="bg-[#1E2B4D] text-white px-8 py-4 rounded-xl font-bold text-sm hover:bg-[#282d63] hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-[#1E2B4D]/20"
             >
               View All Services
             </Link>

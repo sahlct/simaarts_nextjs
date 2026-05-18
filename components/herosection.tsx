@@ -197,11 +197,11 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center hero-content flex flex-col items-center justify-center h-full pt-10 pb-32">
         {/* SUBTITLE */}
         <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-          <div className="h-[1px] w-6 md:w-12 bg-blue-600" />
-          <span className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-blue-600 uppercase px-2">
+          <div className="h-[1px] w-6 md:w-12 bg-[#5e94f1]" />
+          <span className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-[#5e94f1] uppercase px-2">
             {carousel.carousel_subheader}
           </span>
-          <div className="h-[1px] w-6 md:w-12 bg-blue-600" />
+          <div className="h-[1px] w-6 md:w-12 bg-[#5e94f1]" />
         </div>
 
         {/* MAIN TITLE */}
@@ -262,7 +262,7 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
           </div>
           <div className="flex flex-col items-center">
             <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{countriesCount}+</span>
-            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Countries Sourced</span>
+            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">States Sourced</span>
           </div>
         </div>
       </div>

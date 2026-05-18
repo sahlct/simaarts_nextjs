@@ -259,7 +259,7 @@ export default function ProductsClient() {
                 <button
                   disabled={page === 1}
                   onClick={() => setPage(p => Math.max(1, p - 1))}
-                  className="p-3 rounded-xl border-2 border-gray-100 text-[#0F172A] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#0F172A] hover:text-white hover:border-[#0F172A] transition-all"
+                  className="p-3 rounded-xl border-2 border-gray-100 text-[#0F172A] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#282d63] hover:text-white hover:border-[#0F172A] transition-all"
                 >
                   <ChevronLeft size={20} />
                 </button>
@@ -269,7 +269,7 @@ export default function ProductsClient() {
                       key={i}
                       onClick={() => setPage(i + 1)}
                       className={`w-10 h-10 rounded-xl text-sm font-bold transition-all ${page === i + 1
-                        ? "bg-[#0F172A] text-white shadow-lg"
+                        ? "bg-[#282d63] text-white shadow-lg"
                         : "bg-white text-gray-400 hover:bg-gray-50"
                         }`}
                     >
@@ -280,7 +280,7 @@ export default function ProductsClient() {
                 <button
                   disabled={page === totalPages}
                   onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-                  className="p-3 rounded-xl border-2 border-gray-100 text-[#0F172A] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#0F172A] hover:text-white hover:border-[#0F172A] transition-all"
+                  className="p-3 rounded-xl border-2 border-gray-100 text-[#0F172A] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#282d63] hover:text-white hover:border-[#0F172A] transition-all"
                 >
                   <ChevronRight size={20} />
                 </button>
@@ -301,7 +301,7 @@ export default function ProductsClient() {
                 setSearch("");
                 handleCategoryClick(null);
               }}
-              className="mt-8 px-8 py-3 bg-[#0F172A] text-white rounded-xl font-bold text-sm hover:bg-[#15203A] transition-all shadow-lg"
+              className="mt-8 px-8 py-3 bg-[#282d63] text-white rounded-xl font-bold text-sm hover:bg-[#15203A] transition-all shadow-lg"
             >
               Clear All Filters
             </button>

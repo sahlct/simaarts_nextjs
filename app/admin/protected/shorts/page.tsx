@@ -121,6 +121,11 @@ export default function ShortsPage() {
           },
           { key: "shorts_title", label: "Title" },
           {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
+          {
             key: "shorts_type",
             label: "Type",
             render: (r) => (
@@ -154,6 +159,7 @@ export default function ShortsPage() {
           setSelected({
             ...row,
             status: String(row.status),
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
           });
           setOpenForm(true);
         }}
@@ -260,6 +266,12 @@ export default function ShortsPage() {
               { label: "Inactive", value: "0" },
             ],
             required: true,
+          },
+          {
+            name: "order",
+            label: "Order No",
+            type: "number",
+            required: false,
           },
           { name: "thumbnail_image", label: "Thumbnail Image", type: "file" },
         ]}

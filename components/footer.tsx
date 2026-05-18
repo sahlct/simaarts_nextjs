@@ -35,7 +35,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="bg-[#0F172A] text-white pt-20 pb-10">
+    <footer className="bg-[#282d63] text-white pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* Main Grid */}
@@ -150,7 +150,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/40 text-[10px] md:text-xs font-medium">
-            © {new Date().getFullYear()} Elbano. All rights reserved.
+            © {new Date().getFullYear()} elbano. All rights reserved.
           </p>
           <div className="flex gap-8">
             <Link href="/privacy" className="text-white/40 text-[10px] md:text-xs font-medium hover:text-white transition-colors">

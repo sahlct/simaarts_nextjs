@@ -139,7 +139,7 @@ export default function ContactClient() {
       <section className="relative h-[400px] md:h-[400px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img src="/product_bg.jpg" alt="Contact Background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#0F172A]/70 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-[#282d63]/70 backdrop-blur-[2px]" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white contact-hero-content pt-24 md:pt-32">
@@ -171,7 +171,7 @@ export default function ContactClient() {
               { label: "Office Hours", val: "Open Daily", sub: "9 AM - 6 PM", icon: <Clock size={20} className="md:w-6 md:h-6" />, href: "#" }
             ].map((item, i) => (
               <a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className="info-card group cursor-pointer bg-white p-5 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-blue-200/50 hover:-translate-y-2 transition-all duration-500">
-                <div className="w-10 h-10 md:w-14 md:h-14 bg-blue-50 text-[#1e2b58] rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-8 shadow-sm group-hover:bg-[#0F172A] group-hover:text-white transition-all duration-300">
+                <div className="w-10 h-10 md:w-14 md:h-14 bg-blue-50 text-[#1e2b58] rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-8 shadow-sm group-hover:bg-[#282d63] group-hover:text-white transition-all duration-300">
                   <div className="group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
@@ -224,9 +224,9 @@ export default function ContactClient() {
               </div>
 
               <div className="mt-16 flex gap-4">
-                <Link href={CONTACT_INFO.facebook} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Facebook size={18} /></Link>
-                <Link href={CONTACT_INFO.instagram} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Instagram size={18} /></Link>
-                <Link href={CONTACT_LINKS.mailto} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all"><Mail size={18} /></Link>
+                <Link href={CONTACT_INFO.facebook} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all"><Facebook size={18} /></Link>
+                <Link href={CONTACT_INFO.instagram} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all"><Instagram size={18} /></Link>
+                <Link href={CONTACT_LINKS.mailto} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all"><Mail size={18} /></Link>
               </div>
             </div>
 
@@ -328,7 +328,7 @@ export default function ContactClient() {
                   className="w-full flex items-center justify-between p-8 text-left bg-white transition-colors hover:bg-gray-50"
                 >
                   <span className="text-lg font-black text-[#0F172A] leading-tight pr-6">{faq.q}</span>
-                  <div className={`w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 transition-transform duration-300 ${activeFaq === i ? "rotate-45 bg-[#0F172A] text-white" : ""}`}>
+                  <div className={`w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 transition-transform duration-300 ${activeFaq === i ? "rotate-45 bg-[#282d63] text-white" : ""}`}>
                     <Plus size={18} />
                   </div>
                 </button>

@@ -142,6 +142,11 @@ export default function SubCategoryPage() {
           },
           { key: "sub_category_name", label: "Sub Category" },
           {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
+          {
             key: "category",
             label: "Category",
             render: (r) => r.ProductCategory?.category_name || "—",
@@ -171,6 +176,7 @@ export default function SubCategoryPage() {
           setSelected({
             ...row,
             status: String(row.status),
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
           });
           setOpenForm(true);
         }}
@@ -242,6 +248,12 @@ export default function SubCategoryPage() {
               { label: "Inactive", value: "0" },
             ],
             required: true,
+          },
+          {
+            name: "order",
+            label: "Order No",
+            type: "number",
+            required: false,
           },
           {
             name: "sub_category_image",

@@ -4,6 +4,7 @@ export function slugify(text?: string) {
   return text
     .toLowerCase()
     .trim()
+    .replace(/&/g, "and")          // replace '&' with 'and'
     .replace(/[_\W]+/g, " ")
     .trim()
     .replace(/\s+/g, "-")

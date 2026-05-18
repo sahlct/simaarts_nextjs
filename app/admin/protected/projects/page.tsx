@@ -111,6 +111,11 @@ export default function ProjectsPage() {
               ),
           },
           { key: "project_title", label: "Project Title" },
+          {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
           { key: "year", label: "Year" },
           { key: "place", label: "Place" },
           {
@@ -138,6 +143,7 @@ export default function ProjectsPage() {
           setSelected({
             ...row,
             status: String(row.status),
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
           });
           setOpenForm(true);
         }}
@@ -252,6 +258,12 @@ export default function ProjectsPage() {
               { label: "Inactive", value: "0" },
             ],
             required: true,
+          },
+          {
+            name: "order",
+            label: "Order No",
+            type: "number",
+            required: false,
           },
           { name: "thumbnail_image", label: "Thumbnail Image", type: "file" },
           { name: "other_images", label: "Other Images", type: "file", multiple: true },

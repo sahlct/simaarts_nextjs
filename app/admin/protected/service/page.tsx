@@ -112,6 +112,11 @@ export default function ServicePage() {
           },
           { key: "service_title", label: "Title" },
           {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
+          {
             key: "service_description",
             label: "Description",
             render: (r) => {
@@ -151,6 +156,7 @@ export default function ServicePage() {
           setSelected({
             ...row,
             status: String(row.status),
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
           });
           setOpenForm(true);
         }}
@@ -231,6 +237,12 @@ export default function ServicePage() {
               { label: "Inactive", value: "0" },
             ],
             required: true,
+          },
+          {
+            name: "order",
+            label: "Order No",
+            type: "number",
+            required: false,
           },
           { name: "service_image", label: "Service Image", type: "file" },
         ]}

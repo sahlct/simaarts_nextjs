@@ -62,7 +62,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   };
 
   const badge = product.is_best_selling ? "Best Seller" : product.is_new ? "New" : product.product_id % 3 === 0 ? "Premium" : null;
-  const badgeColor = "bg-[#0F172A]"; 
+  const badgeColor = "bg-[#282d63]";
 
   return (
     <div
@@ -79,7 +79,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       >
         {/* Badge */}
         {badge && (
-          <div 
+          <div
             className={`absolute top-5 right-5 z-20 ${badgeColor} text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-[0.1em] shadow-lg`}
             style={{ transform: "translateZ(40px)" }}
           >
@@ -88,7 +88,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         )}
 
         {/* Image Container */}
-        <div 
+        <div
           className="relative aspect-square overflow-hidden bg-gray-50 m-2 rounded-[1.5rem]"
           style={{ transform: "translateZ(20px)" }}
         >
@@ -100,7 +100,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
 
         {/* Content */}
-        <div 
+        <div
           className="p-6 pt-4 flex flex-col flex-grow"
           style={{ transform: "translateZ(30px)" }}
         >
@@ -117,7 +117,7 @@ const ProductCard = ({ product }: { product: Product }) => {
           <div className="mt-auto flex items-center pt-4">
             <Link
               href={`/products/${slugify(product.product_name)}`}
-              className="flex w-full justify-center items-center gap-2 bg-gray-50 text-[#0F172A] text-[10px] font-black border-2 border-gray-200 px-5 py-2.5 rounded-xl hover:border-[#0F172A] hover:bg-[#0F172A] hover:text-white transition-all duration-300"
+              className="flex w-full justify-center items-center gap-2 bg-gray-50 text-[#0F172A] text-[10px] font-black border-2 border-gray-200 px-5 py-2.5 rounded-xl hover:border-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all duration-300"
             >
               View Details <MoveRight size={14} />
             </Link>

@@ -5,6 +5,7 @@ export function slugify(text: string): string {
     .toString()
     .toLowerCase()
     .trim()
+    .replace(/&/g, "and")          // replace '&' with 'and'
     .replace(/[^a-z0-9]+/g, "-")   // replace all special chars & spaces with "-"
     .replace(/^-+|-+$/g, "");      // remove starting & ending "-"
 }

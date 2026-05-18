@@ -95,7 +95,7 @@ export default function AboutClient() {
               (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop";
             }}
           />
-          <div className="absolute inset-0 bg-[#0F172A]/50 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-[#282d63]/50 backdrop-blur-[1px]" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0F172A]/20 to-white" />
         </div>
 
@@ -164,7 +164,7 @@ export default function AboutClient() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
             {[
               { label: "Projects Completed", value: "1000", suffix: "+", icon: <Briefcase size={20} /> },
-              { label: "Countries Served", value: "16", suffix: "+", icon: <Globe size={20} /> },
+              { label: "States Served", value: "16", suffix: "+", icon: <Globe size={20} /> },
               { label: "Tile Designs", value: "100", suffix: "+", icon: <Box size={20} /> },
               { label: "Client Satisfaction", value: "100", suffix: "%", icon: <Users size={20} /> }
             ].map((stat, i) => (
@@ -307,7 +307,7 @@ export default function AboutClient() {
       </section> */}
 
       {/* FINAL CTA */}
-      {/* <section className="bg-[#0F172A] py-32 relative overflow-hidden">
+      {/* <section className="bg-[#282d63] py-32 relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
         </div>

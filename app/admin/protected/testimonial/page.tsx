@@ -121,6 +121,12 @@ export default function TestimonialsPage() {
       required: true,
     },
     {
+      name: "order",
+      label: "Order No",
+      type: "number",
+      required: false,
+    },
+    {
       name: "image_of_candidate",
       label: "Candidate Image",
       type: "file",
@@ -185,6 +191,11 @@ export default function TestimonialsPage() {
               ),
           },
           { key: "name_of_candidate", label: "Candidate Name" },
+          {
+            key: "order",
+            label: "Order No",
+            render: (r) => r.order !== null && r.order !== undefined ? r.order : "—",
+          },
           { key: "position_of_candidate", label: "Position" },
           {
             key: "content",
@@ -217,7 +228,11 @@ export default function TestimonialsPage() {
         setPage={setPage}
         setSearch={setSearch}
         onEdit={(row) => {
-          setSelected({ ...row, status: String(row.status) });
+          setSelected({
+            ...row,
+            status: String(row.status),
+            order: row.order !== null && row.order !== undefined ? String(row.order) : "",
+          });
           setOpenForm(true);
         }}
         onDelete={(row) => {

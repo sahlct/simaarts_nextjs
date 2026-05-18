@@ -30,7 +30,7 @@ const CTASection = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative bg-[#0F172A] pt-24 md:pt-32 pb-12 md:pb-16 overflow-hidden">
+    <section ref={containerRef} className="relative bg-[#282d63] pt-24 md:pt-32 pb-12 md:pb-16 overflow-hidden">
       {/* Floating Decorative Elements */}
       <div className="floating-shape absolute top-10 left-10 w-16 h-16 bg-white/5 backdrop-blur-md rounded-2xl rotate-12 border border-white/10 hidden md:block"></div>
       <div className="floating-shape absolute top-1/2 left-10 w-12 h-12 bg-white/5 backdrop-blur-md rounded-xl -rotate-12 border border-white/10 hidden md:block"></div>
