@@ -284,19 +284,7 @@ Subcategory: ${product.price}`;
               </div>
             )}
 
-            {/* TAGS */}
-            {/* <div className="flex flex-wrap gap-3 mb-10">
-              <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-[10px] font-bold text-gray-600">
-                <span className="text-gray-400 font-medium">Color:</span> {product.color || "White & Gold"}
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-[10px] font-bold text-gray-600">
-                <span className="text-gray-400 font-medium">Material:</span> {product.material || "Porcelain"}
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-full text-[10px] font-bold text-gray-600">
-                <span className="text-gray-400 font-medium">Finish:</span> {product.finish || "Polished"}
-              </div>
-            </div> */}
-
+            {/* dummy- tags */}
             {/* CTA BUTTONS */}
             <div className="space-y-3 md:space-y-4 mb-12">
               <button
