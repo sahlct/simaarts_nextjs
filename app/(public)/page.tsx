@@ -12,6 +12,8 @@ import HomeProjects from "@/components/homeProjects"
 import CTASection from "@/components/CTASection"
 import { getCarousels } from "@/lib/api/carousel"
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   let initialCarousel = null;
   try {

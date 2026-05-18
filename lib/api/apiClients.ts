@@ -26,6 +26,7 @@ export async function apiRequest(
   const options: RequestInit = {
     method,
     headers,
+    cache: "no-store",
   };
 
   if (data) {

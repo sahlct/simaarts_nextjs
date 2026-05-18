@@ -207,7 +207,7 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
         {/* MAIN TITLE */}
         <h1 className="text-3xl md:text-7xl font-extrabold mb-6 md:mb-8 leading-[1.1] tracking-tight">
           {carousel.carousel_title}<br />
-          <span style={{ color: carousel.carousel_title_02_color || "#f5b400" }}>
+          <span style={{ color: (carousel.carousel_title_02_color && carousel.carousel_title_02_color !== "#000000") ? carousel.carousel_title_02_color : "#f5b400" }}>
             {carousel.carousel_title_02}
           </span>
           {flipWords.length > 0 && (

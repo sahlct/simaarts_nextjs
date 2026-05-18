@@ -384,7 +384,7 @@ export default function DynamicFormModal({
                     <input
                       type="color"
                       name={field.name}
-                      value={raw ?? "#000000"}
+                      value={raw && raw !== "" ? raw : "#000000"}
                       onChange={handleChange}
                       className="w-16 h-10 p-1 border rounded cursor-pointer"
                     />
