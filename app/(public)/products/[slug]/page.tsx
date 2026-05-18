@@ -284,7 +284,6 @@ Subcategory: ${product.price}`;
               </div>
             )}
 
-            {/* dummy- tags */}
             {/* CTA BUTTONS */}
             <div className="space-y-3 md:space-y-4 mb-12">
               <button
