@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useParams, useSearchParams } from "next/navigation";
 import { getProductBySlug, getSimilarProducts } from "@/lib/api/product";
 import Link from "next/link";
 import {
@@ -52,9 +52,12 @@ const safeParse = (data: any) => {
   return [];
 };
 
-export default function ProductDetailsPage() {
+function ProductDetails() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const slug = params?.slug as string;
+  const category_id = searchParams?.get("category_id");
+  const sub_category_id = searchParams?.get("sub_category_id");
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const [product, setProduct] = useState<ExtendedProduct | null>(null);
@@ -70,7 +73,7 @@ export default function ProductDetailsPage() {
     const loadProduct = async () => {
       try {
         setLoading(true);
-        const res = await getProductBySlug(slug);
+        const res = await getProductBySlug(slug, category_id, sub_category_id);
         const data = res?.data;
 
         if (data) {
@@ -108,7 +111,7 @@ export default function ProductDetailsPage() {
     };
 
     loadProduct();
-  }, [slug]);
+  }, [slug, category_id, sub_category_id]);
 
   const handleWhatsapp = () => {
     if (!product) return;
@@ -333,5 +336,25 @@ Subcategory: ${product.price}`;
         </section>
       </main>
     </div>
+  );
+}
+
+export default function ProductDetailsPage() {
+  return (
+    <Suspense fallback={
+      <div className="max-w-7xl mx-auto px-6 py-24 animate-pulse">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          <div className="h-[500px] bg-gray-100 rounded-[2rem]" />
+          <div className="space-y-6">
+            <div className="h-4 w-32 bg-gray-100 rounded" />
+            <div className="h-12 w-3/4 bg-gray-100 rounded" />
+            <div className="h-8 w-1/4 bg-gray-100 rounded" />
+            <div className="h-32 w-full bg-gray-100 rounded" />
+          </div>
+        </div>
+      </div>
+    }>
+      <ProductDetails />
+    </Suspense>
   );
 }

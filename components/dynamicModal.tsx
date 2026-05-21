@@ -63,6 +63,11 @@ export default function DynamicFormModal({
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
+    if (!isOpen) {
+      setFormState({});
+      setError("");
+      return;
+    }
     const normalized: Record<string, any> = {};
 
     if (defaultValues) {
@@ -95,7 +100,8 @@ export default function DynamicFormModal({
 
     setFormState(normalized);
     setError("");
-  }, [defaultValues, isOpen, fields]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultValues, isOpen]);
 
   if (!isOpen) return null;
 

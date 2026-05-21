@@ -80,7 +80,7 @@ const Footer = () => {
               {products.length > 0 ? (
                 products.map((item) => (
                   <li key={item.product_id}>
-                    <Link href={`/products/${slugify(item.product_name)}`} className="text-white/60 text-sm hover:text-white transition-colors line-clamp-1">
+                    <Link href={`/products/${slugify(item.product_name)}?category_id=${item.category_id || ""}&sub_category_id=${item.sub_category_id || ""}`} className="text-white/60 text-sm hover:text-white transition-colors line-clamp-1">
                       {item.product_name}
                     </Link>
                   </li>

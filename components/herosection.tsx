@@ -262,7 +262,7 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
           </div>
           <div className="flex flex-col items-center">
             <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{countriesCount}+</span>
-            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">States Sourced</span>
+            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Countries Sourced</span>
           </div>
         </div>
       </div>

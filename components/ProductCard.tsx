@@ -15,6 +15,8 @@ export interface Product {
   price: string;
   is_new: number;
   is_best_selling: number;
+  category_id?: number;
+  sub_category_id?: number;
   SubCategory?: {
     sub_category_name: string;
   };
@@ -116,7 +118,7 @@ const ProductCard = ({ product }: { product: Product }) => {
 
           <div className="mt-auto flex items-center pt-4">
             <Link
-              href={`/products/${slugify(product.product_name)}`}
+              href={`/products/${slugify(product.product_name)}?category_id=${product.category_id || ""}&sub_category_id=${product.sub_category_id || ""}`}
               className="flex w-full justify-center items-center gap-2 bg-gray-50 text-[#0F172A] text-[10px] font-black border-2 border-gray-200 px-5 py-2.5 rounded-xl hover:border-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all duration-300"
             >
               View Details <MoveRight size={14} />

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getCategories } from "@/lib/api/category";
-import { getProducts } from "@/lib/api/product";
+import { getPublicProducts } from "@/lib/api/product";
 import { useDebounce } from "@/hooks/debounce";
 import { slugify } from "@/lib/api/slugify";
 import ProductCard, { Product } from "./ProductCard";
@@ -105,7 +105,7 @@ export default function ProductsClient() {
     const loadProducts = async () => {
       try {
         setProdLoading(true);
-        const res = await getProducts(page, PRODUCT_LIMIT, debouncedSearch, {
+        const res = await getPublicProducts(page, PRODUCT_LIMIT, debouncedSearch, {
           category_id: selectedCategory ?? undefined,
           status: 1,
         });
@@ -136,6 +136,15 @@ export default function ProductsClient() {
     setPage(1);
   }, [debouncedSearch, selectedCategory]);
 
+  const isMounted = useRef(false);
+  useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [page]);
+
   const handleCategoryClick = (c: Category | null) => {
     setPage(1);
 
@@ -149,6 +158,33 @@ export default function ProductsClient() {
       });
     }
   };
+
+  // Group products by category_id and sub_category_id, maintaining the retrieved sequence
+  interface GroupedProducts {
+    key: string;
+    subCategoryName: string;
+    categoryName: string;
+    items: Product[];
+  }
+
+  const groupedProducts: GroupedProducts[] = [];
+  products.forEach((product) => {
+    const catId = product.category_id || 0;
+    const subCatId = product.sub_category_id || 0;
+    const key = `${catId}-${subCatId}`;
+
+    let group = groupedProducts.find((g) => g.key === key);
+    if (!group) {
+      group = {
+        key,
+        subCategoryName: product.SubCategory?.sub_category_name || "Uncategorized",
+        categoryName: (product.ProductCategory?.category_name || "").toLowerCase(),
+        items: [],
+      };
+      groupedProducts.push(group);
+    }
+    group.items.push(product);
+  });
 
   return (
     <div className="bg-white min-h-screen">
@@ -247,9 +283,23 @@ export default function ProductsClient() {
           </div>
         ) : products.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-              {products.map((product) => (
-                <ProductCard key={product.product_id} product={product} />
+            <div className="space-y-16 mb-16">
+              {groupedProducts.map((group) => (
+                <div key={group.key} className="space-y-8">
+                  {/* Dynamic Heading with beautiful accent */}
+                  <div className="flex items-center gap-4">
+                    <h2 className="text-xl md:text-2xl font-black text-[#1e2b58] tracking-tight uppercase flex items-center gap-2">
+                      <span className="w-1.5 h-6 bg-blue-500 rounded-full inline-block" />
+                      {group.subCategoryName} - <span className="lowercase font-bold text-gray-400">{group.categoryName}</span>
+                    </h2>
+                    <div className="h-[2px] bg-gradient-to-r from-gray-100 to-transparent flex-grow rounded-full hidden sm:block" />
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {group.items.map((product) => (
+                      <ProductCard key={product.product_id} product={product} />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
 
