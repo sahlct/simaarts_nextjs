@@ -19,6 +19,9 @@ export default function HomeShorts() {
   const [shorts, setShorts] = useState<Short[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeType, setActiveType] = useState<"youtube" | "insta">("youtube");
+  const [youtubeShorts, setYoutubeShorts] = useState<Short[]>([]);
+  const [instaShorts, setInstaShorts] = useState<Short[]>([]);
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
 
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -31,19 +34,38 @@ export default function HomeShorts() {
 
   /* ---------------- LOAD DATA ---------------- */
   useEffect(() => {
-    const load = async () => {
+    const loadBoth = async () => {
       setLoading(true);
       try {
-        const res = await getShorts(1, 12, "", 1, activeType);
-        setShorts(res?.data || []);
+        const [ytRes, inRes] = await Promise.all([
+          getShorts(1, 12, "", 1, "youtube"),
+          getShorts(1, 12, "", 1, "insta")
+        ]);
+        const ytData = ytRes?.data || [];
+        const inData = inRes?.data || [];
+        setYoutubeShorts(ytData);
+        setInstaShorts(inData);
+
+        if (ytData.length === 0 && inData.length > 0) {
+          setActiveType("insta");
+        }
+        setInitialLoadDone(true);
       } catch (err) {
         console.error(err);
       } finally {
         setLoading(false);
       }
     };
-    load();
-  }, [activeType]);
+    if (!initialLoadDone) {
+      loadBoth();
+    }
+  }, [initialLoadDone]);
+
+  useEffect(() => {
+    if (initialLoadDone) {
+      setShorts(activeType === "youtube" ? youtubeShorts : instaShorts);
+    }
+  }, [activeType, initialLoadDone, youtubeShorts, instaShorts]);
 
   /* ---------------- WHEEL SUPPORT ---------------- */
   const lastScrollTime = useRef(0);
@@ -115,7 +137,7 @@ export default function HomeShorts() {
     return () => ctx.revert();
   }, [loading, activeType]);
 
-  if (!loading && shorts.length === 0) {
+  if (initialLoadDone && youtubeShorts.length === 0 && instaShorts.length === 0) {
     return null;
   }
 
@@ -142,47 +164,60 @@ export default function HomeShorts() {
             <div className="relative flex-1 md:flex-none flex bg-white/5 p-1 md:p-1.5 rounded-xl md:rounded-2xl backdrop-blur-md border border-white/10">
               {/* Sliding Background Pill */}
               <div
-                className="absolute top-1 md:top-1.5 bottom-1 md:bottom-1.5 left-1 md:left-1.5 w-[calc(50%-4px)] md:w-[calc(50%-6px)] bg-white rounded-lg md:rounded-xl transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-xl"
-                style={{ transform: activeType === "insta" ? "translateX(100%)" : "translateX(0)" }}
+                className="absolute top-1 md:top-1.5 bottom-1 md:bottom-1.5 bg-white rounded-lg md:rounded-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-xl"
+                style={{ 
+                  left: youtubeShorts.length > 0 && instaShorts.length > 0
+                    ? (activeType === "insta" ? "calc(50% + 2px)" : "4px")
+                    : "4px",
+                  width: youtubeShorts.length > 0 && instaShorts.length > 0 ? "calc(50% - 6px)" : "calc(100% - 8px)"
+                }}
               />
 
-              <button
-                onClick={() => setActiveType("youtube")}
-                className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "youtube" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
-                  }`}
-              >
-                <Youtube size={14} className="md:w-[18px] md:h-[18px]" /> Shorts
-              </button>
-              <button
-                onClick={() => setActiveType("insta")}
-                className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "insta" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
-                  }`}
-              >
-                <Instagram size={14} className="md:w-[18px] md:h-[18px]" /> Reels
-              </button>
-            </div>
-
-            {/* ACTION BUTTONS (Mobile: Show only active type icon) */}
-            <div className="flex md:hidden items-center shrink-0">
-              {activeType === "youtube" ? (
-                <button className="w-10 h-10 bg-[#FF0000] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-95 transition-all">
-                  <Youtube size={20} />
+              {youtubeShorts.length > 0 && (
+                <button
+                  onClick={() => setActiveType("youtube")}
+                  className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "youtube" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
+                    }`}
+                >
+                  <Youtube size={14} className="md:w-[18px] md:h-[18px]" /> Shorts
                 </button>
-              ) : (
-                <button className="w-10 h-10 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-95 transition-all">
-                  <Instagram size={20} />
+              )}
+              {instaShorts.length > 0 && (
+                <button
+                  onClick={() => setActiveType("insta")}
+                  className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "insta" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
+                    }`}
+                >
+                  <Instagram size={14} className="md:w-[18px] md:h-[18px]" /> Reels
                 </button>
               )}
             </div>
 
+            {/* ACTION BUTTONS (Mobile: Show only active type icon) */}
+            <div className="flex md:hidden items-center shrink-0">
+              {activeType === "youtube" && youtubeShorts.length > 0 ? (
+                <button className="w-10 h-10 bg-[#FF0000] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-95 transition-all">
+                  <Youtube size={20} />
+                </button>
+              ) : activeType === "insta" && instaShorts.length > 0 ? (
+                <button className="w-10 h-10 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white rounded-xl flex items-center justify-center shadow-lg active:scale-95 transition-all">
+                  <Instagram size={20} />
+                </button>
+              ) : null}
+            </div>
+
             {/* ACTION BUTTONS (Desktop: Show both with text) */}
             <div className="hidden md:flex items-center gap-4 justify-end">
-              <button className="flex items-center gap-2 bg-[#FF0000] text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:scale-105 transition-all cursor-pointer">
-                <Youtube size={16} /> Subscribe
-              </button>
-              <button className="flex items-center gap-2 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:scale-105 transition-all cursor-pointer">
-                <Instagram size={16} /> Follow
-              </button>
+              {youtubeShorts.length > 0 && (
+                <button className="flex items-center gap-2 bg-[#FF0000] text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:scale-105 transition-all cursor-pointer">
+                  <Youtube size={16} /> Subscribe
+                </button>
+              )}
+              {instaShorts.length > 0 && (
+                <button className="flex items-center gap-2 bg-gradient-to-tr from-[#F58529] via-[#D62976] to-[#962FBF] text-white px-5 py-2.5 rounded-xl font-bold text-xs hover:scale-105 transition-all cursor-pointer">
+                  <Instagram size={16} /> Follow
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -190,7 +225,7 @@ export default function HomeShorts() {
         {/* ---------------- CAROUSEL ---------------- */}
         <div className="embla" ref={emblaRef}>
           <div className="embla__container flex gap-6">
-            {loading ? (
+            {!initialLoadDone ? (
               Array.from({ length: 5 }).map((_, i) => (
                 <div key={i} className="embla__slide flex-[0_0_280px] min-w-0 bg-white/5 rounded-[2rem] aspect-[9/16] animate-pulse" />
               ))

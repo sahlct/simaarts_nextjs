@@ -156,6 +156,7 @@ export default function CategoryPage() {
 
           const formatted = {
             "Category Name": c.category_name,
+            Description: c.description || "—",
             Status:
               c.status == 1 ? (
                 <span className="bg-green-100 px-3 py-1 rounded-full text-xs">
@@ -196,6 +197,12 @@ export default function CategoryPage() {
             label: "Category Name",
             type: "text",
             required: true,
+          },
+          {
+            name: "description",
+            label: "Description",
+            type: "textarea",
+            required: false,
           },
           {
             name: "status",

@@ -14,24 +14,24 @@ import {
 import Link from "next/link";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
-import { getProducts } from "@/lib/api/product";
-import { slugify } from "@/lib/api/slugify";
+import { getCategories } from "@/lib/api/category";
+import { slugify } from "@/lib/slugify";
 
 const Footer = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchCategories = async () => {
       try {
-        const res = await getProducts(1, 5);
+        const res = await getCategories(1, 4, "", 1); // Get 4 active categories
         if (res?.data) {
-          setProducts(res.data);
+          setCategories(res.data);
         }
       } catch (error) {
-        console.error("Failed to fetch products for footer", error);
+        console.error("Failed to fetch categories for footer", error);
       }
     };
-    fetchProducts();
+    fetchCategories();
   }, []);
 
   return (
@@ -77,11 +77,11 @@ const Footer = () => {
               Products
             </h4>
             <ul className="flex flex-col gap-4">
-              {products.length > 0 ? (
-                products.map((item) => (
-                  <li key={item.product_id}>
-                    <Link href={`/products/${slugify(item.product_name)}?category_id=${item.category_id || ""}&sub_category_id=${item.sub_category_id || ""}`} className="text-white/60 text-sm hover:text-white transition-colors line-clamp-1">
-                      {item.product_name}
+              {categories.length > 0 ? (
+                categories.map((item) => (
+                  <li key={item.category_id}>
+                    <Link href={`/products?category=${slugify(item.category_name)}`} className="text-white/60 text-sm hover:text-white transition-colors line-clamp-1">
+                      {item.category_name}
                     </Link>
                   </li>
                 ))
@@ -100,7 +100,7 @@ const Footer = () => {
               {[
                 { name: "Our Projects", href: "/projects" },
                 { name: "About Us", href: "/about" },
-                { name: "Services", href: "/services" },
+                { name: "Our Products", href: "/products" },
                 { name: "Contact", href: "/contact" }
               ].map((item) => (
                 <li key={item.name}>

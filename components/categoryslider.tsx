@@ -153,8 +153,8 @@ export default function CategorySlider() {
                 {cat.category_name}
               </h1>
 
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 max-w-md">
-                Premium imported {cat.category_name.toLowerCase()} sourced from Italy, Spain, and Portugal. From large-format porcelain slabs to intricate mosaic floors — every step is a statement of quality and design.
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 max-w-md whitespace-pre-line">
+                {cat.description ? cat.description : `Sourcing premium roofing and building materials from Italy, Spain, Japan, Brazil, America, Portugal, and China—we bring global design to Kerala. As the region's premier roofing company, we deliver unmatched quality for every architectural vision.`}
               </p>
 
               <div className="flex flex-row gap-3 md:gap-4">
@@ -239,20 +239,7 @@ export default function CategorySlider() {
         </div>
 
 
-        {/* Category Quick Links (Visual only) */}
-        <div className="hidden md:flex items-center gap-3 pointer-events-none">
-          {categories.map((cat, idx) => (
-            <div
-              key={cat.category_id}
-              className={`px-6 py-2 rounded-full border text-xs font-bold transition-all ${activeIndex === idx
-                  ? "bg-white/20 border-white text-white backdrop-blur-md"
-                  : "bg-[#282d63]/40 border-white/20 text-white/60 backdrop-blur-md"
-                }`}
-            >
-              {cat.category_name}
-            </div>
-          ))}
-        </div>
+
 
       </div>
 

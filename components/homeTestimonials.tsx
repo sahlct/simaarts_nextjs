@@ -103,6 +103,7 @@ export default function HomeTestimonials() {
   }, [loading]);
 
   if (loading) return null;
+  if (!loading && testimonials.length === 0) return null;
 
   return (
     <section ref={sectionRef} className="bg-[#FAFAFA] py-12 md:py-32 overflow-hidden">

@@ -76,19 +76,19 @@ const CTASection = () => {
         </div>
 
         {/* Features */}
-        <div className="flex flex-wrap justify-center gap-6 md:gap-10 w-full max-w-6xl mt-8">
+        <div className="flex flex-nowrap justify-center gap-2 sm:gap-6 md:gap-10 w-full max-w-6xl mt-8 px-1 md:px-0 overflow-hidden">
           {[
-            { label: "Leak Proof", icon: <Droplet size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
-            { label: "Frost Resistant", icon: <Snowflake size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
-            { label: "Heat Resistant", icon: <Flame size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
-            { label: "Light Weight", icon: <Feather size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
-            { label: "Durable", icon: <Dumbbell size={32} strokeWidth={1.5} className="md:w-10 md:h-10" /> },
+            { label: "Leak Proof", icon: <Droplet strokeWidth={1.5} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" /> },
+            { label: "Frost Resistant", icon: <Snowflake strokeWidth={1.5} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" /> },
+            { label: "Heat Resistant", icon: <Flame strokeWidth={1.5} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" /> },
+            { label: "Light Weight", icon: <Feather strokeWidth={1.5} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" /> },
+            { label: "Durable", icon: <Dumbbell strokeWidth={1.5} className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10" /> },
           ].map((feature, i) => (
-            <div key={i} className="flex flex-col items-center gap-3 md:gap-4 w-[70px] md:w-[100px]">
-              <div className="w-16 h-16 md:w-[84px] md:h-[84px] border-[2px] border-white rounded-xl md:rounded-2xl flex items-center justify-center text-white bg-transparent">
+            <div key={i} className="flex flex-col items-center gap-2 md:gap-4 w-[60px] sm:w-[70px] md:w-[100px]">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-[84px] md:h-[84px] border-[1.5px] md:border-[2px] border-white rounded-xl md:rounded-2xl flex items-center justify-center text-white bg-transparent shrink-0">
                 {feature.icon}
               </div>
-              <span className="text-white text-[11px] md:text-sm font-medium text-center leading-snug">
+              <span className="text-white text-[9px] sm:text-[11px] md:text-sm font-medium text-center leading-snug">
                 {feature.label.split(' ').map((word, idx) => (
                   <React.Fragment key={idx}>
                     {word}
