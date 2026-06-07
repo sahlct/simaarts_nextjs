@@ -193,7 +193,7 @@ export default function ProductsClient() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/product_bg.jpg')",
+            backgroundImage: "url('/product_bg.png')",
           }}
         >
           <div className="absolute inset-0 bg-black/50" />

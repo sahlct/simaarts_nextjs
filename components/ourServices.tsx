@@ -91,8 +91,9 @@ export default function OurServices() {
 
   return (
     <section
+      id="services"
       ref={sectionRef}
-      className="relative bg-gradient-to-b from-[#FAFAFA] to-[#F1F5F9] py-20 md:py-32 overflow-hidden"
+      className="relative bg-gradient-to-b from-[#FAFAFA] to-[#F1F5F9] py-20 md:py-32 overflow-hidden scroll-mt-24"
     >
       {/* Decorative top-right element */}
       <div className="absolute top-10 right-10 w-48 h-32 bg-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-2xl -rotate-6 pointer-events-none" />

@@ -111,7 +111,7 @@ export default function ProjectsClient() {
       {/* HERO HEADER */}
       <section className="relative h-[400px] md:h-[350px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src="/product_bg.jpg" alt="Header Background" className="w-full h-full object-cover" />
+          <img src="/product_bg.png" alt="Header Background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#282d63]/60 backdrop-blur-[2px]" />
         </div>
 
@@ -127,7 +127,7 @@ export default function ProjectsClient() {
           </h1>
 
           <p className="text-xs md:text-sm max-w-xl text-white/80 leading-relaxed font-medium">
-            Transforming homes and landmarks across 16+ States with handcrafted clay tiles that blend tradition with modern architectural excellence.
+            Transforming homes and landmarks across 16+ States with premium imported building materials tradition with modern architectural excellence.
           </p>
         </div>
       </section>

@@ -16,7 +16,6 @@ export default function ContactClient() {
     name: "",
     email: "",
     phone: "",
-    subject: "",
     message: ""
   });
   const [loading, setLoading] = useState(false);
@@ -105,7 +104,7 @@ export default function ContactClient() {
         status: 1 // Active
       });
       toast.success("Thank you! Your message has been sent successfully.");
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error: any) {
       console.error("Error submitting enquiry:", error);
       toast.error(error?.response?.data?.message || "Failed to send message. Please try again later.");
@@ -138,7 +137,7 @@ export default function ContactClient() {
       {/* HERO HEADER */}
       <section className="relative h-[400px] md:h-[400px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img src="/product_bg.jpg" alt="Contact Background" className="w-full h-full object-cover" />
+          <img src="/product_bg.png" alt="Contact Background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#282d63]/70 backdrop-blur-[2px]" />
         </div>
 
@@ -259,27 +258,15 @@ export default function ContactClient() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Phone Number</label>
-                      <input
-                        type="tel"
-                        placeholder="+91 00000 00000"
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Subject</label>
-                      <input
-                        type="text"
-                        placeholder="Custom Order"
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      />
-                    </div>
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Phone Number</label>
+                    <input
+                      type="tel"
+                      placeholder="+91 00000 00000"
+                      className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    />
                   </div>
 
                   <div className="space-y-2">
