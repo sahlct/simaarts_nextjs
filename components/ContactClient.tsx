@@ -6,7 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { createEnquiry } from "@/lib/api/enquiry";
-import { toast } from "sonner";
+import { useToast } from "@/contexts/ToastContext";
 import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -20,6 +20,7 @@ export default function ContactClient() {
   });
   const [loading, setLoading] = useState(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  const { showSuccess, showError } = useToast();
 
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -77,18 +78,19 @@ export default function ContactClient() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-      toast.error("Please fill in all required fields.");
+      // toast.error("Please fill in all required fields.");
+      showError("Please fill in all required fields.");
       return;
     }
 
     // Backend Strict Validation Matching
     if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(formData.email)) {
-      toast.error("Invalid email. Only @gmail.com addresses are allowed.");
+      showError("Invalid email. Only @gmail.com addresses are allowed.");
       return;
     }
 
     if (!/^\d{10}$/.test(formData.phone)) {
-      toast.error("Invalid phone number. Must be exactly 10 digits.");
+      showError("Invalid phone number. Must be exactly 10 digits.");
       return;
     }
 
@@ -103,11 +105,11 @@ export default function ContactClient() {
         enquiry_status: 1, // New
         status: 1 // Active
       });
-      toast.success("Thank you! Your message has been sent successfully.");
+      showSuccess("Thank you! Your message has been sent successfully.");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error: any) {
       console.error("Error submitting enquiry:", error);
-      toast.error(error?.response?.data?.message || "Failed to send message. Please try again later.");
+      showError(error?.response?.data?.message || "Failed to send message. Please try again later.");
     } finally {
       setLoading(false);
     }
