@@ -121,8 +121,7 @@ Name: ${product.product_name}
 Code: ${product.product_code}
 Category: ${product.ProductCategory?.category_name || "-"}
 
-Product Link: ${pageUrl}
-Product Image: ${activeImage}`;
+Product Link: ${pageUrl}`;
     window.open(`${CONTACT_LINKS.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
