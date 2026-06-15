@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { Nunito_Sans } from "next/font/google";
+import DisableRightClick from "@/components/DisableRightClick";
 
 import { sharedMetadata } from "@/lib/metadata";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
     >
       <body className="font-nunito">
         <ToastProvider>{children}</ToastProvider>
+        <DisableRightClick />
         <Analytics />
       </body>
     </html>

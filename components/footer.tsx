@@ -47,7 +47,7 @@ const Footer = () => {
               <img src="/logo-transparent.png" alt="logo" className="max-h-10 brightness-0 invert" />
             </div>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-              Crafting timeless roofing excellence with premium natural clay tiles since 1995.
+              Premium roofing and building materials from Italy, Spain, Japan, Brazil, America, Portugal, and China—we bring global design to Kerala.
             </p>
 
             {/* Social Icons */}

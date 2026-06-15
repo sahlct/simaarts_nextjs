@@ -88,11 +88,11 @@ export default function AboutClient() {
       <section className="relative min-h-screen md:h-[800px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+            src="/about_hero.jpeg"
             alt="Elbano Showroom"
             className="w-full h-full object-cover scale-105"
             onError={(e) => {
-              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop";
+              (e.target as HTMLImageElement).src = "/about_hero.jpeg";
             }}
           />
           <div className="absolute inset-0 bg-[#282d63]/50 backdrop-blur-[1px]" />
