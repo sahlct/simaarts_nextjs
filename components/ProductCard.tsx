@@ -63,7 +63,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     });
   };
 
-  const badge = product.is_best_selling ? "Best Seller" : product.is_new ? "New" : product.product_id % 3 === 0 ? "Premium" : null;
+  const badge = product.is_best_selling ? "Best Seller" : product.is_new ? "New" : null;
   const badgeColor = "bg-[#282d63]";
 
   return (

@@ -27,7 +27,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       ? (product.thumbnail_image.startsWith("http")
         ? product.thumbnail_image
         : `${base_url}${product.thumbnail_image}`)
-      : "https://elbano.com/elbano_logo.png";
+      : "https://elbanoindia.com/elbano_logo.png";
 
     return {
       title: `${product.product_name} | ELBANO`,
@@ -35,7 +35,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       openGraph: {
         title: product.product_name,
         description: product.description || "Premium Ceramic Tiles & Roofing Solutions",
-        url: `https://elbano.com/products/${slug}`,
+        url: `https://elbanoindia.com/products/${slug}`,
         siteName: "ELBANO",
         images: [
           {

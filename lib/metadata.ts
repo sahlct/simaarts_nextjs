@@ -1,22 +1,22 @@
 import { Metadata } from "next";
 
 export const sharedMetadata: Metadata = {
-  title: "ELBANO | Premium Ceramic Tiles & Roofing Solutions",
-  description: "ELBANO offers a wide range of premium quality imported ceramic tiles and roofing solutions. Experience the perfect blend of elegance and durability.",
-  keywords: ["Ceramic Tiles", "Roofing Solutions", "ELBANO", "Roofing Sheets", "Home Decor", "Premium Tiles"],
+  title: "ELBANO | Premier Roofing Solutions in Kerala - India",
+  description: "Protect and beautify your home with Kerala's trusted choice for premium roofing materials. From elegant roofing tiles and heavy-duty shingles to reliable rain gutters, we deliver lasting durability tailored to your style.",
+  keywords: ["Roofing Solutions", "Roofing Tiles", "Rain Gutters", "Premium Shingles", "ELBANO", "Kerala Roofing", "Roofing Materials India", "Ceramic Tiles"],
   authors: [{ name: "ELBANO" }],
-  metadataBase: new URL("https://elbano.com"),
+  metadataBase: new URL("https://elbanoindia.com"),
   alternates: {
-    canonical: "https://elbano.com",
+    canonical: "https://elbanoindia.com",
   },
   openGraph: {
-    title: "ELBANO | Premium Ceramic Tiles & Roofing Solutions",
-    description: "Discover our premium collection of imported ceramic tiles and roofing solutions crafted for modern living. Elegance meets durability at ELBANO.",
-    url: "https://elbano.com",
+    title: "ELBANO | Premier Roofing Solutions in Kerala - India",
+    description: "Protect and beautify your home with Kerala's trusted choice for premium roofing materials. From elegant roofing tiles and heavy-duty shingles to reliable rain gutters, we deliver lasting durability tailored to your style.",
+    url: "https://elbanoindia.com",
     siteName: "ELBANO",
     images: [
       {
-        url: "https://elbano.com/elbano_logo.png",
+        url: "https://elbanoindia.com/elbano_logo.png",
         width: 1200,
         height: 630,
         alt: "ELBANO Logo",
@@ -27,9 +27,9 @@ export const sharedMetadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ELBANO | Premium Ceramic Tiles & Roofing Solutions",
-    description: "Discover our premium collection of imported ceramic tiles and roofing solutions crafted for modern living.",
-    images: ["https://elbano.com/elbano_logo.png"],
+    title: "ELBANO | Premier Roofing Solutions in Kerala - India",
+    description: "Protect and beautify your home with Kerala's trusted choice for premium roofing materials. From elegant roofing tiles and heavy-duty shingles to reliable rain gutters, we deliver lasting durability tailored to your style.",
+    images: ["https://elbanoindia.com/elbano_logo.png"],
   },
   icons: {
     icon: "/favicon.ico",

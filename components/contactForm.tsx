@@ -16,6 +16,7 @@ import {
 import { createEnquiry } from "@/lib/api/enquiry";
 import { useToast } from "@/contexts/ToastContext";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
+import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
 
 export default function ContactForm() {
   const { showSuccess, showError } = useToast();
@@ -85,16 +86,16 @@ export default function ContactForm() {
               {/* PHONE */}
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-orange-500 mt-1" />
-                <a href="tel:+914832080456" className="hover:underline">
-                  +91 483 208 0456
+                <a href={CONTACT_LINKS.tel} className="hover:underline">
+                  {CONTACT_INFO.phone}
                 </a>
               </li>
 
               {/* EMAIL */}
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-orange-500 mt-1" />
-                <a href="mailto:info@ssemlp.com" className="hover:underline">
-                  info@ssemlp.com
+                <a href={CONTACT_LINKS.mailto} className="hover:underline">
+                  {CONTACT_INFO.email}
                 </a>
               </li>
 
@@ -102,13 +103,12 @@ export default function ContactForm() {
               <li className="flex items-start gap-3">
                 <MapPin className="md:w-4 md:h-4 text-orange-500 mt-1" />
                 <a
-                  href="https://maps.app.goo.gl/akzNBpKVM6p5WjPW9"
+                  href={CONTACT_INFO.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="md:me-32 hover:underline"
                 >
-                  34B, Inkel Greens, Karathode Oorakam Melmuri PO, Malappuram
-                  Kerala - 676 519
+                  Elbano Roofings, Airport Road, Karuvankallu, Malappuram, Kerala - 673638
                 </a>
               </li>
             </ul>
@@ -117,7 +117,7 @@ export default function ContactForm() {
             <div className="flex gap-3 mt-6">
               {/* CALL */}
               <a
-                href="tel:+914832080456"
+                href={CONTACT_LINKS.tel}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600 transition"
               >
                 <Phone className="w-4 h-4" />
@@ -125,7 +125,7 @@ export default function ContactForm() {
 
               {/* WHATSAPP */}
               <a
-                href="https://wa.me/914832080456"
+                href={CONTACT_LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600 transition"
@@ -135,7 +135,7 @@ export default function ContactForm() {
 
               {/* EMAIL */}
               <a
-                href="mailto:info@ssemlp.com"
+                href={CONTACT_LINKS.mailto}
                 className="w-8 h-8 flex items-center justify-center rounded-full bg-orange-500 text-white hover:bg-orange-600 transition"
               >
                 <Mail className="w-4 h-4" />

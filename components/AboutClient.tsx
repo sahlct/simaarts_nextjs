@@ -88,7 +88,7 @@ export default function AboutClient() {
       <section className="relative min-h-screen md:h-[800px] flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
-            src="/about_hero.jpeg"
+            src="/about_hero_02.png"
             alt="Elbano Showroom"
             className="w-full h-full object-cover scale-105"
             onError={(e) => {

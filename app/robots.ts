@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/admin/',
     },
-    sitemap: 'https://ssemlp.com/sitemap.xml',
+    sitemap: 'https://elbanoindia.com/sitemap.xml',
   }
 }
