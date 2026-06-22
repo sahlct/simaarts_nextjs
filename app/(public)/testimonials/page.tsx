@@ -1,7 +1,20 @@
-"use client";
 import ContactHeader from '@/components/contactHeader';
 import TestimonialContainer from '@/components/testiContainer';
 import React from 'react'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Testimonials",
+  description: "Read what our happy customers have to say about ELBANO's premium roofing solutions. Real experiences and reviews from homeowners across Kerala who trust ELBANO for their roofing needs.",
+  alternates: {
+    canonical: "/testimonials",
+  },
+  openGraph: {
+    title: "Customer Testimonials | ELBANO",
+    description: "Read what our happy customers have to say about ELBANO's premium roofing solutions across Kerala.",
+    url: "https://elbanoindia.com/testimonials",
+  },
+}
 
 export default function TestimonialsListPage() {
     const data = {
