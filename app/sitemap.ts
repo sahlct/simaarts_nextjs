@@ -3,31 +3,31 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://www.elbanoindia.com',
+      url: 'https://elbanoindia.com',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 1,
     },
     {
-      url: 'https://www.elbanoindia.com/products',
+      url: 'https://elbanoindia.com/products',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: 'https://www.elbanoindia.com/projects',
+      url: 'https://elbanoindia.com/projects',
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: 'https://www.elbanoindia.com/about',
+      url: 'https://elbanoindia.com/about',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
-      url: 'https://www.elbanoindia.com/contact',
+      url: 'https://elbanoindia.com/contact',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.6,
