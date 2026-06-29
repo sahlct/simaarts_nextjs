@@ -2,14 +2,14 @@ import { Metadata } from "next";
 
 const siteUrl = "https://elbanoindia.com";
 const siteName = "ELBANO";
-const siteTitle = "ELBANO | Premier Roofing Solutions in Kerala - India";
+const siteTitle = "Roofing Tile Company  In Kerala, India | Elbano Roofing";
 const siteDescription =
   "Protect and beautify your home with Kerala's trusted choice for premium roofing materials. From elegant roofing tiles and heavy-duty shingles to reliable rain gutters, we deliver lasting durability tailored to your style.";
 
 export const sharedMetadata: Metadata = {
   title: {
     default: siteTitle,
-    template: "%s | ELBANO - Premier Roofing Solutions",
+    template: "%s | ELBANO - Roofing Tile Company  In Kerala, India | Elbano Roofing",
   },
   description: siteDescription,
   keywords: [
@@ -57,7 +57,7 @@ export const sharedMetadata: Metadata = {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: "ELBANO - Premier Roofing Solutions in Kerala, India",
+        alt: "ELBANO - Roofing Tile Company  In Kerala, India | Elbano Roofing",
         type: "image/png",
       },
       {
