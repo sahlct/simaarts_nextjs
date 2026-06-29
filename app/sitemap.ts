@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://elbanoindia.com'
 
-  // Main pages
+  // Main route pages
   const routes = [
     '',
     '/about',
