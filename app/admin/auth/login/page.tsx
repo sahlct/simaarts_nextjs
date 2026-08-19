@@ -141,7 +141,7 @@ export default function AdminLoginPage() {
       <div className="relative z-10 w-full max-w-md p-8 mx-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 text-white">
         <h2 className="text-3xl font-bold text-center mb-10 tracking-wide">
           {stage === "login"
-            ? "Elbano Admin"
+            ? "SimaArts Admin"
             : stage === "forgot"
               ? "Forgot Password"
               : stage === "otp"
