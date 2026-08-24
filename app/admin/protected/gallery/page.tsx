@@ -161,9 +161,9 @@ export default function GalleryPage() {
               setSelected(null);
               setOpenForm(true);
             }}
-            className="bg-gradient-to-r from-[#3d3c98] to-[#0b6dac] flex items-center gap-2 cursor-pointer text-white px-4 py-2 rounded-md hover:bg-cyan-800"
+            className="bg-[#4A4229] hover:bg-[#3D3622] text-[#FAF8F3] font-bold px-4 py-2.5 rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer active:scale-95"
           >
-            Create Data <IconPlus size={20} />
+            Create Data <IconPlus size={18} />
           </button>
         </div>
       </div>

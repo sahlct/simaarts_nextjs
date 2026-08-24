@@ -225,9 +225,9 @@ export default function DynamicFormModal({
     <>
       <label
         htmlFor={`file-${field.name}`}
-        className="cursor-pointer inline-flex items-center gap-2 bg-[#036ec6] text-white px-4 py-2 rounded-md hover:bg-[#0361ad]"
+        className="cursor-pointer inline-flex items-center gap-2 bg-[#4A4229] hover:bg-[#3D3622] text-[#FAF8F3] px-4 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-xs"
       >
-        <Upload size={18} />
+        <Upload size={16} />
         Choose File
       </label>
 
@@ -244,18 +244,18 @@ export default function DynamicFormModal({
   );
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-lg w-full max-w-lg p-0 relative">
-        <div className="p-6 max-h-[80vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 backdrop-blur-xs p-4">
+      <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-lg p-0 relative border border-[#EAE4D3]">
+        <div className="p-6 md:p-8 max-h-[85vh] overflow-y-auto">
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 text-gray-500 hover:text-black cursor-pointer"
+            className="absolute top-5 right-5 text-gray-400 hover:text-black transition-colors cursor-pointer p-1 rounded-full hover:bg-gray-100"
           >
             <X size={20} />
           </button>
 
-          <h2 className="text-xl font-semibold text-[#036ec6] mb-4">{title}</h2>
-          {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+          <h2 className="text-xl font-extrabold text-[#2C271D] mb-5 tracking-tight">{title}</h2>
+          {error && <p className="bg-red-50 text-red-700 p-3 rounded-xl border border-red-200 text-xs font-semibold mb-4">{error}</p>}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {fields.map((field) => {
@@ -264,13 +264,13 @@ export default function DynamicFormModal({
               if (field.type === "textarea") {
                 return (
                   <div key={field.name}>
-                    <label className="block text-sm mb-1">{field.label}</label>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-[#857A68] mb-1.5">{field.label}</label>
                     <textarea
                       name={field.name}
                       value={raw || ""}
                       onChange={handleChange}
                       placeholder={field.placeholder}
-                      className="w-full border rounded p-2"
+                      className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-3 text-xs font-bold text-[#2C271D] focus:bg-white focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none transition-all"
                     />
                   </div>
                 );
@@ -279,7 +279,7 @@ export default function DynamicFormModal({
               if (field.type === "select") {
                 return (
                   <div key={field.name}>
-                    <label className="block text-sm mb-1">{field.label}</label>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-[#857A68] mb-1.5">{field.label}</label>
                     <select
                       name={field.name}
                       value={raw ?? ""}
@@ -288,7 +288,7 @@ export default function DynamicFormModal({
                         field.onChange?.(e.target.value);
                       }}
                       disabled={field.disabled}
-                      className="w-full border rounded p-2"
+                      className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-3 text-xs font-bold text-[#2C271D] focus:bg-white focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none transition-all"
                     >
                       <option value="">Select...</option>
                       {field.options?.map((opt) => (
@@ -306,7 +306,7 @@ export default function DynamicFormModal({
 
                 return (
                   <div key={field.name}>
-                    <label className="block text-sm mb-1">{field.label}</label>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-[#857A68] mb-1.5">{field.label}</label>
                     <FileButton field={field} />
 
                     {files.length > 0 && (
@@ -338,20 +338,20 @@ export default function DynamicFormModal({
                           return (
                             <div
                               key={i}
-                              className="relative border rounded-md p-2 w-28 text-xs bg-gray-50"
+                              className="relative border border-[#EAE4D3] rounded-xl p-2 w-28 text-xs bg-[#FAF8F3]"
                             >
                               {isImage ? (
                                 <div className="relative group">
                                   <img
                                     src={src}
                                     alt="preview"
-                                    className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                                    className="w-full h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
                                     onClick={() => window.open(src, "_blank")}
                                   />
                                   <button
                                     type="button"
                                     onClick={() => setEditingImage({ fieldName: field.name, index: i, src })}
-                                    className="absolute cursor-pointer top-1 left-1 bg-white/90 border rounded-full p-1 text-[#036ec6] hover:bg-white transition-colors shadow-sm"
+                                    className="absolute cursor-pointer top-1 left-1 bg-white/90 border border-[#EAE4D3] rounded-full p-1 text-[#8C7E4F] hover:bg-white transition-colors shadow-xs"
                                     title="Edit Image"
                                   >
                                     <Pencil size={12} />
@@ -360,17 +360,17 @@ export default function DynamicFormModal({
                               ) : isVideo ? (
                                 <video
                                   src={src}
-                                  className="w-full h-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                                  className="w-full h-20 object-cover rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
                                   onClick={() => window.open(src, "_blank")}
                                 />
                               ) : (
-                                <p className="truncate">{name}</p>
+                                <p className="truncate font-semibold text-xs text-[#2C271D]">{name}</p>
                               )}
 
                               <button
                                 type="button"
                                 onClick={() => removeFile(field.name, i)}
-                                className="absolute cursor-pointer -top-2 -right-2 bg-white border rounded-full p-1 text-red-500"
+                                className="absolute cursor-pointer -top-2 -right-2 bg-white border border-[#EAE4D3] rounded-full p-1 text-rose-500 hover:bg-rose-50 shadow-xs"
                               >
                                 <X size={12} />
                               </button>
@@ -386,13 +386,13 @@ export default function DynamicFormModal({
               if (field.type === "color") {
                 return (
                   <div key={field.name}>
-                    <label className="block text-sm mb-1">{field.label}</label>
+                    <label className="block text-xs font-extrabold uppercase tracking-wider text-[#857A68] mb-1.5">{field.label}</label>
                     <input
                       type="color"
                       name={field.name}
                       value={raw && raw !== "" ? raw : "#000000"}
                       onChange={handleChange}
-                      className="w-16 h-10 p-1 border rounded cursor-pointer"
+                      className="w-16 h-10 p-1 border border-[#EAE4D3] rounded-xl cursor-pointer"
                     />
                   </div>
                 );
@@ -400,14 +400,14 @@ export default function DynamicFormModal({
 
               return (
                 <div key={field.name}>
-                  <label className="block text-sm mb-1">{field.label}</label>
+                  <label className="block text-xs font-extrabold uppercase tracking-wider text-[#857A68] mb-1.5">{field.label}</label>
                   <input
                     type={field.type}
                     name={field.name}
                     value={raw ?? ""}
                     onChange={handleChange}
                     placeholder={field.placeholder}
-                    className="w-full border rounded p-2"
+                    className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-3 text-xs font-bold text-[#2C271D] focus:bg-white focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none transition-all"
                   />
                 </div>
               );
@@ -416,7 +416,7 @@ export default function DynamicFormModal({
             <button
               type="submit"
               disabled={loading}
-              className="w-full cursor-pointer bg-gradient-to-r from-[#036ec67c] to-[#0361ad] text-white py-2 mt-4 rounded-md"
+              className="w-full cursor-pointer bg-[#4A4229] hover:bg-[#3D3622] text-[#FAF8F3] py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 disabled:opacity-50 mt-4"
             >
               {loading ? "Saving..." : "Submit"}
             </button>

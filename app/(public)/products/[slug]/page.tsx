@@ -27,16 +27,16 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       ? (product.thumbnail_image.startsWith("http")
         ? product.thumbnail_image
         : `${base_url}${product.thumbnail_image}`)
-      : "https://elbanoindia.com/elbano_logo.png";
+      : "https://simaarts.in/logo.png";
 
     return {
-      title: `${product.product_name} | ELBANO`,
-      description: product.description || "Premium Ceramic Tiles & Roofing Solutions",
+      title: `${product.product_name} | SimaArts`,
+      description: product.description || "Official Scout & Guide Badges, Uniforms & Accessories",
       openGraph: {
         title: product.product_name,
-        description: product.description || "Premium Ceramic Tiles & Roofing Solutions",
-        url: `https://elbanoindia.com/products/${slug}`,
-        siteName: "ELBANO",
+        description: product.description || "Official Scout & Guide Badges, Uniforms & Accessories",
+        url: `https://simaarts.in/products/${slug}`,
+        siteName: "SimaArts",
         images: [
           {
             url: imageUrl,
@@ -45,13 +45,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
             alt: product.product_name,
           },
         ],
-        locale: "en_US",
+        locale: "en_IN",
         type: "website",
       },
       twitter: {
         card: "summary_large_image",
         title: product.product_name,
-        description: product.description || "Premium Ceramic Tiles & Roofing Solutions",
+        description: product.description || "Official Scout & Guide Badges, Uniforms & Accessories",
         images: [imageUrl],
       },
     };

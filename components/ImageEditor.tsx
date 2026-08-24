@@ -101,7 +101,7 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
                 max={3}
                 step={0.1}
                 onChange={onZoomChange}
-                className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#036ec6]"
+                className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#D5C58A]"
               />
             </div>
 
@@ -117,7 +117,7 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
                 max={360}
                 step={1}
                 onChange={onRotateChange}
-                className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#036ec6]"
+                className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-[#D5C58A]"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
                   key={ratio.label}
                   onClick={() => setAspect(ratio.value)}
                   className={`px-4 py-2 rounded-xl text-xs font-medium transition-all ${aspect === ratio.value || (ratio.label === "Free" && aspect === undefined)
-                      ? "bg-[#036ec6] text-white shadow-lg shadow-[#036ec6]/20"
+                      ? "bg-[#D5C58A] text-[#2C271D] font-extrabold shadow-md"
                       : "bg-white/10 text-white/60 hover:bg-white/20"
                     }`}
                 >
@@ -152,7 +152,7 @@ export default function ImageEditor({ image, onSave, onCancel }: ImageEditorProp
           </button>
           <button
             onClick={handleSave}
-            className="flex items-center gap-2 bg-[#036ec6] hover:bg-[#0361ad] text-white px-8 py-2.5 rounded-xl font-semibold shadow-lg shadow-[#036ec6]/20 transition-all active:scale-95"
+            className="flex items-center gap-2 bg-[#D5C58A] hover:bg-[#c4b377] text-[#2C271D] px-8 py-2.5 rounded-xl font-extrabold shadow-md transition-all active:scale-95 cursor-pointer"
           >
             <Check size={18} /> Apply Changes
           </button>

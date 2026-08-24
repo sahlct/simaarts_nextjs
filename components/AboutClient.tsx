@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ChevronRight, Target, Eye, Calendar, Award, Globe, Users, CheckCircle2, MessageSquare, History, Briefcase } from "lucide-react";
+import { ChevronRight, Target, Eye, Globe, Users, Briefcase, Award, ShieldCheck, Sparkles, Ribbon, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
@@ -15,30 +15,27 @@ export default function AboutClient() {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Hero Entrance
       gsap.from(".about-hero-content > *", {
-        y: 60,
+        y: 50,
         opacity: 0,
         duration: 1,
         stagger: 0.2,
         ease: "power4.out"
       });
 
-      // Section Fade-ins
       gsap.utils.toArray(".reveal-section").forEach((section: any) => {
         gsap.from(section, {
           scrollTrigger: {
             trigger: section,
             start: "top 80%",
           },
-          y: 50,
+          y: 40,
           opacity: 0,
           duration: 1,
           ease: "power3.out"
         });
       });
 
-      // Stats Counting
       gsap.from(".stat-number", {
         scrollTrigger: {
           trigger: ".stats-bar",
@@ -49,283 +46,226 @@ export default function AboutClient() {
         snap: { innerText: 1 },
         ease: "power1.out"
       });
-
-      // Team Cards Stagger
-      gsap.from(".team-card", {
-        scrollTrigger: {
-          trigger: ".team-grid",
-          start: "top 85%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power4.out",
-        clearProps: "all"
-      });
-
-      // History Items Stagger
-      gsap.from(".history-item", {
-        scrollTrigger: {
-          trigger: ".history-container",
-          start: "top 80%",
-        },
-        x: (i) => (i % 2 === 0 ? -50 : 50),
-        opacity: 0,
-        duration: 1,
-        stagger: 0.3,
-        ease: "power3.out",
-        clearProps: "all"
-      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <div ref={sectionRef} className="bg-white overflow-hidden">
-      {/* CINEMATIC HERO */}
-      <section className="relative min-h-screen md:h-[800px] flex items-center overflow-hidden">
+    <div ref={sectionRef} className="bg-[#FAF8F3] overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="relative min-h-[480px] md:h-[520px] flex items-center overflow-hidden bg-[#2C271D]">
         <div className="absolute inset-0 z-0">
           <img
             src="/about_hero_02.png"
-            alt="Elbano Showroom"
-            className="w-full h-full object-cover scale-105"
+            alt="SimaArts Workshop"
+            className="w-full h-full object-cover opacity-30 mix-blend-overlay"
             onError={(e) => {
               (e.target as HTMLImageElement).src = "/about_hero.jpeg";
             }}
           />
-          <div className="absolute inset-0 bg-[#282d63]/50 backdrop-blur-[1px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0F172A]/20 to-white" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2C271D] via-[#2C271D]/90 to-[#3D3622]/80" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white about-hero-content pt-20">
-          <div className="flex items-center gap-2 text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-6 opacity-80">
-            <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
+          <div className="flex items-center gap-2 text-[10px] md:text-xs font-black uppercase tracking-[0.3em] mb-4 text-[#D5C58A]">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <ChevronRight size={14} />
             <span>About Us</span>
           </div>
 
-          <h1 className="text-5xl md:text-9xl font-black mb-8 tracking-tighter leading-none">
-            About <span className="text-blue-400 block md:inline">elbano</span>
+          <h1 className="text-4xl md:text-7xl font-black mb-6 tracking-tight leading-none text-white">
+            About <span className="text-[#D5C58A]">SimaArts</span>
           </h1>
 
-          <p className="text-base md:text-2xl max-w-2xl text-white/90 leading-relaxed font-medium mb-12">
-            Welcome to Elbano Roofings, where we turn houses into lasting landmarks. True to our branding tagline, Built to strong, made to last, we provide premium, weather-resistant roofing and building solutions
+          <p className="text-base md:text-xl max-w-2xl text-gray-200 leading-relaxed font-medium mb-8">
+            Crafting official, certified Scout & Guide badges, embroidered insignia, school uniforms, scarves, and accessories built with pride and durability.
           </p>
-
-          <div className="flex gap-6">
-            <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center animate-bounce">
-              <ChevronRight size={24} className="rotate-90" />
-            </div>
-          </div>
         </div>
       </section>
 
       {/* OUR STORY */}
-      <section className="py-16 md:py-32 reveal-section bg-white">
-        <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="w-12 h-[2px] bg-indigo-800" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Story</span>
-            <div className="w-12 h-[2px] bg-indigo-800" />
-          </div>
+      <section className="py-16 md:py-28 reveal-section bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-10 tracking-tighter leading-tight">
-            elbano - Specialised for <br className="hidden md:block" /> Roofing Solutions
-          </h2>
+            {/* LEFT COLUMN: IMAGE & CRAFTSMANSHIP BADGE */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative z-10 rounded-[2.5rem] overflow-hidden border-2 border-[#D5C58A]/40 shadow-2xl group">
+                <img
+                  src="/about_story.png"
+                  alt="SimaArts Badge Craftsmanship"
+                  className="w-full h-[420px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = "/product_bg.png";
+                  }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#2C271D]/70 via-transparent to-transparent opacity-80" />
 
-          <div className="space-y-8 text-gray-600 text-base md:text-lg leading-relaxed font-medium text-left bg-gray-50/50 p-8 md:p-12 rounded-[2rem] border border-gray-100">
-            <p>
-              Our Premium Product Collection: We offer a comprehensive range of building products to protect and beautify your property.
-            </p>
-            <p>
-              <strong className="text-[#0F172A]">Ceramic White Clay Roofing Tiles:</strong> Our WAVE, FLAT, ROMAN AND EUROPEAN Series Ceramic Tiles are crafted from high-quality white clay and kiln-fired with a ceramic glaze. They are 100% waterproof, heat-reflective, and resistant to moss and fading.
-            </p>
-            <p>
-              <strong className="text-[#0F172A]">Modern Roofing Sheets:</strong> Choose from Stone Coated Roofing Sheets for a premium look with extreme weather resistance, or UPVC Roofing Sheets for excellent thermal insulation and cost-effective durability.
-            </p>
-            <p>
-              <strong className="text-[#0F172A]">Specialized Roofing Solutions:</strong> We provide high-quality Roofing Shingles for versatile architectural designs and robust Rain Gutter systems to ensure efficient water management for your home.
-            </p>
-          </div>
+                <div className="absolute bottom-6 left-6 right-6 p-5 bg-white/95 backdrop-blur-md rounded-2xl border border-[#EAE4D3] shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#4A4229] text-[#FAF8F3] flex items-center justify-center shrink-0">
+                      <Award size={20} />
+                    </div>
+                    <div>
+                      <span className="block text-xs font-black text-[#2C271D] uppercase tracking-wider">
+                        25+ Years Excellence
+                      </span>
+                      <span className="text-[11px] text-[#5A5243] font-semibold">
+                        High-Stitch Precision Embroidery
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-          <div className="mt-12 flex justify-center">
-            <Link href="/contact" className="inline-flex items-center gap-3 bg-[#1e2b58] text-white px-10 py-5 rounded-[1.25rem] font-black text-xs uppercase tracking-widest hover:bg-[#1e2b58]/80 hover:scale-105 transition-all shadow-xl shadow-gray-200">
-              Work With Us <ChevronRight size={18} />
-            </Link>
+              {/* Decorative Accent Background Box */}
+              <div className="absolute -bottom-6 -left-6 w-full h-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-[3rem] -z-0 hidden md:block" />
+            </div>
+
+            {/* RIGHT COLUMN: STORY & FEATURE LIST */}
+            <div className="lg:col-span-7 flex flex-col justify-center">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-[2px] bg-[#D5C58A]" />
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-[#8C7E4F]">
+                  Our Story & Heritage
+                </span>
+              </div>
+
+              <h2 className="text-3xl md:text-5xl font-black text-[#2C271D] leading-tight mb-6 tracking-tight">
+                Crafting Scout & Guide Legacy With <span className="text-[#8C7E4F]">Precision & Pride</span>
+              </h2>
+
+              <p className="text-[#5A5243] text-sm md:text-base leading-relaxed font-medium mb-8">
+                SimaArts is a pioneer in manufacturing and supplying official high-precision embroidered badges, certified uniforms, scarves, woggles, caps, belts, and insignia for Scouts, Guides, Schools, and Youth Organizations across India.
+              </p>
+
+              {/* FEATURE HIGHLIGHT CARDS */}
+              <div className="space-y-4 mb-10">
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#FAF8F3] border border-[#EAE4D3] hover:border-[#D5C58A] transition-all group">
+                  <div className="w-11 h-11 rounded-xl bg-white border border-[#EAE4D3] text-[#8C7E4F] flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#D5C58A] group-hover:text-[#2C271D] transition-all">
+                    <Sparkles size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm md:text-base font-black text-[#2C271D] mb-1">
+                      Embroidered Badges & Insignia
+                    </h3>
+                    <p className="text-xs md:text-sm text-[#5A5243] font-medium leading-normal">
+                      Crafted using computerised high-density stitch machinery with colour-fast thread, ensuring flawless detail and long-lasting strength.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#FAF8F3] border border-[#EAE4D3] hover:border-[#D5C58A] transition-all group">
+                  <div className="w-11 h-11 rounded-xl bg-white border border-[#EAE4D3] text-[#8C7E4F] flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#D5C58A] group-hover:text-[#2C271D] transition-all">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm md:text-base font-black text-[#2C271D] mb-1">
+                      Certified Scout & Guide Uniforms
+                    </h3>
+                    <p className="text-xs md:text-sm text-[#5A5243] font-medium leading-normal">
+                      Standard-compliant fabrics engineered for durability and maximum comfort during camps, parades, and field drills.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#FAF8F3] border border-[#EAE4D3] hover:border-[#D5C58A] transition-all group">
+                  <div className="w-11 h-11 rounded-xl bg-white border border-[#EAE4D3] text-[#8C7E4F] flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#D5C58A] group-hover:text-[#2C271D] transition-all">
+                    <Ribbon size={20} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm md:text-base font-black text-[#2C271D] mb-1">
+                      Official Accessories & Troop Awards
+                    </h3>
+                    <p className="text-xs md:text-sm text-[#5A5243] font-medium leading-normal">
+                      Scarves, leather woggles, brass belt buckles, flags, banners, and rank stars manufactured strictly to official regulations.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ACTION BUTTONS */}
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href="/products"
+                  className="inline-flex items-center gap-2 bg-[#4A4229] hover:bg-[#3D3622] text-[#FAF8F3] px-7 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95"
+                >
+                  Explore Products <ArrowRight size={16} />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-[#D5C58A] hover:bg-[#c4b377] text-[#2C271D] px-7 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all shadow-sm active:scale-95"
+                >
+                  Work With Us <ChevronRight size={16} />
+                </Link>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* STATS BAR */}
-      <section className="bg-[#1E2B4D] py-12 md:py-20 stats-bar">
+      <section className="bg-[#3D3622] py-12 md:py-20 stats-bar text-white">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             {[
-              { label: "Projects Completed", value: "1000", suffix: "+", icon: <Briefcase size={20} /> },
-              { label: "States Served", value: "16", suffix: "+", icon: <Globe size={20} /> },
-              { label: "Tile Designs", value: "100", suffix: "+", icon: <Box size={20} /> },
-              { label: "Client Satisfaction", value: "100", suffix: "%", icon: <Users size={20} /> }
+              { label: "Items & Designs", value: "1000", suffix: "+", icon: <Award size={20} className="text-[#D5C58A]" /> },
+              { label: "States & Regions", value: "28", suffix: "+", icon: <Globe size={20} className="text-[#D5C58A]" /> },
+              { label: "Years Experience", value: "25", suffix: "+", icon: <Briefcase size={20} className="text-[#D5C58A]" /> },
+              { label: "Troop Satisfaction", value: "100", suffix: "%", icon: <Users size={20} className="text-[#D5C58A]" /> }
             ].map((stat, i) => (
               <div key={i} className="flex flex-col items-center">
-                <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-blue-400 mb-6 border border-white/10">
+                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-4 border border-white/10">
                   {stat.icon}
                 </div>
-                <div className="text-4xl md:text-5xl font-black text-white mb-2 tracking-tighter">
+                <div className="text-3xl md:text-5xl font-black text-[#D5C58A] mb-1 tracking-tight">
                   <span className="stat-number">{stat.value}</span>{stat.suffix}
                 </div>
-                <div className="text-[10px] font-bold text-white/40 uppercase tracking-widest">{stat.label}</div>
+                <div className="text-[10px] font-extrabold text-gray-300 uppercase tracking-widest">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-32 bg-[#F8FAFC] reveal-section">
+      {/* VISION & MISSION */}
+      <section className="py-16 md:py-28 bg-[#FAF8F3] reveal-section">
         <div className="max-w-5xl mx-auto px-6 md:px-12 text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-12 h-[1px] bg-indigo-800" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Purpose</span>
-            <div className="w-12 h-[1px] bg-indigo-800" />
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="w-10 h-[2px] bg-[#D5C58A]" />
+            <span className="text-xs font-black uppercase tracking-[0.2em] text-[#8C7E4F]">Our Purpose</span>
+            <div className="w-10 h-[2px] bg-[#D5C58A]" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-[#0F172A] mb-12 md:mb-20 tracking-tighter">Vision & Mission</h2>
+          <h2 className="text-3xl md:text-5xl font-black text-[#2C271D] mb-12 tracking-tight">Vision & Mission</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Vision Card */}
-            <div className="bg-white p-10 md:p-12 rounded-[2.5rem] text-left border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-100 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-indigo-50 text-indigo-800 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-800 group-hover:text-white transition-all duration-500 shadow-sm">
-                <Eye size={28} className="group-hover:scale-110 transition-transform" />
+            <div className="bg-white p-8 md:p-10 rounded-[2.5rem] text-left border border-[#EAE4D3] shadow-xs group">
+              <div className="w-14 h-14 bg-[#FAF8F3] text-[#8C7E4F] border border-[#EAE4D3] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#D5C58A] group-hover:text-[#2C271D] transition-all duration-300">
+                <Eye size={26} />
               </div>
-              <h3 className="text-xl font-black text-[#0F172A] mb-4">Our Vision</h3>
-              <p className="text-gray-500 leading-relaxed font-medium text-sm md:text-base">
-                To be the world's most trusted importer of premium ceramic tiles — where every collection reflects the finest craftsmanship from Europe, North Africa, and beyond, delivered with uncompromising quality.
+              <h3 className="text-xl font-black text-[#2C271D] mb-3">Our Vision</h3>
+              <p className="text-[#5A5243] leading-relaxed font-medium text-sm md:text-base">
+                To be India's premier and most trusted brand for official Scout & Guide equipment — empowering youth troops with authentic, high-quality badges and uniforms that inspire discipline and pride.
               </p>
             </div>
 
             {/* Mission Card */}
-            <div className="bg-white p-10 md:p-12 rounded-[2.5rem] text-left border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-indigo-100 transition-all duration-500 group">
-              <div className="w-14 h-14 bg-indigo-50 text-indigo-800 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-800 group-hover:text-white transition-all duration-500 shadow-sm">
-                <Target size={28} className="group-hover:scale-110 transition-transform" />
+            <div className="bg-white p-8 md:p-10 rounded-[2.5rem] text-left border border-[#EAE4D3] shadow-xs group">
+              <div className="w-14 h-14 bg-[#FAF8F3] text-[#8C7E4F] border border-[#EAE4D3] rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#D5C58A] group-hover:text-[#2C271D] transition-all duration-300">
+                <Target size={26} />
               </div>
-              <h3 className="text-xl font-black text-[#0F172A] mb-4">Our Mission</h3>
-              <p className="text-gray-500 leading-relaxed font-medium text-sm md:text-base">
-                To source and supply imported ceramic tiles of exceptional quality, guide clients with expert design consultation, and deliver every project with precision, care, and lasting value.
+              <h3 className="text-xl font-black text-[#2C271D] mb-3">Our Mission</h3>
+              <p className="text-[#5A5243] leading-relaxed font-medium text-sm md:text-base">
+                To manufacture standard-compliant Scout & Guide products with immaculate embroidery and durable fabric, maintaining prompt delivery and accessible pricing for all educational and troop organizations.
               </p>
             </div>
           </div>
         </div>
       </section>
-
-
-
-      {/* OUR JOURNEY / TIMELINE */}
-      {/* <section className="py-16 md:py-32 reveal-section">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-24">
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="w-12 h-[1px] bg-blue-600" />
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Our Journey</span>
-              <div className="w-12 h-[1px] bg-blue-600" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tighter">30 Years of History</h2>
-          </div>
-
-          <div className="relative history-container">
-           
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[2px] bg-gray-100 -translate-x-1/2 hidden md:block" />
-
-            <div className="space-y-24">
-              {[
-                {
-                  year: "1995",
-                  title: "Founded with Passion",
-                  desc: "Elbano was established with a mission to bring the world's finest ceramic and roofing tiles to a global audience, prioritizing quality and design excellence.",
-                  align: "left"
-                },
-                {
-                  year: "2020",
-                  title: "Sustainability Certification",
-                  desc: "Achieved ISO 14001 environmental certification, committing to responsible sourcing and eco-conscious logistics across our supply chain.",
-                  align: "right"
-                },
-                {
-                  year: "2024",
-                  title: "Present Day",
-                  desc: "Operating in 60+ countries with over 5,000 tile designs, 1,200 completed projects, and a team of 180 ceramic tile specialists.",
-                  align: "left"
-                }
-              ].map((item, i) => (
-                <div key={i} className={`history-item relative flex items-center justify-between md:flex-row ${item.align === "left" ? "md:flex-row-reverse" : ""}`}>
-                  <div className="hidden md:block w-5/12" />
-
-                  <div className="absolute left-0 md:left-1/2 w-6 h-6 bg-indigo-800 border-4 border-white rounded-full -translate-x-1/2 z-10 shadow-lg hidden md:block" />
-
-                  <div className="w-full md:w-5/12 bg-white p-10 rounded-[2.5rem] border border-gray-50 shadow-sm hover:shadow-xl transition-all duration-500">
-                    <div className="text-indigo-800 font-black text-2xl mb-4">{item.year}</div>
-                    <h3 className="text-xl font-black text-[#0F172A] mb-4">{item.title}</h3>
-                    <p className="text-gray-500 leading-relaxed font-medium text-sm md:text-base">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* THE TEAM */}
-      {/* <section className="py-16 md:py-32 bg-[#F8FAFC] reveal-section">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 text-center">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <div className="w-12 h-[1px] bg-blue-600" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">The People</span>
-            <div className="w-12 h-[1px] bg-blue-600" />
-          </div>
-          <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] mb-4 tracking-tighter">Meet Our Team</h2>
-          <p className="text-gray-500 max-w-xl mx-auto mb-24 font-medium italic">The dedicated experts behind every Elbano tile.</p>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-10 team-grid">
-            {[
-              { name: "Marco Elbano", role: "Chief Executive Officer", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1887&auto=format&fit=crop" },
-              { name: "Sofia Marchetti", role: "Head of Design", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" },
-              { name: "Arun Kumar", role: "Senior Tile Specialist", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" },
-              { name: "Anna Rossi", role: "Global Sourcing Director", img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop" }
-            ].map((member, i) => (
-              <div key={i} className="team-card group bg-white rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-700">
-                <div className="aspect-[4/5] overflow-hidden relative">
-                  <img src={member.img} alt={member.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-                <div className="p-4 md:p-8">
-                  <h4 className="text-sm md:text-xl font-black text-[#0F172A] mb-1">{member.name}</h4>
-                  <p className="text-[8px] md:text-xs font-bold text-indigo-800 uppercase tracking-widest">{member.role}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* FINAL CTA */}
-      {/* <section className="bg-[#282d63] py-32 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 pointer-events-none">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
-        </div>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10 text-center">
-          <h2 className="text-4xl md:text-8xl font-black text-white mb-12 tracking-tighter italic leading-none">Let's Build Something <br className="hidden md:block" /> <span className="text-blue-500">Exceptional</span> Together.</h2>
-          <Link href="/contact" className="inline-flex items-center gap-4 bg-white text-[#0F172A] px-12 py-6 rounded-[1.5rem] font-black text-sm uppercase tracking-[0.2em] hover:bg-blue-500 hover:text-white hover:scale-105 transition-all shadow-2xl">
-            Get in Touch <MessageSquare size={20} />
-          </Link>
-        </div>
-      </section> */}
     </div>
   );
 }
 
-const Box = ({ size, className }: { size: number, className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-    <path d="m3.3 7 8.7 5 8.7-5" />
-    <path d="M12 22V12" />
-  </svg>
-);

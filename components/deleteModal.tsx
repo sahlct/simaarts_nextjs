@@ -57,32 +57,32 @@ export default function ConfirmDeleteModal({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 relative">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-xs flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-[2rem] shadow-2xl w-full max-w-sm p-6 md:p-8 relative border border-[#EAE4D3]">
         <button
           onClick={onClose}
-          className="absolute cursor-pointer top-3 right-3 text-gray-500 hover:text-black"
+          className="absolute cursor-pointer top-4 right-4 text-gray-400 hover:text-black transition-colors p-1 rounded-full hover:bg-gray-100"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
-        <h2 className="text-lg font-semibold text-[#036ec6] mb-3">{title}</h2>
-        <p className="text-gray-600 mb-6">{message}</p>
+        <h2 className="text-xl font-extrabold text-[#2C271D] mb-2">{title}</h2>
+        <p className="text-xs font-medium text-[#5A5243] mb-6 leading-relaxed">{message}</p>
 
-        {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        {error && <p className="bg-red-50 text-red-700 p-2.5 rounded-xl border border-red-200 text-xs font-semibold mb-4">{error}</p>}
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex justify-end items-center gap-3">
           <button
             onClick={onClose}
             disabled={loading}
-            className="px-4 py-1.5 cursor-pointer rounded border border-gray-300 text-gray-700 hover:bg-gray-100"
+            className="px-4 py-2 cursor-pointer rounded-xl border border-[#EAE4D3] text-xs font-bold text-[#2C271D] bg-[#FAF8F3] hover:bg-gray-100 transition-all"
           >
             Cancel
           </button>
           <button
             onClick={handleDelete}
             disabled={loading}
-            className="px-4 py-1.5 cursor-pointer rounded bg-red-500 text-white hover:bg-red-600"
+            className="px-5 py-2 cursor-pointer rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold shadow-sm transition-all active:scale-95 disabled:opacity-50"
           >
             {loading ? "Deleting..." : "Delete"}
           </button>

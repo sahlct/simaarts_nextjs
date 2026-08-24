@@ -1,32 +1,30 @@
 import { Metadata } from "next";
 
-const siteUrl = "https://elbanoindia.com";
-const siteName = "ELBANO";
-const siteTitle = "Roofing Tile Company  In Kerala, India | Elbano Roofing";
+const siteUrl = "https://simaarts.in";
+const siteName = "SimaArts";
+const siteTitle = "SimaArts | Scout & Guide Badges, Uniforms & Accessories";
 const siteDescription =
-  "Protect and beautify your home with Kerala's trusted choice for premium roofing materials. From elegant roofing tiles and heavy-duty shingles to reliable rain gutters, we deliver lasting durability tailored to your style.";
+  "Official manufacturer and supplier of Scout & Guide embroidered badges, certified uniforms, scarves, woggles, caps, belts, and insignia in India.";
 
 export const sharedMetadata: Metadata = {
   title: {
     default: siteTitle,
-    template: "%s | ELBANO - Roofing Tile Company  In Kerala, India | Elbano Roofing",
+    template: "%s | SimaArts - Scout & Guide Badges & Uniforms",
   },
   description: siteDescription,
   keywords: [
-    "Roofing Solutions",
-    "Roofing Tiles",
-    "Rain Gutters",
-    "Premium Shingles",
-    "ELBANO",
-    "Kerala Roofing",
-    "Roofing Materials India",
-    "Ceramic Tiles",
-    "Roofing Tiles Kerala",
-    "Premium Roofing",
-    "Building Materials",
-    "Elbano Roofings",
-    "Elbano India",
+    "Scout Badges",
+    "Guide Badges",
+    "Scout Uniforms",
+    "Guide Uniforms",
+    "SimaArts",
+    "Embroidered Badges",
+    "Scout Scarves",
+    "Scout Accessories",
+    "Bharat Scouts and Guides Badges",
+    "Troop Supplies",
   ],
+
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
@@ -47,37 +45,37 @@ export const sharedMetadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  openGraph: {
-    title: siteTitle,
-    description: siteDescription,
-    url: siteUrl,
-    siteName: siteName,
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: "ELBANO - Roofing Tile Company  In Kerala, India | Elbano Roofing",
-        type: "image/png",
-      },
-      {
-        url: `${siteUrl}/elbano_logo.png`,
-        width: 512,
-        height: 512,
-        alt: "ELBANO Logo",
-        type: "image/png",
-      },
-    ],
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteTitle,
-    description: siteDescription,
-    images: [`${siteUrl}/og-image.png`],
-    creator: "@elbanoindia",
-  },
+    openGraph: {
+      title: siteTitle,
+      description: siteDescription,
+      url: siteUrl,
+      siteName: siteName,
+      images: [
+        {
+          url: `${siteUrl}/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: "SimaArts - Scout & Guide Badges & Uniforms",
+          type: "image/png",
+        },
+        {
+          url: `${siteUrl}/logo.png`,
+          width: 512,
+          height: 512,
+          alt: "SimaArts Logo",
+          type: "image/png",
+        },
+      ],
+      locale: "en_IN",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteTitle,
+      description: siteDescription,
+      images: [`${siteUrl}/og-image.png`],
+      creator: "@simaarts",
+    },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
+  User,
   Users,
   GraduationCap,
   BookOpen,
@@ -42,6 +43,11 @@ const menuItems = [
     path: "/admin/protected/dashboard",
   },
   {
+    name: "Profile",
+    icon: User,
+    path: "/admin/protected/profile",
+  },
+  {
     name: "Home",
     icon: Home,
     children: [
@@ -60,16 +66,16 @@ const menuItems = [
       { name: "Product", icon: BookOpen, path: "/admin/protected/product" },
     ],
   },
-  {
-    name: "Services",
-    icon: BookOpen,
-    path: "/admin/protected/service",
-  },
-  {
-    name: "Projects",
-    icon: FolderOpen,
-    path: "/admin/protected/projects",
-  },
+  // {
+  //   name: "Services",
+  //   icon: BookOpen,
+  //   path: "/admin/protected/service",
+  // },
+  // {
+  //   name: "Projects",
+  //   icon: FolderOpen,
+  //   path: "/admin/protected/projects",
+  // },
   {
     name: "Shorts",
     icon: Video,
@@ -141,33 +147,35 @@ const Sidebar = memo(
     return (
       <>
         <aside
-          className={`fixed lg:static top-0 left-0 z-40 bg-gradient-to-b from-white/50 to-[#0b6dac] text-white transition-all duration-300 flex flex-col 
+          className={`fixed lg:static top-0 left-0 z-40 bg-[#2C271D] text-white border-r border-[#3D3622] transition-all duration-300 flex flex-col 
             ${isCollapsed ? "w-20" : "w-64"} 
             ${mobileOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
           style={{ height: "100vh" }}
         >
           {/* Logo */}
-          <div className="flex items-center justify-between p-4 border-b  border-gray-300 flex-shrink-0">
-            <img
-              src="/logo-transparent.png"
-              alt=""
-              className={`h-8 ps-5 ${isCollapsed ? "hidden" : "block"}`}
-            />
-            <img
-              src="/elbano_logo.png"
-              alt=""
-              className={`h-7 w-8 ${isCollapsed ? "block" : "hidden"}`}
-            />
+          <div className="flex items-center justify-between p-4 border-b border-[#3D3622] flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <img
+                src="/logo.png"
+                alt="SimaArts"
+                className="h-8 w-8 object-contain shrink-0"
+              />
+              <img
+                src="/logo_text.png"
+                alt="SimaArts"
+                className={`h-6 object-contain ${isCollapsed ? "hidden" : "block"}`}
+              />
+            </div>
             <button
               onClick={toggleSidebar}
-              className="hidden cursor-pointer lg:block text-gray-700 hover:text-black"
+              className="hidden cursor-pointer lg:block text-[#D5C58A] hover:text-white transition-colors"
             >
               {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
             </button>
           </div>
 
           {/* Scrollable Menu */}
-          <nav className="mt-4 space-y-1 overflow-y-auto flex-1 custom-scrollbar">
+          <nav className="mt-4 px-2 space-y-1.5 overflow-y-auto flex-1 custom-scrollbar">
             {menuItems.map((item) => {
               const isActiveParent =
                 item.path === pathname ||
@@ -177,26 +185,26 @@ const Sidebar = memo(
                 <div key={item.name}>
                   <button
                     onClick={() => toggleDropdown(item.name)}
-                    className={`flex text-gray-700 items-center justify-between w-full px-4 py-3 text-sm font-medium transition 
-                      ${isActiveParent ? "bg-[#036ec6] text-white" : "hover:bg-[#036ec6] hover:text-white"}`}
+                    className={`flex items-center justify-between w-full px-3.5 py-3 text-sm font-semibold rounded-xl transition-all duration-200 
+                      ${isActiveParent ? "bg-[#D5C58A] text-[#2C271D] font-extrabold shadow-sm" : "text-gray-300 hover:bg-white/10 hover:text-[#D5C58A]"}`}
                   >
                     <div className="flex items-center">
-                      <item.icon size={20} className="mr-3" />
+                      <item.icon size={19} className="mr-3 shrink-0" />
                       {!isCollapsed && <span>{item.name}</span>}
                     </div>
                     {!isCollapsed && (
                       <span className="cursor-pointer">
                         {openDropdown === item.name ? (
-                          <ChevronUp size={18} />
+                          <ChevronUp size={16} />
                         ) : (
-                          <ChevronDown size={18} />
+                          <ChevronDown size={16} />
                         )}
                       </span>
                     )}
                   </button>
 
                   <div
-                    className={`ml-8 mt-1 space-y-1 overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${openDropdown === item.name && !isCollapsed
+                    className={`ml-6 mt-1 space-y-1 overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${openDropdown === item.name && !isCollapsed
                       ? "max-h-60 opacity-100"
                       : "max-h-0 opacity-0"
                       }`}
@@ -205,9 +213,9 @@ const Sidebar = memo(
                       <Link
                         href={child.path}
                         key={child.name}
-                        className={`block px-3 py-2 text-gray-700 rounded-s-lg text-sm transition ${pathname === child.path
-                          ? "bg-[#0361ad] text-white"
-                          : "hover:bg-[#036ec6a4] hover:text-white"
+                        className={`block px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 ${pathname === child.path
+                          ? "bg-[#4A4229] text-[#FAF8F3] font-bold border border-[#D5C58A]/30"
+                          : "text-gray-300 hover:bg-white/10 hover:text-[#D5C58A]"
                           }`}
                       >
                         {child.name}
@@ -219,10 +227,10 @@ const Sidebar = memo(
                 <Link
                   key={item.name}
                   href={item.path}
-                  className={`flex items-center px-4 py-3 text-gray-700 text-sm font-medium transition 
-                    ${pathname === item.path ? "bg-[#036ec6] text-white" : "hover:bg-[#036ec6] hover:text-white"}`}
+                  className={`flex items-center px-3.5 py-3 text-sm font-semibold rounded-xl transition-all duration-200 
+                    ${pathname === item.path ? "bg-[#D5C58A] text-[#2C271D] font-extrabold shadow-sm" : "text-gray-300 hover:bg-white/10 hover:text-[#D5C58A]"}`}
                 >
-                  <item.icon size={20} className="mr-3" />
+                  <item.icon size={19} className="mr-3 shrink-0" />
                   {!isCollapsed && <span>{item.name}</span>}
                 </Link>
               );
@@ -230,12 +238,12 @@ const Sidebar = memo(
           </nav>
 
           {/* Logout Button */}
-          <div className="p-4 border-t border-white/10 mt-auto">
+          <div className="p-3 border-t border-[#3D3622] mt-auto">
             <button
               onClick={handleLogout}
-              className={`flex items-center w-full px-4 py-3 text-sm font-medium text-white/80 hover:text-white hover:bg-red-500/20 rounded-xl transition-all cursor-pointer bg-black/10`}
+              className="flex items-center w-full px-3.5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-red-300 hover:text-white hover:bg-red-500/20 rounded-xl transition-all cursor-pointer bg-white/5"
             >
-              <LogOut size={20} className={isCollapsed ? "" : "mr-3"} />
+              <LogOut size={18} className={isCollapsed ? "" : "mr-3"} />
               {!isCollapsed && <span>Logout</span>}
             </button>
           </div>
@@ -243,7 +251,7 @@ const Sidebar = memo(
 
         {mobileOpen && (
           <div
-            className="fixed inset-0 bg-black/40 z-30 lg:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs z-30 lg:hidden"
             onClick={() => setMobileOpen(false)}
           />
         )}
@@ -269,16 +277,19 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
   const toggleSidebar = () => setIsCollapsed((prev) => !prev);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50 text-gray-900">
-      {/* Mobile Toggle */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-white border-b border-gray-100 flex items-center px-4 z-50">
-        <button
-          onClick={() => setMobileOpen(true)}
-          className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-        >
-          <Menu size={24} />
-        </button>
-        <span className="ml-4 font-bold text-[#0b6dac]">Admin Panel</span>
+    <div className="flex h-screen overflow-hidden bg-[#FAF8F3] text-[#2C271D]">
+      {/* Mobile Toggle Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-[#2C271D] border-b border-[#3D3622] flex items-center justify-between px-4 z-50">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => setMobileOpen(true)}
+            className="p-2 text-[#D5C58A] hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <Menu size={22} />
+          </button>
+          <span className="font-extrabold text-sm uppercase tracking-wider text-[#D5C58A]">SimaArts Admin</span>
+        </div>
+        <img src="/logo.png" alt="SimaArts" className="h-7 w-7 object-contain" />
       </div>
 
       {/* Sidebar */}

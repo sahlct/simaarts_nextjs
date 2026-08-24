@@ -48,7 +48,7 @@ export default function UsersPage() {
   return (
     <div className="p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
-        <h1 className="text-2xl font-semibold text-[#036ec6]">Users</h1>
+        <h1 className="text-2xl font-bold text-[#2C271D]">Users</h1>
 
         <div className="flex items-center gap-3">
           <TableFilter
@@ -73,9 +73,9 @@ export default function UsersPage() {
               setSelected(null);
               setOpenForm(true);
             }}
-            className="bg-gradient-to-r from-[#036ec67c] to-[#036ec6] flex items-center gap-2 text-white border border-gray-300 px-4 py-2 rounded-md cursor-pointer hover:bg-[#036ec6a4]"
+            className="bg-[#4A4229] hover:bg-[#3D3622] text-[#FAF8F3] font-bold px-4 py-2.5 rounded-xl shadow-xs transition-all flex items-center gap-2 cursor-pointer active:scale-95"
           >
-            Add User <IconPlus size={20} />
+            Add User <IconPlus size={18} />
           </button>
         </div>
       </div>

@@ -1,262 +1,142 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { getCategoriesWithSubCategoriesAndProductCount } from "@/lib/api/category";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { ArrowRight, Layers } from "lucide-react";
 import { slugify } from "@/lib/slugify";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export default function CategorySlider() {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const router = useRouter();
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const stRef = useRef<ScrollTrigger | null>(null);
   const base_url = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const loadCategories = async () => {
-    try {
-      const res = await getCategoriesWithSubCategoriesAndProductCount();
-      if (res?.data) {
-        setCategories(res.data);
-      }
-    } catch (err) {
-      console.error("Category fetch error:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleScrollToSlide = (index: number) => {
-    if (!stRef.current) return;
-
-    // Using the exact ScrollTrigger start position and adding 100vh per index.
-    const startY = stRef.current.start;
-    const windowHeight = window.innerHeight;
-    const targetY = startY + (index * windowHeight);
-
-    window.scrollTo({
-      top: targetY,
-      behavior: "smooth"
-    });
-  };
-
-  const handlePrev = () => {
-    if (activeIndex > 0) handleScrollToSlide(activeIndex - 1);
-  };
-
-  const handleNext = () => {
-    if (activeIndex < categories.length - 1) handleScrollToSlide(activeIndex + 1);
-  };
-
   useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const res = await getCategoriesWithSubCategoriesAndProductCount();
+        if (res?.data) {
+          setCategories(res.data);
+        }
+      } catch (err) {
+        console.error("Category fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
     loadCategories();
   }, []);
 
-  useEffect(() => {
-    if (loading || categories.length === 0) return;
-
-    let ctx = gsap.context(() => {
-      const slides = gsap.utils.toArray(".category-slide") as HTMLElement[];
-
-      if (slides.length < 2) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: `+=${(slides.length - 1) * 100}%`,
-          pin: true,
-          scrub: 1,
-          onUpdate: (self) => {
-            const index = Math.min(
-              slides.length - 1,
-              Math.max(0, Math.round(self.progress * (slides.length - 1)))
-            );
-            setActiveIndex(index);
-          }
-        }
-      });
-      stRef.current = tl.scrollTrigger || null;
-
-      slides.forEach((slide, i) => {
-        if (i === 0) return;
-        // Hide subsequent slides initially and slide them in from right
-        gsap.set(slide, { xPercent: 100, autoAlpha: 1, zIndex: i + 10 });
-        tl.to(slide, { xPercent: 0, ease: "none" });
-      });
-
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [loading, categories]);
-
   if (loading) {
     return (
-      <div className="h-screen w-full bg-gray-900 flex items-center justify-center">
-        <div className="animate-pulse text-white">Loading Categories...</div>
-      </div>
+      <section className="py-20 bg-[#FAF8F3]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <div className="h-10 w-48 bg-[#EAE4D3] rounded-full animate-pulse mb-8 mx-auto" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="h-80 bg-white rounded-3xl animate-pulse border border-[#EAE4D3]" />
+            ))}
+          </div>
+        </div>
+      </section>
     );
   }
 
-  if (categories.length === 0) {
-    return null;
-  }
+  if (categories.length === 0) return null;
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full bg-[#111827] overflow-hidden">
-      {categories.map((cat, idx) => (
-        <div
-          key={cat.category_id}
-          className={`category-slide absolute inset-0 w-full h-full ${idx === 0 ? "z-10" : "z-0"}`}
-        >
-          {/* Background Image */}
-          <div className="absolute inset-0 bg-[#282d63]">
-            <img
-              src={cat.category_image ? (cat.category_image?.startsWith('http') ? cat.category_image : base_url + cat.category_image) : "/placeholder.png"}
-              alt={cat.category_name}
-              className="w-full h-full object-cover opacity-40 mix-blend-overlay"
-            />
-            {/* Gradient Overlay for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A]/90 via-[#0F172A]/60 to-transparent" />
+    <section className="py-20 md:py-28 bg-[#FAF8F3] border-y border-[#EAE4D3] relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 bg-[#D5C58A]/30 text-[#4A4229] text-[10px] md:text-xs font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full mb-4 border border-[#D5C58A]/50">
+            <Layers size={14} className="text-[#8C7E4F]" />
+            SimaArts Collections
           </div>
+          <h2 className="text-3xl md:text-5xl font-black text-[#2C271D] tracking-tight mb-4">
+            Explore Scout & Guide Categories
+          </h2>
+          <p className="text-[#6E6454] text-sm md:text-base font-medium leading-relaxed">
+            Discover our high-precision embroidered badges, certified uniforms, scarves, belts, and official accessories built for quality and heritage.
+          </p>
+        </div>
 
-          {/* Content */}
-          <div className="relative z-20 w-full h-full max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-center justify-center lg:justify-between pt-20 pb-24">
+        {/* Categories Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categories.map((cat) => {
+            const catImage = cat.category_image
+              ? cat.category_image.startsWith("http")
+                ? cat.category_image
+                : `${base_url}${cat.category_image}`
+              : "/placeholder.png";
 
-            {/* Left Side: Category Info */}
-            <div className="w-full lg:w-5/12 flex flex-col text-white z-30 mb-10 lg:mb-0">
-              <div className="flex items-center gap-4 mb-6 md:mb-10 opacity-80">
-                <div className="w-12 h-[2px] bg-white" />
-                <span className="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">
-                  Product Categories
-                </span>
-              </div>
+            return (
+              <div
+                key={cat.category_id}
+                className="group bg-white rounded-[2rem] border border-[#EAE4D3] shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden flex flex-col justify-between"
+              >
+                {/* Image & Overlay */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-[#FAF8F3]">
+                  <img
+                    src={catImage}
+                    alt={cat.category_name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2C271D]/70 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
 
-              <div className="inline-flex items-center gap-2 bg-[#b58500]/90 text-white text-[10px] md:text-xs font-bold px-3 py-1.5 rounded mb-4 w-max shadow-lg">
-                <span className="grid place-items-center w-4 h-4 bg-white/20 rounded-sm">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-                </span>
-                FOUNDATION OF ELEGANCE
-              </div>
-
-              <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.1] tracking-tight">
-                {cat.category_name}
-              </h1>
-
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-10 max-w-md whitespace-pre-line">
-                {cat.description ? cat.description : `Sourcing premium roofing and building materials from Italy, Spain, Japan, Brazil, America, Portugal, and China—we bring global design to Kerala. As the region's premier roofing company, we deliver unmatched quality for every architectural vision.`}
-              </p>
-
-              <div className="flex flex-row gap-3 md:gap-4">
-                <Link
-                  href={`/products?category=${slugify(cat.category_name)}`}
-                  className="flex items-center justify-center gap-2 bg-[#b58500] hover:bg-[#9a7000] text-white px-4 md:px-8 py-2.5 md:py-3.5 rounded-lg font-bold text-[10px] md:text-sm transition-all shadow-lg shadow-yellow-900/20 whitespace-nowrap"
-                >
-                  Browse Collection <ArrowRight size={14} className="md:w-4 md:h-4" />
-                </Link>
-                <Link
-                  href="/contact"
-                  className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-md text-white px-5 md:px-8 py-2.5 md:py-3.5 rounded-lg font-bold text-[10px] md:text-sm transition-all whitespace-nowrap"
-                >
-                  Get a Quote
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Side: SubCategories Grid */}
-            <div className="w-full lg:w-6/12 flex justify-center lg:justify-end z-30">
-              <div className="grid grid-cols-2 gap-3 md:gap-4 w-full max-w-[400px] lg:max-w-[460px]">
-                {cat.SubCategories && cat.SubCategories.slice(0, 4).map((sub: any) => (
-                  <Link
-                    href={`/products?category=${slugify(cat.category_name)}&subcategory=${slugify(sub.sub_category_name)}`}
-                    key={sub.sub_category_id}
-                    className="group relative aspect-square rounded-2xl overflow-hidden shadow-2xl block"
-                  >
-                    <img
-                      src={sub.sub_category_image ? (sub.sub_category_image?.startsWith('http') ? sub.sub_category_image : base_url + sub.sub_category_image) : "/placeholder.png"}
-                      alt={sub.sub_category_name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/90 via-[#0F172A]/40 to-transparent" />
-
-                    {/* Items count badge */}
-                    <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold px-3 py-1 rounded-full">
-                      {sub.productCount || 0} items
-                    </div>
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 p-5 w-full">
-                      <h4 className="text-white font-bold text-lg mb-1">{sub.sub_category_name}</h4>
-                      <p className="text-gray-400 text-xs font-medium">Exquisite {sub.sub_category_name.toLowerCase()} selections</p>
-                    </div>
-                  </Link>
-                ))}
-
-                {(!cat.SubCategories || cat.SubCategories.length === 0) && (
-                  <div className="col-span-2 text-center text-white/50 py-10">
-                    No subcategories found.
+                  {/* Badge count */}
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-[#2C271D] text-[10px] font-black px-3.5 py-1.5 rounded-full shadow-sm border border-[#D5C58A]/40 uppercase tracking-wider">
+                    {cat.SubCategories?.length || 0} Subcategories
                   </div>
-                )}
+
+                  <div className="absolute bottom-4 left-6 right-6 text-white">
+                    <h3 className="text-xl font-black tracking-tight text-white mb-0.5">
+                      {cat.category_name}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-6 flex flex-col flex-grow justify-between">
+                  <p className="text-[#6E6454] text-xs leading-relaxed font-medium mb-6 line-clamp-2">
+                    {cat.description ||
+                      `Explore premium ${cat.category_name.toLowerCase()} manufactured according to official Scout & Guide specifications.`}
+                  </p>
+
+                  {/* Subcategories Pills */}
+                  {cat.SubCategories && cat.SubCategories.length > 0 && (
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {cat.SubCategories.slice(0, 3).map((sub: any) => (
+                        <Link
+                          key={sub.sub_category_id}
+                          href={`/products?category=${slugify(cat.category_name)}&subcategory=${slugify(sub.sub_category_name)}`}
+                          className="bg-[#FAF8F3] hover:bg-[#D5C58A]/30 text-[#4A4229] text-[10px] font-extrabold px-3 py-1 rounded-lg border border-[#EAE4D3] transition-colors"
+                        >
+                          {sub.sub_category_name}
+                        </Link>
+                      ))}
+                      {cat.SubCategories.length > 3 && (
+                        <span className="text-[10px] text-[#857A68] font-bold self-center px-1">
+                          +{cat.SubCategories.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  {/* CTA Button */}
+                  <Link
+                    href={`/products?category=${slugify(cat.category_name)}`}
+                    className="flex items-center justify-center gap-2 w-full bg-[#FAF8F3] group-hover:bg-[#D5C58A] text-[#2C271D] font-extrabold text-xs uppercase tracking-wider py-3 rounded-xl border border-[#D5C58A] transition-all duration-300 shadow-xs"
+                  >
+                    Browse Collection
+                    <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
-            </div>
-
-          </div>
+            );
+          })}
         </div>
-      ))}
-
-      {/* Bottom Navigation */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-6">
-
-        {/* Pagination Controls */}
-        <div className="flex items-center gap-2 md:gap-4 bg-white/5 backdrop-blur-xl px-4 md:px-6 py-2 rounded-full border border-white/10 shadow-2xl">
-          <button
-            onClick={handlePrev}
-            disabled={activeIndex === 0}
-            className={`p-2 transition-colors ${activeIndex === 0 ? 'text-white/20 cursor-not-allowed pointer-events-none' : 'text-white/50 hover:text-white cursor-pointer'}`}
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <span className="text-white text-[10px] md:text-xs font-black tracking-[0.3em] px-2 whitespace-nowrap flex items-center">
-            {String(activeIndex + 1).padStart(2, "0")} <span className="mx-2 opacity-30">/</span> {String(categories.length).padStart(2, "0")}
-          </span>
-          <button
-            onClick={handleNext}
-            disabled={activeIndex === categories.length - 1}
-            className={`p-2 transition-colors ${activeIndex === categories.length - 1 ? 'text-white/20 cursor-not-allowed pointer-events-none' : 'text-white/50 hover:text-white cursor-pointer'}`}
-          >
-            <ChevronRight size={16} />
-          </button>
-        </div>
-
-
-
-
-      </div>
-
-      {/* Scroll indicator text (Bottom Left) */}
-      <div className="absolute bottom-12 left-12 z-50 hidden md:flex items-center gap-3 text-white/50 text-xs font-medium">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="5" y="2" width="14" height="20" rx="7" ry="7"></rect><path d="M12 6v4"></path></svg>
-        Scroll to explore categories
-      </div>
-
-      {/* Side Dots (Right Edge) */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-3">
-        {categories.map((_, idx) => (
-          <div
-            key={idx}
-            className={`transition-all duration-300 rounded-full bg-white ${activeIndex === idx ? "w-6 h-1.5 opacity-100" : "w-1.5 h-1.5 opacity-30"}`}
-          />
-        ))}
       </div>
     </section>
   );

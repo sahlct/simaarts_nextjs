@@ -12,7 +12,8 @@ export interface Product {
   product_code: string;
   thumbnail_image: string;
   description: string;
-  price: string;
+  price: string | number;
+  mrp?: string | number;
   is_new: number;
   is_best_selling: number;
   category_id?: number;
@@ -40,8 +41,8 @@ const ProductCard = ({ product }: { product: Product }) => {
     const centerX = width / 2;
     const centerY = height / 2;
 
-    const rotateX = (y - centerY) / 12;
-    const rotateY = (centerX - x) / 12;
+    const rotateX = (y - centerY) / 14;
+    const rotateY = (centerX - x) / 14;
 
     gsap.to(cardRef.current, {
       rotateX: rotateX,
@@ -64,7 +65,14 @@ const ProductCard = ({ product }: { product: Product }) => {
   };
 
   const badge = product.is_best_selling ? "Best Seller" : product.is_new ? "New" : null;
-  const badgeColor = "bg-[#282d63]";
+
+  // Price calculations
+  const numericPrice = Number(product.price || 0);
+  const numericMrp = Number(product.mrp || 0);
+  const hasDiscount = numericMrp > numericPrice && numericPrice > 0;
+  const discountPercent = hasDiscount
+    ? Math.round(((numericMrp - numericPrice) / numericMrp) * 100)
+    : 0;
 
   return (
     <div
@@ -76,50 +84,97 @@ const ProductCard = ({ product }: { product: Product }) => {
     >
       <div
         ref={cardRef}
-        className="bg-white rounded-[2rem] shadow-sm border border-gray-100 overflow-hidden transition-shadow duration-500 group-hover:shadow-2xl flex flex-col h-full relative"
+        className="bg-white rounded-[2rem] shadow-sm border border-[#EAE4D3] overflow-hidden transition-all duration-500 group-hover:shadow-xl group-hover:border-[#D5C58A] flex flex-col h-full relative"
         style={{ transformStyle: "preserve-3d" }}
       >
-        {/* Badge */}
-        {badge && (
-          <div
-            className={`absolute top-5 right-5 z-20 ${badgeColor} text-white text-[10px] font-bold px-4 py-1.5 rounded-full uppercase tracking-[0.1em] shadow-lg`}
-            style={{ transform: "translateZ(40px)" }}
-          >
-            {badge}
-          </div>
-        )}
+        {/* Discount / Status Badges */}
+        <div
+          className="absolute top-4 left-4 right-4 z-20 flex items-center justify-between pointer-events-none"
+          style={{ transform: "translateZ(40px)" }}
+        >
+          {badge ? (
+            <span className="bg-[#4A4229] text-[#FAF8F3] text-[9px] font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider shadow-md">
+              {badge}
+            </span>
+          ) : (
+            <span />
+          )}
+
+          {hasDiscount && (
+            <span className="bg-[#D5C58A] text-[#2C271D] text-[10px] font-extrabold px-3 py-1 rounded-full shadow-md ml-auto">
+              {discountPercent}% OFF
+            </span>
+          )}
+        </div>
 
         {/* Image Container */}
         <div
-          className="relative aspect-square overflow-hidden bg-gray-50 m-2 rounded-[1.5rem]"
+          className="relative aspect-square overflow-hidden bg-[#FAF8F3] m-2.5 rounded-[1.5rem] border border-[#EAE4D3]/50"
           style={{ transform: "translateZ(20px)" }}
         >
           <img
-            src={product.thumbnail_image ? (product.thumbnail_image?.startsWith('http') ? product.thumbnail_image : `${base_url}${product.thumbnail_image}`) : "/placeholder.png"}
+            src={
+              product.thumbnail_image
+                ? product.thumbnail_image?.startsWith("http")
+                  ? product.thumbnail_image
+                  : `${base_url}${product.thumbnail_image}`
+                : "/placeholder.png"
+            }
             alt={product.product_name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
           />
         </div>
 
         {/* Content */}
         <div
-          className="p-6 pt-4 flex flex-col flex-grow"
+          className="p-5 pt-3 flex flex-col flex-grow"
           style={{ transform: "translateZ(30px)" }}
         >
-          <span className="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] mb-2 line-clamp-1">
-            {product.SubCategory?.sub_category_name || "Porcelain"}
+          <span className="text-[#8C7E4F] text-[10px] font-black uppercase tracking-[0.2em] mb-1.5 line-clamp-1">
+            {product.SubCategory?.sub_category_name ||
+              product.ProductCategory?.category_name ||
+              "Scout & Guide Badge"}
           </span>
-          <h3 className="text-lg font-bold text-[#0F172A] mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
+
+          <h3 className="text-base md:text-lg font-bold text-[#2C271D] mb-1.5 line-clamp-1 group-hover:text-[#8C7E4F] transition-colors">
             {product.product_name}
           </h3>
-          <p className="text-gray-400 text-xs mb-6 line-clamp-2 leading-relaxed font-medium">
-            {product.description || "Italian-inspired marble-look porcelain with gold veining"}
+
+          <p className="text-[#6E6454] text-xs mb-4 line-clamp-2 leading-relaxed font-medium">
+            {product.description || "Premium official Scout & Guide product crafted with high quality standards."}
           </p>
 
-          <div className="mt-auto flex items-center pt-4">
+          {/* Pricing Highlight Section */}
+          <div className="mt-auto pt-3 border-t border-[#EAE4D3]/60 flex items-center justify-between mb-4">
+            <div>
+              <span className="block text-[9px] font-extrabold text-[#857A68] uppercase tracking-wider">
+                Price
+              </span>
+              <div className="flex items-baseline gap-2">
+                {numericPrice > 0 ? (
+                  <>
+                    <span className="text-lg md:text-xl font-black text-[#4A4229]">
+                      ₹{numericPrice.toLocaleString("en-IN")}
+                    </span>
+                    {hasDiscount && (
+                      <span className="line-through text-xs font-bold text-gray-400">
+                        ₹{numericMrp.toLocaleString("en-IN")}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <span className="text-sm font-extrabold text-[#8C7E4F]">
+                    Ask for Quote
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div>
             <Link
               href={`/products/${slugify(product.product_name)}?category_id=${product.category_id || ""}&sub_category_id=${product.sub_category_id || ""}`}
-              className="flex w-full justify-center items-center gap-2 bg-gray-50 text-[#0F172A] text-[10px] font-black border-2 border-gray-200 px-5 py-2.5 rounded-xl hover:border-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all duration-300"
+              className="flex w-full justify-center items-center gap-2 bg-[#FAF8F3] text-[#2C271D] text-xs font-black border border-[#D5C58A] px-4 py-2.5 rounded-xl hover:bg-[#D5C58A] hover:text-[#2C271D] transition-all duration-300 shadow-xs"
             >
               View Details <MoveRight size={14} />
             </Link>
@@ -131,3 +186,4 @@ const ProductCard = ({ product }: { product: Product }) => {
 };
 
 export default ProductCard;
+

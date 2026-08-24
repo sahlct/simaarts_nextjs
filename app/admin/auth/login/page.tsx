@@ -127,30 +127,33 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div
-      className="min-h-screen w-full flex items-center justify-center bg-cover bg-center relative"
-      style={{
-        backgroundImage:
-          "url('https://png.pngtree.com/background/20250104/original/pngtree-free-hd-wallpaper-4k-new-background-picture-image_15546678.jpg')",
-      }}
-    >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#2C271D] relative overflow-hidden">
+      {/* Background Image / Pattern Overlay */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-30 mix-blend-overlay"
+        style={{
+          backgroundImage: "url('/product_bg.png')",
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-tr from-[#2C271D] via-[#2C271D]/90 to-[#3D3622]/90" />
 
       {/* Centered Form */}
-      <div className="relative z-10 w-full max-w-md p-8 mx-4 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 text-white">
-        <h2 className="text-3xl font-bold text-center mb-10 tracking-wide">
-          {stage === "login"
-            ? "SimaArts Admin"
-            : stage === "forgot"
-              ? "Forgot Password"
-              : stage === "otp"
-                ? "Verify OTP"
-                : "Reset Password"}
-        </h2>
+      <div className="relative z-10 w-full max-w-md p-8 md:p-10 mx-4 bg-white/10 backdrop-blur-xl rounded-[2rem] shadow-2xl border border-white/10 text-white">
+        <div className="flex flex-col items-center mb-8">
+          <img src="/logo.png" alt="SimaArts" className="h-12 w-12 object-contain mb-3" />
+          <h2 className="text-2xl md:text-3xl font-black tracking-tight text-white">
+            {stage === "login"
+              ? "SimaArts Admin"
+              : stage === "forgot"
+                ? "Forgot Password"
+                : stage === "otp"
+                  ? "Verify OTP"
+                  : "Reset Password"}
+          </h2>
+        </div>
 
         {error && (
-          <p className="text-red-300 text-sm mb-4 text-center">{error}</p>
+          <p className="bg-red-500/20 border border-red-500/30 text-red-200 text-xs font-semibold p-3 rounded-xl mb-6 text-center">{error}</p>
         )}
 
         {stage === "login" && (
@@ -159,7 +162,7 @@ export default function AdminLoginPage() {
               type="text"
               value={user_name}
               onChange={(e) => setUser_name(e.target.value)}
-              className="w-full bg-transparent border border-gray-300/30 rounded p-2 mb-4 text-white placeholder-gray-100"
+              className="w-full bg-white/5 border border-white/20 rounded-xl p-3 mb-4 text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D5C58A]"
               placeholder="Your Username"
               required
             />
@@ -168,7 +171,7 @@ export default function AdminLoginPage() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent border border-gray-300/30 rounded p-2 text-white placeholder-gray-100 pr-10"
+                className="w-full bg-white/5 border border-white/20 rounded-xl p-3 text-white text-sm placeholder-gray-400 pr-10 focus:outline-none focus:ring-2 focus:ring-[#D5C58A]"
                 placeholder="Password"
                 required
               />
@@ -178,14 +181,14 @@ export default function AdminLoginPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-white transition-colors"
                 aria-label={showPassword ? "Hide password" : "Show password"}
               >
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-            <div className="text-right mb-4">
+            <div className="text-right mb-6">
               <button
                 type="button"
                 onClick={() => setStage("forgot")}
-                className="text-sm text-blue-300 cursor-pointer mb-10 hover:text-blue-200"
+                className="text-xs font-bold text-[#D5C58A] cursor-pointer hover:underline"
               >
                 Forgot Password?
               </button>
@@ -193,9 +196,9 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 rounded-md cursor-pointer font-semibold transition-all"
+              className="w-full bg-[#D5C58A] hover:bg-[#c4b377] text-[#2C271D] py-3.5 rounded-xl cursor-pointer font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 disabled:opacity-50"
             >
-              {loading ? "Logging in..." : "Login"}
+              {loading ? "Logging in..." : "Login to Admin"}
             </button>
           </form>
         )}
@@ -206,23 +209,23 @@ export default function AdminLoginPage() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-transparent border border-gray-300/30 rounded p-2 mb-4 text-white placeholder-gray-300"
+              className="w-full bg-white/5 border border-white/20 rounded-xl p-3 mb-4 text-white text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D5C58A]"
               placeholder="Your Email"
               required
             />
-            <div className="text-right">
+            <div className="text-right mb-6">
               <button
                 type="button"
                 onClick={() => setStage("login")}
-                className="text-sm text-blue-300 cursor-pointer mb-10 hover:text-blue-200"
+                className="text-xs font-bold text-[#D5C58A] cursor-pointer hover:underline"
               >
-                back to login!
+                Back to Login
               </button>
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 rounded-md cursor-pointer font-semibold transition-all"
+              className="w-full bg-[#D5C58A] hover:bg-[#c4b377] text-[#2C271D] py-3.5 rounded-xl cursor-pointer font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 disabled:opacity-50"
             >
               {loading ? "Sending..." : "Send OTP"}
             </button>
@@ -249,7 +252,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 rounded font-semibold transition-all cursor-pointer"
+              className="w-full bg-[#D5C58A] hover:bg-[#c4b377] text-[#2C271D] py-3.5 rounded-xl cursor-pointer font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 disabled:opacity-50 mt-4"
             >
               {loading ? "Verifying..." : "Verify OTP"}
             </button>
@@ -263,7 +266,7 @@ export default function AdminLoginPage() {
                 type={showNewPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full bg-transparent border border-gray-300/30 rounded p-2 text-white placeholder-gray-300 pr-10"
+                className="w-full bg-white/5 border border-white/20 rounded-xl p-3 text-white text-sm placeholder-gray-400 pr-10 focus:outline-none focus:ring-2 focus:ring-[#D5C58A]"
                 placeholder="New Password"
                 required
               />
@@ -273,15 +276,15 @@ export default function AdminLoginPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
                 aria-label={showNewPassword ? "Hide password" : "Show password"}
               >
-                {showNewPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-            <div className="relative mb-4">
+            <div className="relative mb-6">
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-transparent border border-gray-300/30 rounded p-2 text-white placeholder-gray-300 pr-10"
+                className="w-full bg-white/5 border border-white/20 rounded-xl p-3 text-white text-sm placeholder-gray-400 pr-10 focus:outline-none focus:ring-2 focus:ring-[#D5C58A]"
                 placeholder="Confirm Password"
                 required
               />
@@ -291,13 +294,13 @@ export default function AdminLoginPage() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
                 aria-label={showConfirmPassword ? "Hide password" : "Show password"}
               >
-                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-cyan-600 hover:bg-cyan-700 py-2 rounded font-semibold transition-all cursor-pointer"
+              className="w-full bg-[#D5C58A] hover:bg-[#c4b377] text-[#2C271D] py-3.5 rounded-xl cursor-pointer font-black text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 disabled:opacity-50"
             >
               {loading ? "Resetting..." : "Reset Password"}
             </button>

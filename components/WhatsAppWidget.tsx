@@ -3,10 +3,11 @@
 import React, { useEffect, useRef } from "react";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import { gsap } from "gsap";
-import { CONTACT_LINKS } from "@/lib/contact";
+import { useCompanyProfile } from "@/context/CompanyProfileContext";
 
 const WhatsAppWidget = () => {
   const buttonRef = useRef<HTMLAnchorElement>(null);
+  const { links } = useCompanyProfile();
 
   useEffect(() => {
     if (buttonRef.current) {
@@ -29,7 +30,7 @@ const WhatsAppWidget = () => {
   return (
     <a
       ref={buttonRef}
-      href={CONTACT_LINKS.whatsapp}
+      href={links.whatsapp}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9999] flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-[#25D366] text-white rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:shadow-[0_15px_40px_rgba(37,211,102,0.6)] transition-all duration-300 group scale-100 hover:scale-110 active:scale-95"

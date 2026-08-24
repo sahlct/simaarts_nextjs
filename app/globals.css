@@ -11,10 +11,14 @@
     --font-nunito: "Nunito Sans", sans-serif;
     --font-geist-sans: var(--font-geist-sans);
     --font-geist-mono: var(--font-geist-mono);
+    --kaaaki-primary: #D5C58A;
+    --kaaaki-dark: #3D3622;
+    --kaaaki-light: #FAF8F3;
   }
 
   body {
     font-family: var(--font-nunito);
+    background-color: var(--kaaaki-light);
   }
 
   img {
@@ -26,6 +30,7 @@
     user-select: none;
   }
 }
+
 
 
 :root {

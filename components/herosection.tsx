@@ -197,18 +197,18 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center hero-content flex flex-col items-center justify-center h-full pt-10 pb-32">
         {/* SUBTITLE */}
         <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
-          <div className="h-[1px] w-6 md:w-12 bg-[#5e94f1]" />
-          <span className="text-[10px] md:text-sm font-bold tracking-[0.2em] text-[#5e94f1] uppercase px-2">
-            {carousel.carousel_subheader}
+          <div className="h-[1.5px] w-6 md:w-12 bg-[#D5C58A]" />
+          <span className="text-[10px] md:text-sm font-extrabold tracking-[0.2em] text-[#D5C58A] uppercase px-2">
+            {carousel.carousel_subheader || "Official Scout & Guide Supplies"}
           </span>
-          <div className="h-[1px] w-6 md:w-12 bg-[#5e94f1]" />
+          <div className="h-[1.5px] w-6 md:w-12 bg-[#D5C58A]" />
         </div>
 
         {/* MAIN TITLE */}
         <h1 className="text-3xl md:text-7xl font-extrabold mb-6 md:mb-8 leading-[1.1] tracking-tight">
-          {carousel.carousel_title}<br />
-          <span style={{ color: (carousel.carousel_title_02_color && carousel.carousel_title_02_color !== "#000000") ? carousel.carousel_title_02_color : "#f5b400" }}>
-            {carousel.carousel_title_02}
+          {carousel.carousel_title || "Premier Scout & Guide"}<br />
+          <span style={{ color: (carousel.carousel_title_02_color && carousel.carousel_title_02_color !== "#000000") ? carousel.carousel_title_02_color : "#D5C58A" }}>
+            {carousel.carousel_title_02 || "Badges, Uniforms & Accessories"}
           </span>
           {flipWords.length > 0 && (
             <div className="mt-2 md:mt-4 h-[40px] md:h-[60px] flex items-center justify-center overflow-hidden">
@@ -226,43 +226,42 @@ export default function HeroSection({ initialData }: { initialData?: CarouselIte
         </h1>
 
         {/* DESCRIPTION */}
-        {/* <p className="text-gray-300 text-xs md:text-lg max-w-2xl mb-8 md:mb-10 leading-relaxed font-light px-4">
-          {carousel?.description || "Curated imported ceramic tiles from the world's finest manufacturers. Elevate every floor, wall, and surface with timeless quality and design."}
-        </p> */}
+        <p className="text-gray-200 text-xs md:text-base max-w-2xl mb-8 md:mb-10 leading-relaxed font-medium px-4">
+          {carousel?.description || "High-precision embroidered badges, certified uniforms, scarves, belts, and official accessories for Scouts, Guides, Schools, and Organisations."}
+        </p>
 
         {/* BUTTONS */}
         <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto px-6 sm:px-0">
           <Link
             href="/products"
-            className="group flex items-center justify-center gap-2 bg-blue-600 text-white px-8 py-3.5 md:py-4 rounded-lg font-bold text-sm transition-all hover:bg-blue-700 active:scale-95 shadow-lg shadow-blue-600/20"
+            className="group flex items-center justify-center gap-2 bg-[#D5C58A] text-[#2C271D] px-8 py-3.5 md:py-4 rounded-xl font-extrabold text-xs md:text-sm uppercase tracking-wider transition-all hover:bg-[#c4b377] active:scale-95 shadow-lg shadow-black/20"
           >
-            Explore Collection
+            Explore Products
             <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
-            href="/projects"
-            className="group flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 md:py-4 rounded-lg font-bold text-sm transition-all hover:bg-white/20 active:scale-95"
+            href="/contact"
+            className="group flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 md:py-4 rounded-xl font-extrabold text-xs md:text-sm uppercase tracking-wider transition-all hover:bg-white/20 active:scale-95"
           >
-            View Projects
-            <ExternalLink size={18} />
+            Get Custom Quote
           </Link>
         </div>
       </div>
 
       {/* STATS AT BOTTOM */}
-      <div className="absolute bottom-10 md:bottom-12 left-0 w-full z-10 px-4 md:px-6">
+      <div className="absolute bottom-8 md:bottom-12 left-0 w-full z-10 px-4 md:px-6">
         <div className="max-w-7xl mx-auto grid grid-cols-3 md:flex md:flex-wrap md:justify-around gap-4 hero-stats text-center items-center">
           <div className="flex flex-col items-center">
-            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{expCount}+</span>
-            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Years Experience</span>
+            <span className="text-xl md:text-4xl font-black text-[#D5C58A] mb-0.5 md:mb-1 tracking-tighter leading-none">{expCount}+</span>
+            <span className="text-[8px] md:text-xs text-gray-300 uppercase tracking-widest font-extrabold leading-none">Years Craftsmanship</span>
           </div>
-          <div className="flex flex-col items-center border-x border-white/10 md:border-none">
-            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{designsCount}+</span>
-            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Tile Designs</span>
+          <div className="flex flex-col items-center border-x border-white/15 md:border-none">
+            <span className="text-xl md:text-4xl font-black text-[#D5C58A] mb-0.5 md:mb-1 tracking-tighter leading-none">{designsCount}+</span>
+            <span className="text-[8px] md:text-xs text-gray-300 uppercase tracking-widest font-extrabold leading-none">Badge & Uniform Items</span>
           </div>
           <div className="flex flex-col items-center">
-            <span className="text-xl md:text-4xl font-bold mb-0.5 md:mb-1 tracking-tighter leading-none">{countriesCount}+</span>
-            <span className="text-[8px] md:text-xs text-gray-400 uppercase tracking-widest font-medium leading-none">Countries Sourced</span>
+            <span className="text-xl md:text-4xl font-black text-[#D5C58A] mb-0.5 md:mb-1 tracking-tighter leading-none">{countriesCount}+</span>
+            <span className="text-[8px] md:text-xs text-gray-300 uppercase tracking-widest font-extrabold leading-none">States & Troops Supplied</span>
           </div>
         </div>
       </div>

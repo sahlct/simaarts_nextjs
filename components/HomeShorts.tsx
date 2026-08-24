@@ -142,29 +142,29 @@ export default function HomeShorts() {
   }
 
   return (
-    <section ref={sectionRef} className="bg-[#282d63] py-20 md:py-32 overflow-hidden">
+    <section ref={sectionRef} className="bg-[#3D3622] py-20 md:py-28 overflow-hidden text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
 
         {/* ---------------- HEADER ---------------- */}
         <div data-hs-header className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div>
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-[2px] bg-white/20" />
-              <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-white/50 uppercase">
-                Watch & Learn
+              <div className="w-10 h-[2px] bg-[#D5C58A]" />
+              <span className="text-[10px] md:text-xs font-black tracking-[0.2em] text-[#D5C58A] uppercase">
+                Product Showcase Videos
               </span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">
-              Latest Videos
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
+              Watch SimaArts In Action
             </h2>
           </div>
 
           <div className="flex flex-row items-center gap-3 w-full md:w-auto">
             {/* TYPE FILTERS */}
-            <div className="relative flex-1 md:flex-none flex bg-white/5 p-1 md:p-1.5 rounded-xl md:rounded-2xl backdrop-blur-md border border-white/10">
+            <div className="relative flex-1 md:flex-none flex bg-white/10 p-1 md:p-1.5 rounded-xl md:rounded-2xl backdrop-blur-md border border-white/15">
               {/* Sliding Background Pill */}
               <div
-                className="absolute top-1 md:top-1.5 bottom-1 md:bottom-1.5 bg-white rounded-lg md:rounded-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-xl"
+                className="absolute top-1 md:top-1.5 bottom-1 md:bottom-1.5 bg-[#D5C58A] rounded-lg md:rounded-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-md"
                 style={{ 
                   left: youtubeShorts.length > 0 && instaShorts.length > 0
                     ? (activeType === "insta" ? "calc(50% + 2px)" : "4px")
@@ -176,7 +176,7 @@ export default function HomeShorts() {
               {youtubeShorts.length > 0 && (
                 <button
                   onClick={() => setActiveType("youtube")}
-                  className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "youtube" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
+                  className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "youtube" ? "text-[#2C271D]" : "text-white/70 hover:text-white"
                     }`}
                 >
                   <Youtube size={14} className="md:w-[18px] md:h-[18px]" /> Shorts
@@ -185,7 +185,7 @@ export default function HomeShorts() {
               {instaShorts.length > 0 && (
                 <button
                   onClick={() => setActiveType("insta")}
-                  className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "insta" ? "text-[#0F172A]" : "text-white/60 hover:text-white"
+                  className={`relative flex-1 flex items-center justify-center gap-2 px-4 md:px-6 py-2 md:py-3 rounded-lg md:rounded-xl font-bold text-[10px] md:text-sm transition-colors duration-500 cursor-pointer z-10 ${activeType === "insta" ? "text-[#2C271D]" : "text-white/70 hover:text-white"
                     }`}
                 >
                   <Instagram size={14} className="md:w-[18px] md:h-[18px]" /> Reels
@@ -236,7 +236,7 @@ export default function HomeShorts() {
                     href={short.video_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block group relative aspect-[9/16] rounded-[2rem] overflow-hidden bg-white/5 cursor-pointer"
+                    className="block group relative aspect-[9/16] rounded-[2rem] overflow-hidden bg-white/5 cursor-pointer border border-white/10 shadow-lg"
                   >
                     {/* THUMBNAIL */}
                     <img
@@ -250,8 +250,8 @@ export default function HomeShorts() {
 
                     {/* BADGES */}
                     <div className="absolute top-6 left-6 right-6 flex justify-between items-start pointer-events-none">
-                      <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-lg border border-white/10 uppercase tracking-wider">
-                        {short.shorts_subtitle || "Project Showcase"}
+                      <span className="bg-[#D5C58A] text-[#2C271D] text-[10px] font-black px-3 py-1.5 rounded-lg border border-[#D5C58A]/30 uppercase tracking-wider shadow-sm">
+                        {short.shorts_subtitle || "Badge Showcase"}
                       </span>
                     </div>
 
@@ -279,3 +279,4 @@ export default function HomeShorts() {
     </section>
   );
 }
+

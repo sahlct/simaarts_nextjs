@@ -60,21 +60,21 @@ export default function TableFilter({ fields, onChange }: TableFilterProps) {
       {/* Filter Button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 cursor-pointer bg-gray-100 hover:bg-gray-200 text-gray-700 border px-3 py-2 rounded-md shadow-sm transition"
+        className="flex items-center gap-2 cursor-pointer bg-[#FAF8F3] hover:bg-white hover:border-[#D5C58A] text-[#2C271D] border border-[#EAE4D3] px-4 py-2.5 rounded-xl shadow-xs transition-all font-bold text-xs uppercase tracking-wider"
       >
-        <IconFilter size={18} />
+        <IconFilter size={16} className="text-[#8C7E4F]" />
         <span className="hidden sm:inline">Filters</span>
       </button>
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute right-0 mt-2 w-64 bg-white border rounded-lg shadow-lg p-3 z-50">
+        <div className="absolute right-0 mt-2 w-64 bg-white border border-[#EAE4D3] rounded-2xl shadow-xl p-4 z-50 animate-in fade-in duration-200">
           <div className="flex flex-col gap-3">
             {fields
               .filter((field) => shouldShowField(field))
               .map((field) => (
                 <div key={field.key}>
-                  <label className="text-sm text-gray-600 font-medium">
+                  <label className="block text-[10px] font-extrabold uppercase tracking-wider text-[#857A68] mb-1">
                     {field.label}
                   </label>
 
@@ -89,7 +89,7 @@ export default function TableFilter({ fields, onChange }: TableFilterProps) {
                           [field.key]: e.target.value,
                         }))
                       }
-                      className="mt-1 w-full border rounded-md p-2 text-sm"
+                      className="mt-1 w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-2.5 text-xs font-bold text-[#2C271D] focus:bg-white focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none"
                     />
                   )}
 
@@ -109,8 +109,8 @@ export default function TableFilter({ fields, onChange }: TableFilterProps) {
                           [field.key]: year,
                         }));
                       }}
-                      className="mt-1 w-full border rounded-md p-2 text-sm"
-                      onFocus={(e) => e.target.showPicker?.()} // auto open picker if supported
+                      className="mt-1 w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-2.5 text-xs font-bold text-[#2C271D] focus:bg-white focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none"
+                      onFocus={(e) => e.target.showPicker?.()}
                     />
                   )}
 
@@ -124,7 +124,7 @@ export default function TableFilter({ fields, onChange }: TableFilterProps) {
                           [field.key]: e.target.value,
                         }))
                       }
-                      className="mt-1 w-full border rounded-md p-2 text-sm"
+                      className="mt-1 w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-2.5 text-xs font-bold text-[#2C271D] focus:bg-white focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none"
                     >
                       <option value="">All</option>
                       {field.options?.map((opt) => (

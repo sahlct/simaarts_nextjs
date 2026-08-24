@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Phone, Mail, MapPin, Clock, Send, MessageSquare, ChevronRight, Plus, Minus, Facebook, Instagram, Linkedin, Twitter, Globe } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, MessageSquare, ChevronRight, Facebook, Instagram, Youtube } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { createEnquiry } from "@/lib/api/enquiry";
 import { useToast } from "@/contexts/ToastContext";
-import { CONTACT_INFO, CONTACT_LINKS } from "@/lib/contact";
+import { useCompanyProfile } from "@/context/CompanyProfileContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactClient() {
+  const { profile, links } = useCompanyProfile();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,7 +20,6 @@ export default function ContactClient() {
     message: ""
   });
   const [loading, setLoading] = useState(false);
-  const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const { showSuccess, showError } = useToast();
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export default function ContactClient() {
 
     const ctx = gsap.context(() => {
       gsap.from(".contact-hero-content > *", {
-        y: 60,
+        y: 40,
         opacity: 0,
         duration: 1,
         stagger: 0.2,
@@ -41,7 +41,7 @@ export default function ContactClient() {
           trigger: ".info-grid",
           start: "top 85%",
         },
-        y: 40,
+        y: 30,
         opacity: 0,
         duration: 0.8,
         stagger: 0.15,
@@ -54,7 +54,7 @@ export default function ContactClient() {
           trigger: ".form-section",
           start: "top 80%",
         },
-        x: -50,
+        x: -40,
         opacity: 0,
         duration: 1,
         ease: "power3.out"
@@ -65,7 +65,7 @@ export default function ContactClient() {
           trigger: ".form-container",
           start: "top 80%",
         },
-        x: 50,
+        x: 40,
         opacity: 0,
         duration: 1,
         ease: "power3.out"
@@ -78,14 +78,12 @@ export default function ContactClient() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.message) {
-      // toast.error("Please fill in all required fields.");
       showError("Please fill in all required fields.");
       return;
     }
 
-    // Backend Strict Validation Matching
-    if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(formData.email)) {
-      showError("Invalid email. Only @gmail.com addresses are allowed.");
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
+      showError("Please enter a valid email address.");
       return;
     }
 
@@ -101,11 +99,11 @@ export default function ContactClient() {
         cstmr_email: formData.email,
         cstmr_phone: formData.phone,
         cstmr_message: formData.message,
-        enquiry_type: 1, // General Enquiry
-        enquiry_status: 1, // New
-        status: 1 // Active
+        enquiry_type: 1,
+        enquiry_status: 1,
+        status: 1
       });
-      showSuccess("Thank you! Your message has been sent successfully.");
+      showSuccess("Thank you! Your inquiry has been submitted to SimaArts.");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (error: any) {
       console.error("Error submitting enquiry:", error);
@@ -115,71 +113,49 @@ export default function ContactClient() {
     }
   };
 
-  const faqs = [
-    {
-      q: "What is your typical lead time for custom tile orders?",
-      a: "For custom kiln-fired tiles from our Florence facility, the typical lead time is 6-8 weeks, depending on the complexity and quantity of the order."
-    },
-    {
-      q: "Do you offer international shipping?",
-      a: "Yes, we operate in 60+ countries and offer global logistics support to ensure your tiles arrive safely at any location worldwide."
-    },
-    {
-      q: "Can I request a sample before placing a large order?",
-      a: "Absolutely. We encourage architects and homeowners to request physical samples to experience the texture and color in their specific lighting."
-    },
-    {
-      q: "Do you provide installation services?",
-      a: "While we specialize in supply, we have a network of certified master installers in several regions who are experts in handling Elbano tiles."
-    }
-  ];
-
   return (
-    <div ref={sectionRef} className="bg-white min-h-screen">
+    <div ref={sectionRef} className="bg-[#FAF8F3] min-h-screen">
       {/* HERO HEADER */}
-      <section className="relative h-[400px] md:h-[400px] flex items-center overflow-hidden">
+      <section className="relative h-[340px] md:h-[380px] flex items-center overflow-hidden bg-[#2C271D]">
         <div className="absolute inset-0 z-0">
-          <img src="/product_bg.png" alt="Contact Background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#282d63]/70 backdrop-blur-[2px]" />
+          <img src="/product_bg.png" alt="SimaArts Contact" className="w-full h-full object-cover opacity-30 mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2C271D] via-[#2C271D]/90 to-[#3D3622]/80" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white contact-hero-content pt-24 md:pt-32">
-          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.3em] mb-4 opacity-80">
-            <Link href="/" className="hover:text-blue-400 transition-colors">Home</Link>
+        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full text-white contact-hero-content pt-20">
+          <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] mb-4 text-[#D5C58A]">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <ChevronRight size={12} />
             <span>Contact Us</span>
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tighter">
-            Get in <span className="text-blue-400">Touch</span>
+          <h1 className="text-3xl md:text-6xl font-black mb-4 tracking-tight">
+            Contact <span className="text-[#D5C58A]">SimaArts</span>
           </h1>
 
-          <p className="text-xs md:text-base max-w-xl text-white/70 leading-relaxed font-medium">
-            Have a question about our collections or a custom project? Our team of tile specialists is here to guide you.
+          <p className="text-xs md:text-base max-w-xl text-gray-200 leading-relaxed font-medium">
+            Have questions about custom badge embroidery, bulk troop uniform orders, or official Scout & Guide supplies? We are here to help.
           </p>
         </div>
       </section>
 
       {/* CONTACT INFO GRID */}
-      <section className="py-12 md:py-24 bg-[#F8FAFC] info-grid">
+      <section className="py-12 md:py-20 bg-white border-b border-[#EAE4D3] info-grid">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
-            {/* Info Cards */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {[
-              { label: "Call Us", val: CONTACT_INFO.phone, sub: "Mon-Sat, 9am-6pm", icon: <Phone size={20} className="md:w-6 md:h-6" />, href: CONTACT_LINKS.tel },
-              { label: "Email Us", val: CONTACT_INFO.email, sub: "Fast Response", icon: <Mail size={20} className="md:w-6 md:h-6" />, href: CONTACT_LINKS.mailto },
-              { label: "Headquarters", val: "Karuvankallu", sub: "Malappuram, Kerala", icon: <MapPin size={20} className="md:w-6 md:h-6" />, href: CONTACT_INFO.googleMapsUrl },
-              { label: "Office Hours", val: "Open Daily", sub: "9 AM - 6 PM", icon: <Clock size={20} className="md:w-6 md:h-6" />, href: "#" }
+              { label: "Call Us", val: profile.phone_number, sub: profile.working_hours || "Mon-Sat, 9am-6pm", icon: <Phone size={20} />, href: links.tel },
+              { label: "Email Us", val: profile.email, sub: "Quick Response", icon: <Mail size={20} />, href: links.mailto },
+              { label: "Headquarters", val: profile.location_text || "SimaArts HQ", sub: "India", icon: <MapPin size={20} />, href: profile.location_url || "#" },
+              { label: "Working Hours", val: profile.working_hours || "Mon - Sat", sub: "9:00 AM - 6:00 PM", icon: <Clock size={20} />, href: "#" }
             ].map((item, i) => (
-              <a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className="info-card group cursor-pointer bg-white p-5 md:p-10 rounded-[1.5rem] md:rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-blue-200/50 hover:-translate-y-2 transition-all duration-500">
-                <div className="w-10 h-10 md:w-14 md:h-14 bg-blue-50 text-[#1e2b58] rounded-xl md:rounded-2xl flex items-center justify-center mb-4 md:mb-8 shadow-sm group-hover:bg-[#282d63] group-hover:text-white transition-all duration-300">
-                  <div className="group-hover:scale-110 transition-transform duration-300">
-                    {item.icon}
-                  </div>
+              <a key={i} href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined} className="info-card group cursor-pointer bg-[#FAF8F3] p-5 md:p-8 rounded-2xl border border-[#EAE4D3] shadow-xs hover:border-[#D5C58A] hover:bg-white transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-white text-[#8C7E4F] border border-[#EAE4D3] rounded-xl flex items-center justify-center mb-4 shadow-xs group-hover:bg-[#D5C58A] group-hover:text-[#2C271D] transition-all duration-300">
+                  {item.icon}
                 </div>
-                <h3 className="text-[8px] md:text-xs font-black uppercase tracking-widest text-gray-400 mb-1 md:mb-2">{item.label}</h3>
-                <div className="text-sm md:text-xl font-black text-[#1e2b58] mb-1 md:mb-2 truncate">{item.val}</div>
-                <p className="text-[10px] md:text-sm text-gray-500 font-medium truncate">{item.sub}</p>
+                <h3 className="text-[9px] md:text-xs font-black uppercase tracking-wider text-[#857A68] mb-1">{item.label}</h3>
+                <div className="text-sm md:text-lg font-black text-[#2C271D] mb-1 truncate">{item.val}</div>
+                <p className="text-[10px] md:text-xs text-[#5A5243] font-semibold truncate">{item.sub}</p>
               </a>
             ))}
           </div>
@@ -187,111 +163,103 @@ export default function ContactClient() {
       </section>
 
       {/* FORM & DETAILS */}
-      <section className="py-12 md:py-24 bg-[#F8FAFC]">
+      <section className="py-12 md:py-24 bg-[#FAF8F3]">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left Column: Details */}
             <div className="form-section">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-[2px] bg-indigo-800" />
-                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-indigo-800">Inquiry Form</span>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-[2px] bg-[#D5C58A]" />
+                <span className="text-xs font-black uppercase tracking-[0.2em] text-[#8C7E4F]">Bulk & Custom Orders</span>
               </div>
-              <h2 className="text-2xl md:text-5xl font-black text-[#0F172A] mb-10 tracking-tighter leading-tight">
-                Tell Us About <br /> Your Project
+              <h2 className="text-3xl md:text-5xl font-black text-[#2C271D] mb-6 tracking-tight leading-tight">
+                Request a Custom Quote for Your Troop
               </h2>
-              <p className="text-gray-500 text-base md:text-lg leading-relaxed font-medium mb-12">
-                Whether you're an architect planning a landmark building or a homeowner renovating your sanctuary, we provide personalized consultation for every scale.
+              <p className="text-[#5A5243] text-sm md:text-base leading-relaxed font-medium mb-10">
+                Send us your badge artwork, uniform specifications, or troop requirements. Our specialists will assist you with pricing, embroidery samples, and delivery timelines.
               </p>
 
-              <div className="space-y-8">
-                <div className="flex items-start gap-6 group">
-                  <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-indigo-800 group-hover:bg-indigo-800 group-hover:text-white transition-colors flex-shrink-0">
-                    <MessageSquare size={20} />
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-11 h-11 rounded-2xl bg-white border border-[#EAE4D3] flex items-center justify-center text-[#8C7E4F] shrink-0 shadow-xs">
+                    <MessageSquare size={18} />
                   </div>
                   <div>
-                    <h4 className="text-[#0F172A] font-black text-lg mb-1">Live Consultation</h4>
-                    <p className="text-gray-500 text-sm font-medium">Chat with our designers to explore material possibilities.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-6 group">
-                  <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-indigo-800 group-hover:bg-indigo-800 group-hover:text-white transition-colors flex-shrink-0">
-                    <Globe size={20} />
-                  </div>
-                  <div>
-                    <h4 className="text-[#0F172A] font-black text-lg mb-1">Global Showrooms</h4>
-                    <p className="text-gray-500 text-sm font-medium">Locate your nearest Elbano gallery to experience tiles in person.</p>
+                    <h4 className="text-[#2C271D] font-extrabold text-base mb-1">Custom Badge Embroidery</h4>
+                    <p className="text-[#5A5243] text-xs md:text-sm font-medium">Send high-resolution badge artwork for precision thread matching and sample proofing.</p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-16 flex gap-4">
-                <Link href={CONTACT_INFO.facebook} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all"><Facebook size={18} /></Link>
-                <Link href={CONTACT_INFO.instagram} target="_blank" className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all"><Instagram size={18} /></Link>
-                <Link href={CONTACT_LINKS.mailto} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#0F172A] hover:bg-[#282d63] hover:text-white transition-all"><Mail size={18} /></Link>
+              <div className="mt-12 flex gap-3">
+                <Link href={profile.facebook_url || "https://facebook.com"} target="_blank" className="w-11 h-11 rounded-xl border border-[#EAE4D3] bg-white flex items-center justify-center text-[#2C271D] hover:bg-[#D5C58A] transition-all"><Facebook size={18} /></Link>
+                <Link href={profile.insta_url || "https://instagram.com"} target="_blank" className="w-11 h-11 rounded-xl border border-[#EAE4D3] bg-white flex items-center justify-center text-[#2C271D] hover:bg-[#D5C58A] transition-all"><Instagram size={18} /></Link>
+                <Link href={links.mailto} className="w-11 h-11 rounded-xl border border-[#EAE4D3] bg-white flex items-center justify-center text-[#2C271D] hover:bg-[#D5C58A] transition-all"><Mail size={18} /></Link>
               </div>
             </div>
 
             {/* Right Column: Form */}
             <div className="form-container">
-              <form onSubmit={handleSubmit} className="bg-white p-6 md:p-12 rounded-[2.5rem] md:rounded-[3rem] shadow-2xl shadow-gray-200 border border-white">
-                <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Your Name *</label>
+              <form onSubmit={handleSubmit} className="bg-white p-6 md:p-10 rounded-[2.5rem] shadow-sm border border-[#EAE4D3]">
+                <div className="space-y-5">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase tracking-wider text-[#857A68] ml-2">Your Name *</label>
                       <input
                         type="text"
-                        placeholder="John Doe"
+                        placeholder="Leader / Officer Name"
                         required
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                        className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl p-3 text-xs font-bold text-[#2C271D] focus:ring-2 focus:ring-[#D5C58A] transition-all outline-none"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Email Address *</label>
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black uppercase tracking-wider text-[#857A68] ml-2">Email Address *</label>
                       <input
                         type="email"
-                        placeholder="john@example.com"
+                        placeholder="leader@troop.com"
                         required
-                        className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl px-4 py-3 text-xs font-bold text-[#2C271D] outline-none focus:ring-2 focus:ring-[#D5C58A]"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Phone Number</label>
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-black uppercase tracking-wider text-[#857A68] ml-2">Phone Number *</label>
                     <input
                       type="tel"
-                      placeholder="+91 00000 00000"
-                      className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none"
+                      placeholder="+91 9995616166"
+                      required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl px-4 py-3 text-xs font-bold text-[#2C271D] outline-none focus:ring-2 focus:ring-[#D5C58A]"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Your Message *</label>
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-black uppercase tracking-wider text-[#857A68] ml-2">Message & Details *</label>
                     <textarea
-                      placeholder="Tell us about your project requirements..."
-                      rows={5}
+                      rows={4}
+                      placeholder="Specify badge quantities, uniform sizes, or custom requirements..."
                       required
-                      className="w-full bg-[#F8FAFC] border-none rounded-2xl p-3.5 md:p-5 text-sm font-bold text-[#0F172A] focus:ring-2 focus:ring-indigo-800 transition-all outline-none resize-none"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    />
+                      className="w-full bg-[#FAF8F3] border border-[#EAE4D3] rounded-xl px-4 py-3 text-xs font-bold text-[#2C271D] outline-none focus:ring-2 focus:ring-[#D5C58A] resize-none"
+                    ></textarea>
                   </div>
 
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-[#1e2b58] cursor-pointer hover:bg-indigo-950 text-white py-3.5 md:py-5 rounded-xl md:rounded-2xl font-black text-[10px] md:text-xs uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 md:gap-3 shadow-xl hover:shadow-blue-200 active:scale-95"
+                    className="w-full bg-[#4A4229] hover:bg-[#3D3622] text-[#FAF8F3] py-4 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     {loading ? (
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      "Sending..."
                     ) : (
-                      <><Send size={16} className="md:w-[18px] md:h-[18px]" /> Send Message</>
+                      <><Send size={16} /> Submit Inquiry</>
                     )}
                   </button>
                 </div>
@@ -301,41 +269,10 @@ export default function ContactClient() {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
-      {/* <section className="py-32">
-        <div className="max-w-4xl mx-auto px-6 md:px-12">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black text-[#0F172A] tracking-tighter mb-4">FAQ</h2>
-            <p className="text-gray-500 font-medium">Quick answers to common questions about our products and services.</p>
-          </div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <div key={i} className="border border-gray-100 rounded-[2rem] overflow-hidden transition-all duration-300 hover:border-blue-100">
-                <button
-                  onClick={() => setActiveFaq(activeFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between p-8 text-left bg-white transition-colors hover:bg-gray-50"
-                >
-                  <span className="text-lg font-black text-[#0F172A] leading-tight pr-6">{faq.q}</span>
-                  <div className={`w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 transition-transform duration-300 ${activeFaq === i ? "rotate-45 bg-[#282d63] text-white" : ""}`}>
-                    <Plus size={18} />
-                  </div>
-                </button>
-                <div className={`overflow-hidden transition-all duration-500 ease-in-out ${activeFaq === i ? "max-h-[500px] border-t border-gray-50" : "max-h-0"}`}>
-                  <div className="p-8 text-gray-500 font-medium leading-relaxed bg-gray-50/30">
-                    {faq.a}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       {/* MAP SECTION */}
-      <section className="h-[400px] md:h-[600px] w-full bg-gray-100">
+      <section className="h-[360px] md:h-[450px] w-full bg-gray-100 border-t border-[#EAE4D3]">
         <iframe
-          src={CONTACT_INFO.mapEmbedUrl}
+          src={profile.location_url && profile.location_url.includes("embed") ? profile.location_url : "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3914.980903717614!2d75.9529!3d11.1148!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba64f48d1ab3b05%3A0x820087cecaef4575!2sELBANO%20ROOFINGS!5e0!3m2!1sen!2sin!4v1777737554636!5m2!1sen!2sin"}
           width="100%"
           height="100%"
           style={{ border: 0 }}
@@ -347,3 +284,4 @@ export default function ContactClient() {
     </div>
   );
 }
+

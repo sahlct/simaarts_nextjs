@@ -43,24 +43,24 @@ export default function DataTable({
           placeholder="Search..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-gray-300 rounded-lg px-3 py-2 w-full sm:w-64 focus:ring-2 focus:ring-[#036ec6]"
+          className="border border-[#EAE4D3] rounded-xl px-3.5 py-2 w-full sm:w-64 focus:ring-2 focus:ring-[#D5C58A] focus:border-[#D5C58A] outline-none text-xs font-semibold text-[#2C271D]"
         />
       </div>
 
       {/*  Table */}
-      <table className="min-w-full divide-y divide-gray-200 text-sm">
-        <thead className="bg-[#036ec61a]">
+      <table className="min-w-full divide-y divide-[#EAE4D3] text-sm">
+        <thead className="bg-[#FAF8F3] border-b border-[#EAE4D3]">
           <tr>
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="px-4 py-2 text-left font-medium text-[#036ec6]"
+                className="px-4 py-3 text-left font-extrabold text-[#4A4229] uppercase tracking-wider text-xs"
               >
                 {col.label}
               </th>
             ))}
             {(onEdit || onDelete) && (
-              <th className="px-4 py-2 text-right font-medium text-[#036ec6]">
+              <th className="px-4 py-3 text-right font-extrabold text-[#4A4229] uppercase tracking-wider text-xs">
                 Actions
               </th>
             )}
@@ -82,27 +82,27 @@ export default function DataTable({
               <tr
                 key={idx}
                 onClick={() => onRowClick && onRowClick(row)}
-                className={`hover:bg-gray-50 ${
+                className={`hover:bg-[#FAF8F3]/60 transition-colors ${
                   onRowClick ? "cursor-pointer" : ""
                 }`}
               >
                 {columns.map((col) => (
-                  <td key={col.key} className="px-4 py-2 text-gray-700">
+                  <td key={col.key} className="px-4 py-3 text-xs font-semibold text-[#2C271D]">
                     {col.render ? col.render(row, idx) : row[col.key] ?? "—"}
                   </td>
                 ))}
 
                 {(onEdit || onDelete) && (
                   <td
-                    className="px-4 py-2 text-right space-x-5"
+                    className="px-4 py-3 text-right space-x-4"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {onEdit && (
                       <button
                         onClick={() => onEdit(row)}
-                        className="text-[#036ec6] hover:text-[#0361ad] cursor-pointer"
+                        className="text-[#8C7E4F] hover:text-[#4A4229] transition-colors cursor-pointer"
                       >
-                        <IconEdit />
+                        <IconEdit size={18} />
                       </button>
                     )}
                     {onDelete && (
